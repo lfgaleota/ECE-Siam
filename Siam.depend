@@ -1,0 +1,64 @@
+# depslib dependency file v1.0
+1479059840 source:c:\users\romai\desktop\ing2 progs\siam\main.cpp
+	<iostream>
+	<vector>
+	"matrix.h"
+	"object.h"
+	"mountain.h"
+	"entity.h"
+	"player.h"
+
+1479033041 source:c:\users\romai\desktop\ing2 progs\siam\entity.cpp
+	"object.h"
+	"matrix.h"
+	"entity.h"
+
+1479059076 c:\users\romai\desktop\ing2 progs\siam\object.h
+	<iostream>
+	<vector>
+	<string>
+
+1479059648 c:\users\romai\desktop\ing2 progs\siam\matrix.h
+	<iostream>
+	<vector>
+	<string>
+	"object.h"
+
+1479033041 c:\users\romai\desktop\ing2 progs\siam\entity.h
+	<iostream>
+	<vector>
+	<string>
+	"object.h"
+	"player.h"
+	"matrix.h"
+
+1479024815 c:\users\romai\desktop\ing2 progs\siam\player.h
+	<iostream>
+	<vector>
+	<string>
+	"entity.h"
+
+1479059689 source:c:\users\romai\desktop\ing2 progs\siam\matrix.cpp
+	"matrix.h"
+	"mountain.h"
+
+1479026840 source:c:\users\romai\desktop\ing2 progs\siam\mountain.cpp
+	"object.h"
+	"mountain.h"
+	"matrix.h"
+
+1479026839 c:\users\romai\desktop\ing2 progs\siam\mountain.h
+	<iostream>
+	<vector>
+	<string>
+	"object.h"
+
+1479059076 source:c:\users\romai\desktop\ing2 progs\siam\object.cpp
+	"object.h"
+
+1479059793 source:c:\users\romai\desktop\ing2 progs\siam\player.cpp
+	<iostream>
+	<vector>
+	<string>
+	"entity.h"
+
