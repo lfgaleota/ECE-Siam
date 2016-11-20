@@ -18,3 +18,13 @@ Object::~Object()
 {
 
 }
+
+float Object::getforce()
+{
+    return m_force ;
+}
+
+void Object::setdirection(char direction)
+{
+
+}

@@ -20,7 +20,8 @@ public :
     Object(string nom, float force);
     ~Object();
 
-    //méthode de déplacement
+    float getforce();
+    virtual void setdirection(char direction);
 };
 
 

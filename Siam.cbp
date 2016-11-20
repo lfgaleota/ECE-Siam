@@ -32,7 +32,23 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="cli/cli.cpp" />
+		<Unit filename="cli/cli.hpp" />
+		<Unit filename="elephant.cpp" />
+		<Unit filename="elephant.h" />
+		<Unit filename="entity.cpp" />
+		<Unit filename="entity.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="matrix.cpp" />
+		<Unit filename="matrix.h" />
+		<Unit filename="mountain.cpp" />
+		<Unit filename="mountain.h" />
+		<Unit filename="object.cpp" />
+		<Unit filename="object.h" />
+		<Unit filename="player.cpp" />
+		<Unit filename="player.h" />
+		<Unit filename="rhinoceros.cpp" />
+		<Unit filename="rhinoceros.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

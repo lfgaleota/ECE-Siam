@@ -23,8 +23,7 @@ public :
     Entity(string nom, float force, char orientation, Player* player);
     ~Entity();
 
-    //sortie du terrain
-    //orienter la piece
+    void setdirection(char direction) ;
 };
 
 

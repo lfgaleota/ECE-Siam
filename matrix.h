@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include "object.h"
+#include "cli/cli.hpp"
 
 
 
@@ -24,10 +25,10 @@ public :
     Matrix(vector<Object*> remplir);
     ~Matrix();
 
-    void entrance(Object* A);
-    void exit();
-    void makeamove();
-    void orient();
+    void entrance(Object* A, int x, int y);
+    void exit(int x, int y);
+    void makeamove(int x, int y, char direction);
+    void orient(int x, int y, char direction);
 
 };
 

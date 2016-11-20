@@ -1,5 +1,6 @@
 #include "matrix.h"
 #include "mountain.h"
+#include "cli/cli.hpp"
 
 using namespace std ;
 
@@ -11,11 +12,11 @@ Matrix::Matrix(vector<Object*> remplir)
 
     for(int i=0; i<5 ; i++)
     {
-        for(int j=0; j<5 ;j++)
+        for(int j=0; j<5 ; j++)
         {
             if((i==1&&j==2)||(i==2&&j==2)||(i==3&&j==2))
             {
-                 m_board[i][j] = remplir[k];
+                m_board[i][j] = remplir[k];
                 k++ ;
                 //cout << 'X' ;
             }
@@ -35,32 +36,25 @@ Matrix::~Matrix()
 
 }
 
-void Matrix::entrance(Object* A)
+void Matrix::entrance(Object* A, int x, int y)
 {
-    //il faudra rajouter un paramètre pour recevoir la case choisie par l'utilisateur qui sera dans une méthode d'affichage !
-    //ici je vais juste la simuler
-
-    int x=0, y=0 ;
 
     if((x=0)||(x=4)||(y=0)||(y=4))
     {
         m_board[x][y]= A ;
-    }else
+    } else
 
         //on affiche un message d'erreur
         cout << "pas le droit ici" << endl ;
 }
 
-void Matrix::exit()
+void Matrix::exit(int x, int y)
 {
-    //on ajoutera des paramètres de coordonnées (la position du curseur) pour savoir lequel enlever ?
-
-    int x=0, y=0 ;
 
     if((x=0)||(x=4)||(y=0)||(y=4))
     {
         m_board[x][y]= nullptr ;
-    }else
+    } else
 
         //on affiche un message d'erreur
         cout << "pas le droit ici" << endl ;
@@ -68,22 +62,58 @@ void Matrix::exit()
 
 }
 
-void Matrix::makeamove()
+void Matrix::makeamove(int x, int y, char direction) //reçoit des coordonnées et une direction de déplacement
 {
-    //on parcourt à la recherche de la position du curseur
-    //une fois trouvé on "enregistre" le pointeur sur objet de la case en question
-    //on demande à l'utilisateur quel mouvement faire
-    //on lui demande si il veut changer l'orientation : si oui on appelle orient(), sinon rien
-    //on vérifie si il y a poussée ou non, et si on peut ou pas en fonction des rapport de force
-    //si il n'y a pas poussée on "déplace" le pointeur à la case voulue
-    //si il y a poussée on déplace la pièce poussée sur sa nouvelle position puis la pièce du joueur sur la case de la pièce poussée.
-    //on passe un nouveau tour
+
+    if(direction == 'o')
+    {
+        if(m_board[x-1][y]==nullptr)
+        {
+            m_board[x-1][y] = m_board[x][y] ;
+            m_board[x][y]= nullptr ;
+        }else
+        {
+            if(m_board[x][y]->getforce()==m_board[x-1][y]->getforce()) //la je compare avec la première case la plus proche dans la direction de mouvement, il faut que je le fasse pour les cases derrière aussi
+            {
+
+            }
+        }
+    }
+
+    if(direction == 'l')
+    {
+        if(m_board[x+1][y]==nullptr)
+        {
+            m_board[x+1][y] = m_board[x][y] ;
+            m_board[x][y]= nullptr ;
+        }
+    }
+
+    if(direction == 'k')
+    {
+        if(m_board[x][y-1]==nullptr)
+        {
+            m_board[x][y-1] = m_board[x][y] ;
+            m_board[x][y]= nullptr ;
+        }
+    }
+
+    if(direction == 'm')
+    {
+        if(m_board[x][y+1]==nullptr)
+        {
+            m_board[x][y+1] = m_board[x][y] ;
+            m_board[x][y]= nullptr ;
+        }
+    }
+
+
 }
 
-void orient()
+void Matrix::orient(int x, int y, char direction)
 {
-    //on parcourt à la recherche de la position du curseur
-    //une fois trouvé on demande à l'user la nouvelle direction
-    //on l'enregistre dans l'objet en cours d'utilisation
-    //on passe le tour
+    //reçoit des coordonnées et une direction
+    //prend l'objet à ces coordonnées et modifie sa direction comme il faut.
+
+    m_board[x][y]->setdirection(direction);
 }

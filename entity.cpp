@@ -20,3 +20,8 @@ Entity::~Entity()
 {
 
 }
+
+void Entity::setdirection(char direction)
+{
+    m_orientation = direction ;
+}
