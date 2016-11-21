@@ -8,30 +8,31 @@
 #include "cli/cli.hpp"
 
 
+using namespace std;
 
-using namespace std ;
+class Matrix {
+	private :
 
-class Matrix
-{
-private :
+		int m_tour;
+		Object t;
 
-    int m_tour ;
-    Object t ;
+		vector<vector<Object*>> m_board;
 
-    vector<vector<Object*>> m_board ;
+	public :
 
-public :
+		Matrix( vector<Object*> remplir );
 
-    Matrix(vector<Object*> remplir);
-    ~Matrix();
+		~Matrix();
 
-    void entrance(Object* A, int x, int y);
-    void exit(int x, int y);
-    void makeamove(int x, int y, char direction);
-    void orient(int x, int y, char direction);
+		void entrance( Object* A, int x, int y );
+
+		void exit( int x, int y );
+
+		void makeamove( int x, int y, char direction );
+
+		void orient( int x, int y, char direction );
 
 };
-
 
 
 #endif // MATRIX_H_INCLUDED

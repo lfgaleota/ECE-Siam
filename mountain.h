@@ -7,19 +7,19 @@
 #include "object.h"
 
 
-using namespace std ;
+using namespace std;
 
-class Mountain : public Object
-{
-public :
+class Mountain : public Object {
+	public :
 
-    Mountain();
-    Mountain(string nom, float force);
-    ~Mountain();
+		Mountain();
 
-    //sortie du terrain
+		Mountain( string nom, float force );
+
+		~Mountain();
+
+		//sortie du terrain
 };
-
 
 
 #endif // MOUNTAIN_H_INCLUDED

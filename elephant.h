@@ -4,10 +4,8 @@
 #include "object.h"
 #include "entity.h"
 
-class Elephant : public Entity
-{
+class Elephant : public Entity {
 };
-
 
 
 #endif // ELEPHANT_H_INCLUDED

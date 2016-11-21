@@ -7,24 +7,24 @@
 #include <string>
 #include "entity.h"
 
-using namespace std ;
+using namespace std;
 
-class Player
-{
-private :
+class Player {
+	private :
 
-    string m_name ;
-    //attribut pour le camp choisi ? string ou pointeur sur une des pieces ?
+		string m_name;
+		//attribut pour le camp choisi ? string ou pointeur sur une des pieces ?
 
-public :
+	public :
 
-    Player();
-    Player(string name);
-    ~Player();
+		Player();
+
+		Player( string name );
+
+		~Player();
 
 
 };
-
 
 
 #endif // PLAYER_H_INCLUDED

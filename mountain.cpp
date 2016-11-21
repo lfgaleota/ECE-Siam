@@ -1,22 +1,18 @@
 #include "object.h"
 #include "mountain.h"
-#include "matrix.h"
 
 Mountain::Mountain()
-    : Object()
-{
+		: Object() {
 
 }
 
-Mountain::Mountain(string nom, float force)
-    : Object(nom, force)
-{
+Mountain::Mountain( string nom, float force )
+		: Object( nom, force ) {
 
 }
 
-Mountain::~Mountain()
-{
+Mountain::~Mountain() {
 
 }
 
-using namespace std ;
+using namespace std;

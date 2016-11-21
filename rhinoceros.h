@@ -4,10 +4,8 @@
 #include "object.h"
 #include "entity.h"
 
-class Rhinoceros : public Entity
-{
+class Rhinoceros : public Entity {
 };
-
 
 
 #endif // RHINOCEROS_H_INCLUDED

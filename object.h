@@ -5,25 +5,26 @@
 #include <vector>
 #include <string>
 
-using namespace std ;
+using namespace std;
 
-class Object
-{
-private :
+class Object {
+	private :
 
-    string m_nom ;
-    float m_force ;
+		string m_nom;
+		float m_force;
 
-public :
+	public :
 
-    Object();
-    Object(string nom, float force);
-    virtual ~Object();
+		Object();
 
-    float getforce();
-    virtual void setdirection(char direction);
+		Object( string nom, float force );
+
+		virtual ~Object();
+
+		float getforce();
+
+		virtual void setdirection( char direction );
 };
-
 
 
 #endif // OBJECT_H_INCLUDED

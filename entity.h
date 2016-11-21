@@ -8,24 +8,24 @@
 #include "player.h"
 #include "matrix.h"
 
-using namespace std ;
+using namespace std;
 
-class Entity : public Object
-{
-private :
+class Entity : public Object {
+	private :
 
-    char m_orientation ;
-    Player *m_player ;
+		char m_orientation;
+		Player* m_player;
 
-public :
+	public :
 
-    Entity();
-    Entity(string nom, float force, char orientation, Player* player);
-    virtual ~Entity();
+		Entity();
 
-    void setdirection(char direction) ;
+		Entity( string nom, float force, char orientation, Player* player );
+
+		virtual ~Entity();
+
+		void setdirection( char direction );
 };
-
 
 
 #endif // ENTITY_H_INCLUDED
