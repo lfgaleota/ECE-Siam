@@ -21,7 +21,7 @@ public :
 
     Entity();
     Entity(string nom, float force, char orientation, Player* player);
-    ~Entity();
+    virtual ~Entity();
 
     void setdirection(char direction) ;
 };

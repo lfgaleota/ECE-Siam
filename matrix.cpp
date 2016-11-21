@@ -7,7 +7,6 @@ using namespace std ;
 Matrix::Matrix(vector<Object*> remplir)
     : m_tour(0), m_board(5, vector<Object*> (5))
 {
-    Mountain vide("  ", 0.9);
     int k=0 ;
 
     for(int i=0; i<5 ; i++)
@@ -22,7 +21,7 @@ Matrix::Matrix(vector<Object*> remplir)
             }
             else
             {
-                m_board[i][j] = &vide ;
+                m_board[i][j] = new Mountain("  ", 0.9);
                 //cout << 'A' ;
             }
         }
@@ -39,7 +38,7 @@ Matrix::~Matrix()
 void Matrix::entrance(Object* A, int x, int y)
 {
 
-    if((x=0)||(x=4)||(y=0)||(y=4))
+    if((x==0)||(x==4)||(y==0)||(y==4))
     {
         m_board[x][y]= A ;
     } else
@@ -51,7 +50,7 @@ void Matrix::entrance(Object* A, int x, int y)
 void Matrix::exit(int x, int y)
 {
 
-    if((x=0)||(x=4)||(y=0)||(y=4))
+    if((x==0)||(x==4)||(y==0)||(y==4))
     {
         m_board[x][y]= nullptr ;
     } else
@@ -62,7 +61,7 @@ void Matrix::exit(int x, int y)
 
 }
 
-void Matrix::makeamove(int x, int y, char direction) //reçoit des coordonnées et une direction de déplacement
+void Matrix::makeamove(int x, int y, char direction) //reÃ§oit des coordonnÃ©es et une direction de dÃ©placement
 {
 
     if(direction == 'o')
@@ -73,7 +72,7 @@ void Matrix::makeamove(int x, int y, char direction) //reçoit des coordonnées et
             m_board[x][y]= nullptr ;
         }else
         {
-            if(m_board[x][y]->getforce()==m_board[x-1][y]->getforce()) //la je compare avec la première case la plus proche dans la direction de mouvement, il faut que je le fasse pour les cases derrière aussi
+            if(m_board[x][y]->getforce()==m_board[x-1][y]->getforce()) //la je compare avec la premiÃ¨re case la plus proche dans la direction de mouvement, il faut que je le fasse pour les cases derriÃ¨re aussi
             {
 
             }
@@ -112,8 +111,8 @@ void Matrix::makeamove(int x, int y, char direction) //reçoit des coordonnées et
 
 void Matrix::orient(int x, int y, char direction)
 {
-    //reçoit des coordonnées et une direction
-    //prend l'objet à ces coordonnées et modifie sa direction comme il faut.
+    //reÃ§oit des coordonnÃ©es et une direction
+    //prend l'objet Ã  ces coordonnÃ©es et modifie sa direction comme il faut.
 
     m_board[x][y]->setdirection(direction);
 }

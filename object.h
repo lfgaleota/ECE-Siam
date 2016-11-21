@@ -18,7 +18,7 @@ public :
 
     Object();
     Object(string nom, float force);
-    ~Object();
+    virtual ~Object();
 
     float getforce();
     virtual void setdirection(char direction);
