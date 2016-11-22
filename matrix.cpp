@@ -14,7 +14,7 @@ Matrix::Matrix( vector<Object*> remplir )
 				k++;
 				//cout << 'X' ;
 			} else {
-				m_board[ i ][ j ] = new Mountain( "  ", 0.9 );
+				m_board[ i ][ j ] = nullptr ; //new Mountain( "  ", 0.9 ); --> du coup on fait pas ça on va faire un NULL plutot
 				//cout << 'A' ;
 			}
 		}
