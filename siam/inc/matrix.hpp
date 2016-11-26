@@ -16,13 +16,14 @@
 
 				std::vector<std::vector<Siam::Object*>> m_board;
 
-				Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir );
-
 				inline Siam::Object* at( unsigned int x, unsigned int y );
 				inline void set( unsigned int x, unsigned int y, Siam::Object* obj );
 
 				inline Siam::Object* at( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec );
 				inline void set( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec, Siam::Object* obj );
+
+				int getFrontForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec );
+				int getBackForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec );
 
 			public:
 				Matrix( std::vector<Siam::Object*> remplir );
@@ -35,6 +36,10 @@
 				void orient( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction );
 
 				const std::vector<std::vector<Siam::Object*>>& getBoard();
+
+				Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir );
+
+				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec );
 		};
 
 	}
