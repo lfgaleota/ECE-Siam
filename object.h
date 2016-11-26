@@ -16,7 +16,7 @@ class Object {
 
 	public:
 		Object();
-		Object( string nom, float force );
+		Object( string nom, float force, Direction direction = Direction::Left );
 
 		float getForce();
 

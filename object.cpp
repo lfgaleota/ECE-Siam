@@ -7,8 +7,8 @@ Object::Object()
 
 }
 
-Object::Object( string nom, float force )
-		: m_nom( nom ), m_force( force ) {
+Object::Object( string nom, float force, Direction direction )
+		: m_nom( nom ), m_force( force ), m_direction( direction ) {
 
 }
 

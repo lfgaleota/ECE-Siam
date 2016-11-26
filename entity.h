@@ -11,12 +11,12 @@
 using namespace std;
 
 class Entity : public Object {
-	private :
+	private:
 		Player* m_player;
 
-	public :
+	public:
 		Entity();
-		Entity( string nom, float force, Player* player );
+		Entity( string nom, float force, Direction direction, Player* player );
 };
 
 
