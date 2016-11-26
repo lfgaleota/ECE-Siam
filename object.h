@@ -10,20 +10,17 @@ using namespace std;
 
 class Object {
 	private:
-
 		string m_nom;
 		float m_force;
 		Direction m_direction;
 
 	public:
-
 		Object();
-
 		Object( string nom, float force );
 
 		virtual ~Object();
 
-		float getforce();
+		float getForce();
 
 		Direction getDirection() const;
 		void setDirection( Direction direction );

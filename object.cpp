@@ -16,7 +16,7 @@ Object::~Object() {
 
 }
 
-float Object::getforce() {
+float Object::getForce() {
 	return m_force;
 }
 
