@@ -9,7 +9,7 @@
 using namespace std;
 
 class Object {
-	private:
+	protected:
 		string m_nom;
 		float m_force;
 		Direction m_direction;
