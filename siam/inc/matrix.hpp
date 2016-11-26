@@ -33,6 +33,8 @@
 
 				void move( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction );
 				void orient( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction );
+
+				const std::vector<std::vector<Siam::Object*>>& getBoard();
 		};
 
 	}

@@ -132,3 +132,7 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) {
 		throw Siam::exceptions::invalid_move();
 	}
 }
+
+const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() {
+	return m_board;
+}
