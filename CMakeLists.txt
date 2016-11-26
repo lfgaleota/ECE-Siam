@@ -24,6 +24,7 @@ set(SOURCE_FILES
 	siam/matrixs/direction.cpp
 	siam/inc/matrixs/direction.hpp
 	siam/inc/exceptions/exceptions.hpp
+	siam/inc/objects/types/type.hpp
 )
 
 add_executable(ECE_Siam ${SOURCE_FILES})

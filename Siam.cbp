@@ -52,6 +52,7 @@
 		<Unit filename="siam/objects/mountain.cpp"/>
 		<Unit filename="siam/objects/rhinoceros.cpp"/>
 		<Unit filename="siam/player.cpp"/>
+		<Unit filename="siam/inc/objects/types/type.hpp"/>
 		<Extensions>
 			<code_completion />
 			<envvars />
