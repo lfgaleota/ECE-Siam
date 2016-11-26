@@ -1,4 +1,4 @@
-#include "player.h"
+#include "inc/player.hpp"
 
 using namespace std;
 using namespace Siam;

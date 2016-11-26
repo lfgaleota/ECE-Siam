@@ -1,5 +1,3 @@
-#include <stdexcept>
-
 class invalid_move : public std::exception {
 	virtual const char* what() const throw() {
 		return "Invalid move";

@@ -1,4 +1,4 @@
-#include "object.h"
+#include "inc/object.hpp"
 
 using namespace std;
 using namespace Siam;

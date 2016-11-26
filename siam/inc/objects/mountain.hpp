@@ -3,7 +3,7 @@
 
 	#include <vector>
 	#include <string>
-	#include "object.h"
+	#include "../object.hpp"
 
 	namespace Siam {
 		namespace Objects {

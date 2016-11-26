@@ -3,7 +3,7 @@
 
 	#include <vector>
 	#include <string>
-	#include "inc/matrix/direction.hpp"
+	#include "matrixs/direction.hpp"
 
 	namespace Siam {
 

@@ -1,5 +1,5 @@
-#include "object.h"
-#include "entity.h"
+#include "../inc/object.hpp"
+#include "../inc/objects/entity.hpp"
 
 using namespace std;
 using namespace Siam;

@@ -1,4 +1,4 @@
-#include "matrix.h"
+#include "inc/matrix.hpp"
 
 using namespace std;
 using namespace Siam;

@@ -3,9 +3,9 @@
 
 	#include <vector>
 	#include <string>
-	#include "object.h"
-	#include "player.h"
-	#include "inc/matrix/direction.hpp"
+	#include "../object.hpp"
+	#include "../player.hpp"
+	#include "../matrixs/direction.hpp"
 
 	namespace Siam {
 		namespace Objects {

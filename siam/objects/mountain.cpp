@@ -1,5 +1,5 @@
-#include "object.h"
-#include "mountain.h"
+#include "../inc/object.hpp"
+#include "../inc/objects/mountain.hpp"
 
 using namespace std;
 using namespace Siam;

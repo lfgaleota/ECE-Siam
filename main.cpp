@@ -1,8 +1,8 @@
 #include <iostream>
 #include <vector>
-#include "matrix.h"
-#include "mountain.h"
-#include "entity.h"
+#include "siam/inc/matrix.hpp"
+#include "siam/inc/objects/mountain.hpp"
+#include "siam/inc/objects/entity.hpp"
 
 using namespace std;
 
