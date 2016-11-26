@@ -20,6 +20,6 @@ set(SOURCE_FILES
 		siam/player.cpp
 		siam/inc/player.hpp
 		siam/objects/rhinoceros.cpp
-		siam/inc/objects/rhinoceros.hpp siam/inc/matrixs/direction.hpp siam/inc/exceptions/exceptions.hpp)
+		siam/inc/objects/rhinoceros.hpp siam/inc/matrixs/direction.hpp siam/inc/exceptions/exceptions.hpp siam/matrixs/direction.cpp siam/matrixs/direction.hpp)
 
 add_executable(ECE_Siam ${SOURCE_FILES})

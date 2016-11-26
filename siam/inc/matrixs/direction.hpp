@@ -15,8 +15,8 @@ namespace Siam {
 			const int x;
 			const int y;
 
-			DirectionVector() : x( 0 ), y( 0 ) {}
-			DirectionVector( int _x, int _y ) : x( _x ), y( _y ) {}
+			DirectionVector();
+			DirectionVector( int _x, int _y );
 		};
 
 	}
