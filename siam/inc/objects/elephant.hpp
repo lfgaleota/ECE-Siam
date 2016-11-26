@@ -8,6 +8,9 @@
 
 			class Elephant : public Entity {
 				public:
+					Elephant();
+					Elephant( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+
 					Siam::Objects::Types::Type getType();
 			};
 

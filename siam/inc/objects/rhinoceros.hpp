@@ -8,6 +8,9 @@
 
 			class Rhinoceros : public Entity {
 				public:
+					Rhinoceros();
+					Rhinoceros( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+
 					Siam::Objects::Types::Type getType();
 			};
 
