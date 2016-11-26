@@ -6,8 +6,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(SOURCE_FILES
 		cli/cli.cpp
 		cli/cli.hpp
-		cli/main.cpp
-		cli/test.cpp
 		elephant.cpp
 		elephant.h
 		entity.cpp
@@ -22,6 +20,6 @@ set(SOURCE_FILES
 		player.cpp
 		player.h
 		rhinoceros.cpp
-		rhinoceros.h)
+		rhinoceros.h inc/matrix/direction.hpp inc/exceptions/exceptions.hpp)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
