@@ -8,16 +8,19 @@
 #include "player.h"
 #include "matrix.h"
 
-using namespace std;
+namespace Siam {
+	namespace Objects {
+		class Entity : public Siam::Object {
+			private:
+				Player* m_player;
 
-class Entity : public Object {
-	private:
-		Player* m_player;
+			public:
+				Entity();
 
-	public:
-		Entity();
-		Entity( string nom, float force, Direction direction, Player* player );
-};
+				Entity( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+		};
+	}
+}
 
 
 #endif // ENTITY_H_INCLUDED

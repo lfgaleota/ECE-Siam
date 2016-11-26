@@ -1,9 +1,11 @@
 #include "matrix.h"
 
 using namespace std;
+using namespace Siam;
+using namespace Siam::Matrixs;
 
-Matrix::Matrix( vector<Object*> remplir )
-		: m_tour( 0 ), m_board( 5, vector<Object*>( 5 ) ) {
+Matrix::Matrix( vector<Siam::Object*> remplir )
+		: m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
 	unsigned int k = 0;
 
 	for( unsigned int i = 0; i < 5; i++ ) {
@@ -31,7 +33,7 @@ Matrix::~Matrix() {
 	}
 }
 
-void Matrix::add( Object* A, unsigned int x, unsigned int y ) {
+void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) {
 	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) {
 		try {
 			if( this->at( x, y ) == nullptr ) {
@@ -78,26 +80,26 @@ DirectionVector Matrix::getDirectionVector( Direction dir ) {
 	return DirectionVector();
 }
 
-inline Object* Matrix::at( unsigned int x, unsigned int y ) {
+inline Siam::Object* Matrix::at( unsigned int x, unsigned int y ) {
 	return this->m_board.at( x ).at( y );
 }
 
-inline void Matrix::set( unsigned int x, unsigned int y, Object* obj ) {
+inline void Matrix::set( unsigned int x, unsigned int y, Siam::Object* obj ) {
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x ][ y ] = obj;
 	else
-		throw out_of_range( "Accessing outside the defined matrix" );
+		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
 }
 
-inline Object* Matrix::at( unsigned int x, unsigned int y, DirectionVector dvec ) {
+inline Siam::Object* Matrix::at( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	return this->m_board.at( x + dvec.x ).at( y + dvec.y );
 }
 
-inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, Object* obj ) {
+inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, Siam::Object* obj ) {
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x + dvec.x ][ y + dvec.y ] = obj;
 	else
-		throw out_of_range( "Accessing outside the defined matrix" );
+		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
 }
 
 //reçoit des coordonnées et une direction de déplacement

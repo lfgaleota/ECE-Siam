@@ -2,29 +2,27 @@
 #define PLAYER_H_INCLUDED
 
 
-#include <iostream>
 #include <vector>
 #include <string>
-#include "entity.h"
 
-using namespace std;
+namespace Siam {
+	class Player {
+		private :
 
-class Player {
-	private :
+			std::string m_name;
+			//attribut pour le camp choisi ? string ou pointeur sur une des pieces ?
 
-		string m_name;
-		//attribut pour le camp choisi ? string ou pointeur sur une des pieces ?
+		public :
 
-	public :
+			Player();
 
-		Player();
+			Player( std::string name );
 
-		Player( string name );
-
-		~Player();
+			~Player();
 
 
-};
+	};
+}
 
 
 #endif // PLAYER_H_INCLUDED

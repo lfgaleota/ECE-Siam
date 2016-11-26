@@ -6,23 +6,25 @@
 #include <string>
 #include "inc/matrix/direction.hpp"
 
-using namespace std;
+namespace Siam {
+	class Object {
+		protected:
+			std::string m_nom;
+			float m_force;
+			Siam::Matrixs::Direction m_direction;
 
-class Object {
-	protected:
-		string m_nom;
-		float m_force;
-		Direction m_direction;
+		public:
+			Object();
 
-	public:
-		Object();
-		Object( string nom, float force, Direction direction = Direction::Left );
+			Object( std::string nom, float force, Siam::Matrixs::Direction direction = Siam::Matrixs::Direction::Left );
 
-		float getForce();
+			float getForce();
 
-		Direction getDirection() const;
-		void setDirection( Direction direction );
-};
+			Siam::Matrixs::Direction getDirection() const;
+
+			void setDirection( Siam::Matrixs::Direction direction );
+	};
+}
 
 
 #endif // OBJECT_H_INCLUDED

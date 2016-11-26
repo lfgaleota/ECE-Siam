@@ -1,13 +1,15 @@
 #include "object.h"
 
 using namespace std;
+using namespace Siam;
+using namespace Siam::Matrixs;
 
 Object::Object()
 		: m_nom( "" ), m_force( 0 ) {
 
 }
 
-Object::Object( string nom, float force, Direction direction )
+Object::Object( string nom, float force, Siam::Matrixs::Direction direction )
 		: m_nom( nom ), m_force( force ), m_direction( direction ) {
 
 }

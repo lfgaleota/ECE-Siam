@@ -7,16 +7,20 @@
 #include "object.h"
 
 
-using namespace std;
 
-class Mountain : public Object {
-	public :
+namespace Siam {
+	namespace Objects {
+		class Mountain : public Siam::Object {
+			public :
 
-		Mountain();
-		Mountain( string nom, float force );
+				Mountain();
 
-		//sortie du terrain
-};
+				Mountain( std::string nom, float force );
+
+				//sortie du terrain
+		};
+	}
+}
 
 
 #endif // MOUNTAIN_H_INCLUDED

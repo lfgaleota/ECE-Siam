@@ -1,7 +1,7 @@
-#include <iostream>
-#include "entity.h"
+#include "player.h"
 
 using namespace std;
+using namespace Siam;
 
 Player::Player()
 		: m_name( "" ) {

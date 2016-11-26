@@ -8,38 +8,41 @@
 #include "inc/exceptions/exceptions.hpp"
 #include "inc/matrix/direction.hpp"
 
-using namespace std;
+namespace Siam {
+	class Matrix {
+		private :
 
-class Matrix {
-	private :
+			unsigned int m_tour;
+			Siam::Object t;
 
-		unsigned int m_tour;
-		Object t;
+			std::vector<std::vector<Siam::Object*>> m_board;
 
-		vector<vector<Object*>> m_board;
+			Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir );
 
-		DirectionVector getDirectionVector( Direction dir );
-		inline Object* at( unsigned int x, unsigned int y );
-		inline void set( unsigned int x, unsigned int y, Object* obj );
+			inline Siam::Object* at( unsigned int x, unsigned int y );
 
-		inline Object* at( unsigned int x, unsigned int y, DirectionVector dvec );
-		inline void set( unsigned int x, unsigned int y, DirectionVector dvec, Object* obj );
+			inline void set( unsigned int x, unsigned int y, Siam::Object* obj );
 
-	public :
+			inline Siam::Object* at( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec );
 
-		Matrix( vector<Object*> remplir );
+			inline void set( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec, Siam::Object* obj );
 
-		~Matrix();
+		public :
 
-		void add( Object* A, unsigned int x, unsigned int y );
+			Matrix( std::vector<Siam::Object*> remplir );
 
-		void remove( unsigned int x, unsigned int y );
+			~Matrix();
 
-		void move( unsigned int x, unsigned int y, Direction direction );
+			void add( Siam::Object* A, unsigned int x, unsigned int y );
 
-		void orient( unsigned int x, unsigned int y, Direction direction );
+			void remove( unsigned int x, unsigned int y );
 
-};
+			void move( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction );
+
+			void orient( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction );
+
+	};
+}
 
 
 #endif // MATRIX_H_INCLUDED
