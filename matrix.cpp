@@ -26,7 +26,7 @@ Matrix::~Matrix() {
 
 }
 
-void Matrix::entrance( Object* A, unsigned int x, unsigned int y ) {
+void Matrix::add( Object* A, unsigned int x, unsigned int y ) {
 	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) {
 		try {
 			if( this->at( x, y ) == nullptr ) {
@@ -42,7 +42,7 @@ void Matrix::entrance( Object* A, unsigned int x, unsigned int y ) {
 	}
 }
 
-void Matrix::exit( unsigned int x, unsigned int y ) {
+void Matrix::remove( unsigned int x, unsigned int y ) {
 	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) {
 		try {
 			if( this->at( x, y ) != nullptr ) {
@@ -96,7 +96,7 @@ inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, O
 }
 
 //reçoit des coordonnées et une direction de déplacement
-void Matrix::makeamove( unsigned int x, unsigned int y, Direction direction ) {
+void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
 	DirectionVector dvec = this->getDirectionVector( direction );
 
 	if( this->at( x, y ) != nullptr ) {

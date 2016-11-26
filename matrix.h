@@ -31,11 +31,11 @@ class Matrix {
 
 		~Matrix();
 
-		void entrance( Object* A, unsigned int x, unsigned int y );
+		void add( Object* A, unsigned int x, unsigned int y );
 
-		void exit( unsigned int x, unsigned int y );
+		void remove( unsigned int x, unsigned int y );
 
-		void makeamove( unsigned int x, unsigned int y, Direction direction );
+		void move( unsigned int x, unsigned int y, Direction direction );
 
 		void orient( unsigned int x, unsigned int y, Direction direction );
 

@@ -19,7 +19,7 @@ int main() {
 
 	Matrix board( remplir ); //on initialise le terrain de jeu !
 
-	board.entrance( & Rhino1, x, y ); //test d'entrée dans la matrice d'une entité
-	board.exit( x, y ); //on enlève une pièce qui est au bord
+	board.add( &Rhino1, x, y ); //test d'entrée dans la matrice d'une entité
+	board.remove( x, y ); //on enlève une pièce qui est au bord
 	return 0;
 }
