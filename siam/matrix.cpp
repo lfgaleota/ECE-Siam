@@ -68,13 +68,13 @@ void Matrix::remove( unsigned int x, unsigned int y ) {
 DirectionVector Matrix::getDirectionVector( Direction dir ) {
 	switch( dir ) {
 		case Left:
-			return DirectionVector( 0, -1 );
-		case Right:
-			return DirectionVector( 0, 1 );
-		case Top:
 			return DirectionVector( -1, 0 );
-		case Bottom:
+		case Right:
 			return DirectionVector( 1, 0 );
+		case Top:
+			return DirectionVector( 0, -1 );
+		case Bottom:
+			return DirectionVector( 0, 1 );
 	}
 
 	return DirectionVector();
