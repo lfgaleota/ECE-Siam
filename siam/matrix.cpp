@@ -39,13 +39,13 @@ void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) {
 			if( this->at( x, y ) == nullptr ) {
 				this->set( x, y, A );
 			} else {
-				throw Siam::exceptions::invalid_move();
+				throw Siam::exceptions::invalid_move( "Add: Already occupied" );
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move();
+			throw Siam::exceptions::invalid_move( "Add: Out of bound" );
 		}
 	} else {
-		throw Siam::exceptions::invalid_move();
+		throw Siam::exceptions::invalid_move( "Add: Not authorized" );
 	}
 }
 
@@ -55,13 +55,13 @@ void Matrix::remove( unsigned int x, unsigned int y ) {
 			if( this->at( x, y ) != nullptr ) {
 				this->set( x, y, nullptr );
 			} else {
-				throw Siam::exceptions::invalid_move();
+				throw Siam::exceptions::invalid_move( "Remove: Empty space" );
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move();
+			throw Siam::exceptions::invalid_move( "Remove: Out of bound" );
 		}
 	} else {
-		throw Siam::exceptions::invalid_move();
+		throw Siam::exceptions::invalid_move( "Remove: Not authorized" );
 	}
 }
 
@@ -118,7 +118,7 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
 				}
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move();
+			throw Siam::exceptions::invalid_move( "Move: out of range" );
 		}
 	}
 }
@@ -129,7 +129,7 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) {
 	try {
 		this->at( x, y )->setDirection( direction );
 	} catch( out_of_range e ) {
-		throw Siam::exceptions::invalid_move();
+		throw Siam::exceptions::invalid_move( "Set direction: out of range" );
 	}
 }
 
