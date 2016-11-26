@@ -13,3 +13,7 @@ DirectionVector operator*( int lhs, DirectionVector& rhs ) {
 DirectionVector operator*( DirectionVector& lhs, int rhs ) {
 	return DirectionVector( rhs * lhs.x, rhs * lhs.y );
 }
+
+bool operator==( DirectionVector const& lhs, DirectionVector const& rhs ) {
+	return ( lhs.x == rhs.x && lhs.y == rhs.y );
+}
