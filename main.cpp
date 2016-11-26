@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	int x = 0, y = 0;
+	unsigned int x = 0, y = 0;
 
 	Mountain M1( "M", 0.9 ), M2( "M", 0.9 ), M3( "M", 0.9 ); //création des trois montagnes nécéssaires au jeu
 	Entity Rhino1( "R1", 1, 'h', nullptr ); //pas fait l'assignation d'un animal à un joueur pour le moment donc pointeur null

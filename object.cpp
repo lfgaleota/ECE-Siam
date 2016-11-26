@@ -20,6 +20,6 @@ float Object::getforce() {
 	return m_force;
 }
 
-void Object::setdirection( char direction ) {
+void Object::setdirection( Direction direction ) {
 
 }

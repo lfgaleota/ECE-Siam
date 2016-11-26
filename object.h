@@ -4,16 +4,18 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "inc/matrix/direction.hpp"
 
 using namespace std;
 
 class Object {
-	private :
+	private:
 
 		string m_nom;
 		float m_force;
+		Direction m_direction;
 
-	public :
+	public:
 
 		Object();
 
@@ -23,7 +25,7 @@ class Object {
 
 		float getforce();
 
-		virtual void setdirection( char direction );
+		virtual void setdirection( Direction direction );
 };
 
 
