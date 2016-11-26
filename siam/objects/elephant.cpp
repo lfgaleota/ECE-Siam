@@ -9,5 +9,5 @@ Elephant::Elephant() : Entity() {}
 Elephant::Elephant( string nom, float force, Direction direction, Player* player ) : Entity( nom, force, direction, player ) {}
 
 Types::Type Elephant::getType() {
-	return Types::Type::Mountain;
+	return Types::Type::Elephant;
 }
