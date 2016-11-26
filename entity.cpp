@@ -3,16 +3,5 @@
 
 using namespace std;
 
-Entity::Entity()
-		: Object(), m_orientation( 'h' ), m_player( nullptr ) {
-
-}
-
-Entity::Entity( string nom, float force, char orientation, Player* player )
-		: Object( nom, force ), m_orientation( orientation ), m_player( player ) {
-
-}
-
-void Entity::setdirection( char direction ) {
-	m_orientation = direction;
-}
+Entity::Entity() : Object(), m_player( nullptr ) {}
+Entity::Entity( string nom, float force, Player* player ) : Object( nom, force ), m_player( player ) {}
