@@ -1,26 +1,21 @@
-#ifndef MOUNTAIN_H_INCLUDED
-#define MOUNTAIN_H_INCLUDED
+#ifndef _ECE_SIAM_MOUNTAIN_HPP_
+	#define _ECE_SIAM_MOUNTAIN_HPP_
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include "object.h"
+	#include <vector>
+	#include <string>
+	#include "object.h"
 
+	namespace Siam {
+		namespace Objects {
 
+			class Mountain : public Siam::Object {
+				public:
+					Mountain();
+					Mountain( std::string nom, float force );
 
-namespace Siam {
-	namespace Objects {
-		class Mountain : public Siam::Object {
-			public :
+					//sortie du terrain
+			};
 
-				Mountain();
-
-				Mountain( std::string nom, float force );
-
-				//sortie du terrain
-		};
+		}
 	}
-}
-
-
-#endif // MOUNTAIN_H_INCLUDED
+#endif

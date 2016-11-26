@@ -1,26 +1,24 @@
-#ifndef ENTITY_H_INCLUDED
-#define ENTITY_H_INCLUDED
+#ifndef _ECE_SIAM_ENTITY_HPP_
+	#define _ECE_SIAM_ENTITY_HPP_
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include "object.h"
-#include "player.h"
-#include "matrix.h"
+	#include <vector>
+	#include <string>
+	#include "object.h"
+	#include "player.h"
+	#include "inc/matrix/direction.hpp"
 
-namespace Siam {
-	namespace Objects {
-		class Entity : public Siam::Object {
-			private:
-				Player* m_player;
+	namespace Siam {
+		namespace Objects {
 
-			public:
-				Entity();
+			class Entity : public Siam::Object {
+				private:
+					Player* m_player;
 
-				Entity( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
-		};
+				public:
+					Entity();
+					Entity( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+			};
+
+		}
 	}
-}
-
-
-#endif // ENTITY_H_INCLUDED
+#endif

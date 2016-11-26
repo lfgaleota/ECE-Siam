@@ -1,14 +1,14 @@
-#ifndef ELEPHANT_H_INCLUDED
-#define ELEPHANT_H_INCLUDED
+#ifndef _ECE_SIAM_ELEPHANT_HPP_
+	#define _ECE_SIAM_ELEPHANT_HPP_
 
-#include "entity.h"
+	#include "entity.h"
 
-namespace Siam {
-	namespace Objects {
-		class Elephant : public Entity {
-		};
+	namespace Siam {
+		namespace Objects {
+
+			class Elephant : public Entity {
+			};
+
+		}
 	}
-}
-
-
-#endif // ELEPHANT_H_INCLUDED
+#endif
