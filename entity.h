@@ -12,17 +12,12 @@ using namespace std;
 
 class Entity : public Object {
 	private :
-
 		char m_orientation;
 		Player* m_player;
 
 	public :
-
 		Entity();
-
 		Entity( string nom, float force, char orientation, Player* player );
-
-		virtual ~Entity();
 
 		void setdirection( char direction );
 };

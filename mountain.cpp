@@ -11,8 +11,4 @@ Mountain::Mountain( string nom, float force )
 
 }
 
-Mountain::~Mountain() {
-
-}
-
 using namespace std;

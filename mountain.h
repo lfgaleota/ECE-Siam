@@ -13,10 +13,7 @@ class Mountain : public Object {
 	public :
 
 		Mountain();
-
 		Mountain( string nom, float force );
-
-		~Mountain();
 
 		//sortie du terrain
 };

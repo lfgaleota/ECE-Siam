@@ -13,10 +13,6 @@ Entity::Entity( string nom, float force, char orientation, Player* player )
 
 }
 
-Entity::~Entity() {
-
-}
-
 void Entity::setdirection( char direction ) {
 	m_orientation = direction;
 }

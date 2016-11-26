@@ -12,10 +12,6 @@ Object::Object( string nom, float force )
 
 }
 
-Object::~Object() {
-
-}
-
 float Object::getForce() {
 	return m_force;
 }

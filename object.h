@@ -18,8 +18,6 @@ class Object {
 		Object();
 		Object( string nom, float force );
 
-		virtual ~Object();
-
 		float getForce();
 
 		Direction getDirection() const;
