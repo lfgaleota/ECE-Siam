@@ -23,7 +23,12 @@ Matrix::Matrix( vector<Object*> remplir )
 }
 
 Matrix::~Matrix() {
-
+	for( auto& invec : this->m_board ) {
+		for( auto& elem : invec ) {
+			if( elem != nullptr )
+				delete elem;
+		}
+	}
 }
 
 void Matrix::add( Object* A, unsigned int x, unsigned int y ) {
