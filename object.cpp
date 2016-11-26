@@ -20,6 +20,10 @@ float Object::getforce() {
 	return m_force;
 }
 
-void Object::setdirection( Direction direction ) {
+Direction Object::getDirection() const {
+	return this->m_direction;
+}
 
+void Object::setDirection( Direction direction ) {
+	this->m_direction = direction;
 }

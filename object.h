@@ -25,7 +25,8 @@ class Object {
 
 		float getforce();
 
-		virtual void setdirection( Direction direction );
+		Direction getDirection() const;
+		void setDirection( Direction direction );
 };
 
 

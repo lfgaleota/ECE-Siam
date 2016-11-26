@@ -125,7 +125,7 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) {
 	//reçoit des coordonnées et une direction
 	//prend l'objet à ces coordonnées et modifie sa direction comme il faut.
 	try {
-		this->at( x, y )->setdirection( direction );
+		this->at( x, y )->setDirection( direction );
 	} catch( out_of_range e ) {
 		throw Siam::exceptions::invalid_move();
 	}
