@@ -7,6 +7,8 @@
 		namespace Objects {
 
 			class Elephant : public Entity {
+				public:
+					Siam::Objects::Types::Type getType();
 			};
 
 		}

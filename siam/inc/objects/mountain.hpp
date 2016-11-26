@@ -13,7 +13,7 @@
 					Mountain();
 					Mountain( std::string nom, float force );
 
-					//sortie du terrain
+					Siam::Objects::Types::Type getType();
 			};
 
 		}

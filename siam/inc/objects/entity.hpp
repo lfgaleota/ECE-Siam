@@ -6,6 +6,7 @@
 	#include "../object.hpp"
 	#include "../player.hpp"
 	#include "../matrixs/direction.hpp"
+	#include "../objects/types/type.hpp"
 
 	namespace Siam {
 		namespace Objects {
@@ -17,6 +18,8 @@
 				public:
 					Entity();
 					Entity( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+
+					virtual Siam::Objects::Types::Type getType();
 			};
 
 		}

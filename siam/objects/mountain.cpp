@@ -14,3 +14,7 @@ Mountain::Mountain( string nom, float force )
 		: Object( nom, force ) {
 
 }
+
+Types::Type Mountain::getType() {
+	return Types::Type::Mountain;
+}

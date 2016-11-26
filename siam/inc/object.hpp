@@ -4,6 +4,7 @@
 	#include <vector>
 	#include <string>
 	#include "matrixs/direction.hpp"
+	#include "objects/types/type.hpp"
 
 	namespace Siam {
 
@@ -21,6 +22,8 @@
 
 				Siam::Matrixs::Direction getDirection() const;
 				void setDirection( Siam::Matrixs::Direction direction );
+
+				virtual Siam::Objects::Types::Type getType();
 		};
 
 	}

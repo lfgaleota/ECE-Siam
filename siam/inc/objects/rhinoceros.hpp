@@ -7,6 +7,8 @@
 		namespace Objects {
 
 			class Rhinoceros : public Entity {
+				public:
+					Siam::Objects::Types::Type getType();
 			};
 
 		}
