@@ -32,23 +32,26 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="cli/cli.cpp" />
-		<Unit filename="cli/cli.hpp" />
-		<Unit filename="elephant.cpp" />
-		<Unit filename="elephant.h" />
-		<Unit filename="entity.cpp" />
-		<Unit filename="entity.h" />
-		<Unit filename="main.cpp" />
-		<Unit filename="matrix.cpp" />
-		<Unit filename="matrix.h" />
-		<Unit filename="mountain.cpp" />
-		<Unit filename="mountain.h" />
-		<Unit filename="object.cpp" />
-		<Unit filename="object.h" />
-		<Unit filename="player.cpp" />
-		<Unit filename="player.h" />
-		<Unit filename="rhinoceros.cpp" />
-		<Unit filename="rhinoceros.h" />
+		<Unit filename="cli/cli.cpp"/>
+		<Unit filename="cli/cli.hpp"/>
+		<Unit filename="main.cpp"/>
+		<Unit filename="siam/inc/exceptions/exceptions.hpp"/>
+		<Unit filename="siam/inc/matrix.hpp"/>
+		<Unit filename="siam/inc/matrixs/direction.hpp"/>
+		<Unit filename="siam/inc/object.hpp"/>
+		<Unit filename="siam/inc/objects/elephant.hpp"/>
+		<Unit filename="siam/inc/objects/entity.hpp"/>
+		<Unit filename="siam/inc/objects/mountain.hpp"/>
+		<Unit filename="siam/inc/objects/rhinoceros.hpp"/>
+		<Unit filename="siam/inc/player.hpp"/>
+		<Unit filename="siam/matrix.cpp"/>
+		<Unit filename="siam/matrixs/direction.cpp"/>
+		<Unit filename="siam/object.cpp"/>
+		<Unit filename="siam/objects/elephant.cpp"/>
+		<Unit filename="siam/objects/entity.cpp"/>
+		<Unit filename="siam/objects/mountain.cpp"/>
+		<Unit filename="siam/objects/rhinoceros.cpp"/>
+		<Unit filename="siam/player.cpp"/>
 		<Extensions>
 			<code_completion />
 			<envvars />
