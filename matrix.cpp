@@ -111,7 +111,7 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
 				this->set( x, y, nullptr );
 			} else {
 				//la je compare avec la première case la plus proche dans la direction de mouvement, il faut que je le fasse pour les cases derrière aussi
-				if( this->at( x, y )->getforce() == this->at( x, y, dvec )->getforce() ) {
+				if( this->at( x, y )->getForce() == this->at( x, y, dvec )->getForce() ) {
 
 				}
 			}
