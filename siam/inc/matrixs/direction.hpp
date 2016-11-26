@@ -22,4 +22,6 @@ namespace Siam {
 	}
 }
 
+Siam::Matrixs::DirectionVector operator*( int lhs, Siam::Matrixs::DirectionVector& rhs );
+Siam::Matrixs::DirectionVector operator*( Siam::Matrixs::DirectionVector& lhs, int rhs );
 #endif
