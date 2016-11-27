@@ -149,6 +149,17 @@ void ajout(Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board)
 
 }
 
+void remove(Siam::Matrix& board)
+{
+    int x,y ;
+    cout << "A quelles coordonnees ?" << endl ;
+    cin >> x ;
+    cin >> y ;
+
+    board.remove(x,y);
+
+}
+
 void tour(Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board)
 {
 
@@ -176,6 +187,7 @@ void tour(Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board)
         break ;
     case 2 :
         //remove
+        remove(board);
         break ;
     case 3 :
         //move
@@ -184,6 +196,8 @@ void tour(Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board)
         //orient
         break ;
     }
+
+    board.settour();
 }
 
 int main() {
@@ -212,6 +226,7 @@ int main() {
 
     //board.remove( x, y ); //on enlève une pièce qui est au bord
 
+    tour(&player1, &player2, board);
     tour(&player1, &player2, board);
     return 0;
 }

@@ -198,3 +198,8 @@ unsigned int Matrix::gettour()
 {
     return m_tour ;
 }
+
+void Matrix::settour()
+{
+    m_tour++ ;
+}
