@@ -9,7 +9,6 @@
 		class Player {
 			private:
 				std::string m_name;
-				//attribut pour le camp choisi ? string ou pointeur sur une des pieces ?
 
 			public:
 				Player();

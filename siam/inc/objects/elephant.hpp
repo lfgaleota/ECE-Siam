@@ -8,10 +8,10 @@
 
 			class Elephant : public Entity {
 				public:
-					Elephant();
-					Elephant( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );
+					Elephant(); //default constructor
+					Elephant( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );//overload constructor
 
-					Siam::Objects::Types::Type getType();
+					Siam::Objects::Types::Type getType();//gets type of object --> useful because classes will inherit of object
 			};
 
 		}

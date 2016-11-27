@@ -8,12 +8,12 @@
 	namespace Siam {
 		namespace Objects {
 
-			class Mountain : public Siam::Object {
+			class Mountain : public Siam::Object { //inherits from object
 				public:
-					Mountain();
-					Mountain( std::string nom, float force );
+					Mountain(); //default constructor
+					Mountain( std::string nom, float force ); //overload constructor
 
-					Siam::Objects::Types::Type getType();
+					Siam::Objects::Types::Type getType();//gets type of object --> useful because classes will inherit of object
 			};
 
 		}

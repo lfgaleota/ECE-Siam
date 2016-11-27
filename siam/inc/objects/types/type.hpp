@@ -5,7 +5,7 @@
 		namespace Objects {
 			namespace Types {
 
-				enum Type {
+				enum Type { //allows to get the type of the object
 					Object,
 					Entity,
 					Mountain,
