@@ -193,3 +193,8 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) {
 const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() {
 	return m_board;
 }
+
+unsigned int Matrix::gettour()
+{
+    return m_tour ;
+}

@@ -27,7 +27,7 @@
 
 			public:
 				Matrix( std::vector<Siam::Object*> remplir ); //overloard constructor
-				~Matrix(); //destructor
+				virtual ~Matrix(); //destructor
 
 				void add( Siam::Object* A, unsigned int x, unsigned int y ); //add a piece on the board at x,y spot -> only if possible
 				void remove( unsigned int x, unsigned int y ); //removes a piece from the board. -> only if possible
@@ -40,6 +40,8 @@
 				Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir ); //gets direction of the object (read access)
 
 				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
+
+				unsigned int gettour();
 		};
 
 	}
