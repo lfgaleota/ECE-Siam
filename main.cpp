@@ -5,6 +5,7 @@
 #include "siam/inc/objects/entity.hpp"
 #include "siam/inc/objects/rhinoceros.hpp"
 #include "siam/inc/objects/elephant.hpp"
+#include "siam/inc/player.hpp"
 
 using namespace std;
 
@@ -54,11 +55,29 @@ void display( Siam::Matrix& board ) {
 	}
 }
 
+void playerchoice(Siam::Player* player1, Siam::Player* player2)
+{
+    bool choix ;
+    cout << "vous etes plutot du genre a jouer les elephants vous non ?" << endl ;
+    cout << "0:OUI 1:NON" << endl ;
+    cin >> choix ;
+
+    player1->savechoice(choix);
+    player2->savechoice(!choix);
+
+    cout << player1->getanimalchosen() << endl ;
+
+
+}
+
 int main() {
 	unsigned int x = 0, y = 0;
 
 	Siam::Objects::Mountain M1( "M", 0.9 ), M2( "M", 0.9 ), M3( "M", 0.9 ); //création des trois montagnes nécéssaires au jeu
 	vector<Siam::Object*> remplir; // on va les stocker dans un vector c'est plus pratique à manipuler
+	Siam::Player player1("Louis-Felix"), player2("Romain") ;
+
+	playerchoice(&player1, &player2);
 
 	remplir.push_back( & M1 ); //on les met effectivement dedans
 	remplir.push_back( & M2 );

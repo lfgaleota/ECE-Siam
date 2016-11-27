@@ -37,3 +37,8 @@ void Player::savechoice(bool choice)
         cout << "Error : wrong value for choice" << endl ;
 
 }
+
+std::string Player::getanimalchosen()
+{
+    return m_animalchosen ;
+}
