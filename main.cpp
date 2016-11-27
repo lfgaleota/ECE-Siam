@@ -27,6 +27,10 @@ void display( Siam::Matrix& board ) {
 					case Siam::Objects::Types::Type::Elephant:
 						std::cout << "E";
 						break;
+                    case Siam::Objects::Types::Type::Object:
+						break;
+                    case Siam::Objects::Types::Type::Entity:
+						break;
 				}
 				switch( elem->getDirection() ) {
 					case Siam::Matrixs::Direction::Left:
