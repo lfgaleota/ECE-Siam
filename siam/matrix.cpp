@@ -141,11 +141,9 @@ int Matrix::getFrontForce( unsigned int x, unsigned int y, DirectionVector dvec 
 			try {
 				obj = this->at( x, y, dvec );
 				for( int nb = 1; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {
-					if( initobj->getType() == obj->getType() &&
-					    this->getDirectionVector( obj->getDirection() ) == dvec )
+					if( initobj->getType() == obj->getType() && this->getDirectionVector( obj->getDirection() ) == dvec )
 						forceSum += obj->getForce();
-					else if( initobj->getType() != obj->getType() &&
-					         this->getDirectionVector( obj->getDirection() ) == invdvec )
+					else if( initobj->getType() != obj->getType() && this->getDirectionVector( obj->getDirection() ) == invdvec )
 						forceSum -= obj->getForce();
 				}
 			} catch( out_of_range e ) {}
@@ -163,7 +161,6 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	return this->getBackForce( x, y, dvec ) + this->getFrontForce( x, y, dvec );
 }
 
-//reçoit des coordonnées et une direction de déplacement
 void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
 	DirectionVector dvec = this->getDirectionVector( direction );
 
@@ -173,7 +170,6 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
 			} else {
-				//la je compare avec la première case la plus proche dans la direction de mouvement, il faut que je le fasse pour les cases derrière aussi
 				if( this->at( x, y )->getForce() == this->at( x, y, dvec )->getForce() ) {
 
 				}

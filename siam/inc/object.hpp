@@ -15,15 +15,15 @@
 				Siam::Matrixs::Direction m_direction;
 
 			public:
-				Object();
-				Object( std::string nom, float force, Siam::Matrixs::Direction direction = Siam::Matrixs::Direction::Left );
+				Object(); //default constructor
+				Object( std::string nom, float force, Siam::Matrixs::Direction direction = Siam::Matrixs::Direction::Left ); //overload constructor
 
-				float getForce();
+				float getForce(); //read access to strength of object
 
-				Siam::Matrixs::Direction getDirection() const;
-				void setDirection( Siam::Matrixs::Direction direction );
+				Siam::Matrixs::Direction getDirection() const; //read access to direction of the object
+				void setDirection( Siam::Matrixs::Direction direction ); //write access to direction of the object
 
-				virtual Siam::Objects::Types::Type getType();
+				virtual Siam::Objects::Types::Type getType(); //gets type of object --> useful because classes will inherit of object
 		};
 
 	}
