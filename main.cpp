@@ -58,14 +58,24 @@ void display( Siam::Matrix& board ) {
 void playerchoice(Siam::Player* player1, Siam::Player* player2)
 {
     bool choix ;
-    cout << "vous etes plutot du genre a jouer les elephants vous non ?" << endl ;
+    std::string name ;
+
+    cout << "joueur 1 entrez votre nom : " ;
+    cin >> name ;
+    player1->setname(name) ;
+    cout << "joueur 2 entrez votre nom : ";
+    cin >> name ;
+    player2->setname(name);
+
+    cout << "vous etes plutot du genre a jouer les elephants " << player1->getname() << " non ?" << endl ;
     cout << "0:OUI 1:NON" << endl ;
     cin >> choix ;
 
     player1->savechoice(choix);
     player2->savechoice(!choix);
 
-    cout << player1->getanimalchosen() << endl ;
+    cout << player1->getname() << " jouera les " << player1->getanimalchosen() << endl ;
+    cout << player2->getname() << " jouera les " << player2->getanimalchosen() << endl ;
 
 
 }

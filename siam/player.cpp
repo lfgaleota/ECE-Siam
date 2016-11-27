@@ -42,3 +42,13 @@ std::string Player::getanimalchosen()
 {
     return m_animalchosen ;
 }
+
+std::string Player::getname()
+{
+    return m_name ;
+}
+
+void Player::setname(std::string name)
+{
+    m_name = name ;
+}

@@ -20,6 +20,8 @@
 
 				void savechoice(bool choice); //recevra le choix de l'user sous forme de vrai/faux
 				std::string getanimalchosen(); //pour faire un test ça juste
+				std::string getname();
+				void setname(std::string name);
 		};
 
 	}
