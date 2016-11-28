@@ -128,9 +128,9 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	}
 }
 
-void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //move a piece
+Object* Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //move a piece
 	DirectionVector dvec = this->getDirectionVector( direction ); //get the direction of the piece
-	Object* obj;
+	Object *obj, *ejectedobj = nullptr;
 	int nb = 0;
 
 	if( this->at( x, y ) != nullptr ) { //if the chosen spot is not empty
@@ -139,16 +139,33 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //mov
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
 			} else {
-				if( this->getForce( x, y, dvec ) > 0 ) { //else check for the power balance
+				if( this->getForce( x, y, dvec ) > 0 ) {
+					// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
 					try {
 						obj = this->at( x, y );
 						for( nb = 0; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {}
 					} catch( out_of_range e ) {}
 
+					// Maintenant nb contient le nombre de fois qu'on se déplace pour atteindre la prochaine case vide ou sortir du tableau
+					// On parcourt alors le tableau en sens inverse
 					for( ; nb > 0 ; nb-- ) {
-						obj = this->at( x, y, nb * dvec );
-						this->set( x, y, nb * dvec, this->at( x, y, ( nb - 1 ) * dvec ) );
-						this->set( x, y, ( nb - 1 ) * dvec, obj );
+						try {
+							// On intervertie l'objet en cours et celui à côté dans le sens opposé au déplacement
+							obj = this->at( x, y, nb * dvec );
+							this->set( x, y, nb * dvec, this->at( x, y, ( nb - 1 ) * dvec ) );
+							this->set( x, y, ( nb - 1 ) * dvec, obj );
+						} catch( out_of_range e ) {
+							// On est en dehors! On va donc retourner l'object
+
+							// Si on a déjà un objet à éjecter en attente
+							if( ejectedobj != nullptr )
+								throw exceptions::invalid_move( "Ejecting more than one piece at a time." ); // Ce n'est pas sensé arriver! On arrête tout.
+
+							// Sinon on stocke l'objet à éjecter
+							ejectedobj = this->at( x, y, ( nb - 1 ) * dvec );
+							// On vide son ancienne case
+							this->set( x, y, ( nb - 1 ) * dvec, nullptr );
+						}
 					}
 				}
 			}
@@ -156,6 +173,8 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //mov
 			throw Siam::exceptions::invalid_move( "Move: out of range" ); //shielding
 		}
 	}
+
+	return ejectedobj;
 }
 
 void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) { //reorient a piece
