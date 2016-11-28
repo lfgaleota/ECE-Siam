@@ -28,7 +28,7 @@
 				virtual ~Matrix(); //destructor
 
 				void add( Siam::Object* A, unsigned int x, unsigned int y ); //add a piece on the board at x,y spot -> only if possible
-				void remove( unsigned int x, unsigned int y ); //removes a piece from the board. -> only if possible
+				Siam::Object* remove( unsigned int x, unsigned int y ); //removes a piece from the board. -> only if possible
 
 				void move( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction ); //moves if the spot is free, else checks the strength front and back and moves or not accordingly
 				void orient( unsigned int x, unsigned int y, Siam::Matrixs::Direction direction ); //only modifies the direction of a piece on the board.

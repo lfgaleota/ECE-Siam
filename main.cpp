@@ -1,9 +1,8 @@
 #include <iostream>
 #include <vector>
 #include "siam/inc/matrix.hpp"
-#include "siam/inc/objects/entity.hpp"
-#include "siam/inc/objects/rhinoceros.hpp"
-#include "siam/inc/objects/elephant.hpp"
+#include "siam/inc/player.hpp"
+#include "siam/inc/object.hpp"
 
 using namespace std;
 
@@ -65,122 +64,136 @@ Siam::Player initPlayer( Siam::Player* player ) {
 	cout << "0:OUI 1:NON" << endl;
 	cin >> choix;
 
-	return Siam::Player( name, ( choix ? Siam::Objects::Types::Type::Elephant : Siam::Objects::Types::Type::Rhinoceros ) );
+	return Siam::Player( name,
+	                     ( choix ? Siam::Objects::Types::Type::Elephant : Siam::Objects::Types::Type::Rhinoceros ) );
 }
 
-void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) {
+void ajout( Siam::Matrix& board, Siam::Player& player ) {
 	unsigned int x, y;
 	char direction;
+	Siam::Object* obj = nullptr;
 
-	cout << "A quelles coordonnees ?" << endl;
-	cin >> x;
-	cin >> y;
-	cout << "Dans quelle direction ?(h/b/g/d)" << endl;
-	cin >> direction;
+	for( bool loop = true; loop; ) {
+		loop = false;
 
-	switch( direction ) {
+		cout << "A quelles coordonnees ?" << endl;
+		cin >> x;
+		cin >> y;
+		cout << "Dans quelle direction ?(h/b/g/d)" << endl;
+		cin >> direction;
 
-		case 'g' :
+		try {
+			switch( direction ) {
+				case 'g' :
+					obj = player.retrievePiece();
+					board.add( obj, x, y );
+					board.orient( x, y, Siam::Matrixs::Direction::Left );
+					break;
 
-			if( player1->getAnimalChosen() == "Elephant" ) {
-				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
-			} else
-				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
-			break;
+				case 'd' :
+					obj = player.retrievePiece();
+					board.add( obj, x, y );
+					board.orient( x, y, Siam::Matrixs::Direction::Right );
+					break;
 
-		case 'd' :
+				case 'h' :
+					obj = player.retrievePiece();
+					board.add( obj, x, y );
+					board.orient( x, y, Siam::Matrixs::Direction::Top );
+					break;
 
+				case 'b' :
+					obj = player.retrievePiece();
+					board.add( obj, x, y );
+					board.orient( x, y, Siam::Matrixs::Direction::Bottom );
+					break;
 
-			if( player1->getAnimalChosen() == "Elephant" ) {
-				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Right, nullptr ), x, y );
-			} else
-				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Right, nullptr ), x, y );
-			break;
-
-		case 'h' :
-
-
-			if( player1->getAnimalChosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
-				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Top, nullptr ), x, y );
-			} else
-				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Top, nullptr ), x, y );
-			break;
-
-		case 'b' :
-
-
-			if( player1->getAnimalChosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
-				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Bottom, nullptr ), x, y );
-			} else
-				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Bottom, nullptr ), x, y );
-			break;
-
-
-		default :
-
-			cout << "error" << endl;
-
-			break;
-
+				default:
+					loop = true;
+					break;
+			}
+		} catch( Siam::exceptions::invalid_move e ) {
+			std::cerr << e.what() << std::endl;
+			loop = true;
+			if( obj != nullptr )
+				player.stockPiece( obj );
+		}
 	}
-
-
 }
 
-void remove( Siam::Matrix& board ) {
+void remove( Siam::Matrix& board, Siam::Player& player ) {
 	unsigned int x, y;
-	cout << "A quelles coordonnees ?" << endl;
-	cin >> x;
-	cin >> y;
+	Siam::Object* obj = nullptr;
 
-	board.remove( x, y );
+	for( bool loop = true; loop; ) {
+		loop = false;
 
+		cout << "A quelles coordonnees ?" << endl;
+		cin >> x;
+		cin >> y;
+
+		try {
+			obj = board.remove( x, y );
+			player.stockPiece( obj );
+		} catch( Siam::exceptions::invalid_move e ) {
+			std::cerr << e.what() << std::endl;
+			loop = true;
+			if( obj != nullptr )
+				board.add( obj, x, y );
+		}
+	}
 }
 
-void tour( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) {
+void
+tour( Siam::Matrix& board, std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer ) {
+	int choice;
 
-	int choix;
+	if( currentPlayer == players.end() )
+		currentPlayer = players.begin();
 
-	if( board.gettour() % 2 == 0 )
-		cout << "c'est au tour de " << player1->getName() << endl;
-	else
-		cout << "c'est au tour de " << player2->getName() << endl;
+	std::cout << "Vous etes " << currentPlayer->getName() << "." <<std::endl;
 
-	cout << "vos possibilites sont : " << endl;
-	cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
-	cout << "   2. Enlever une piece du terrain" << endl;
-	cout << "   3. Bouger une piece sur le terrain" << endl;
-	cout << "   4. Changer l'orientation d'une piece" << endl;
-	cout << endl;
-	cout << "quel est votre choix ?";
-	cin >> choix;
+	do {
+		cout << "vos possibilites sont : " << endl;
+		cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
+		cout << "   2. Enlever une piece du terrain" << endl;
+		cout << "   3. Bouger une piece sur le terrain" << endl;
+		cout << "   4. Changer l'orientation d'une piece" << endl;
+		cout << endl;
+		cout << "quel est votre choix ?";
+		cin >> choice;
 
-	switch( choix ) {
-		case 1 :
-			//add
-			ajout( player1, player2, board );
-			break;
-		case 2 :
-			//remove
-			remove( board );
-			break;
-		case 3 :
-			//move
-			break;
-		case 4 :
-			//orient
-			break;
-	}
+		switch( choice ) {
+			case 1:
+				//add
+				ajout( board, * currentPlayer );
+				break;
+			case 2:
+				//remove
+				remove( board, * currentPlayer );
+				break;
+			case 3:
+				//move
+				break;
+			case 4:
+				//orient
+				break;
+		}
+	} while( choice < 1 || choice > 4 );
 
-	board.settour();
+	currentPlayer++;
 }
 
 int main() {
 	unsigned int x = 0, y = 0;
 
-	Siam::Player player1( "Louis-Félix", Siam::Objects::Types::Type::Rhinoceros ), player2( "Romain", Siam::Objects::Types::Type::Elephant );
+	std::vector<Siam::Player> players;
+	players.push_back( Siam::Player( "Louis-Félix", Siam::Objects::Types::Type::Rhinoceros ) );
+	players.push_back( Siam::Player( "Romain", Siam::Objects::Types::Type::Elephant ) );
 
-	Siam::Matrix board(); //on initialise le terrain de jeu !
+	std::vector<Siam::Player>::iterator currentPlayer = players.begin();
+
+	Siam::Matrix board = Siam::Matrix(); //on initialise le terrain de jeu !
 
 	//board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
 	//board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Right, nullptr ), x + 1, y ); //test d'entrée dans la matrice d'une entité
@@ -193,13 +206,7 @@ int main() {
 
 	//board.remove( x, y ); //on enlève une pièce qui est au bord
 
-<<<<<<< HEAD
-    //tour(&player1, &player2, board);
-    //tour(&player1, &player2, board);
-    return 0;
-=======
-	tour( & player1, & player2, board );
-	tour( & player1, & player2, board );
+	tour( board, players, currentPlayer );
+	tour( board, players, currentPlayer );
 	return 0;
->>>>>>> f0623044b962763e8442b76f269bfe68753364d2
 }

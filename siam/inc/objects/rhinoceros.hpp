@@ -9,7 +9,7 @@
 			class Rhinoceros : public Entity {
 				public:
 					Rhinoceros();//default constructor
-					Rhinoceros( std::string nom, float force, Siam::Matrixs::Direction direction, Player* player );//overload constructor
+					Rhinoceros( std::string nom, float force, Siam::Matrixs::Direction direction );//overload constructor
 
 					Siam::Objects::Types::Type getType();//gets type of object --> useful because classes will inherit of object
 			};

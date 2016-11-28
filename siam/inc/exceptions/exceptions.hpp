@@ -7,7 +7,7 @@
 	namespace Siam {
 		namespace exceptions {
 			#include "invalid_move"
-			#include "invalid_object"
+			#include "invalid_object_type"
 			#include "stack_empty"
 			#include "stack_full"
 		}

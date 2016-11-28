@@ -5,21 +5,6 @@ using namespace Siam;
 using namespace Siam::Matrixs;
 using namespace Siam::Objects;
 
-<<<<<<< HEAD
-Matrix::Matrix( vector<Siam::Object*> remplir ) //constructor
-		: m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) { //dimensions initialization -> vector<vector<object*>(dimension1, vector<object*> (dimension2))
-	unsigned int k = 0;
-
-	for( unsigned int i = 0; i < 5; i++ ) { //fill it up !
-		for( unsigned int j = 0; j < 5; j++ ) {
-			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
-				this->set( i, j, remplir[ k ] );
-				k++;
-
-			} else {
-				this->set( i, j, nullptr ); //if this is not a mountain case, initiate at nullptr
-
-=======
 Matrix::Matrix() : m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
@@ -27,7 +12,6 @@ Matrix::Matrix() : m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
 				this->set( i, j, new Mountain( "M", 0 ) );
 			} else {
 				this->set( i, j, nullptr );
->>>>>>> 5e0340df4381d8a13fd27557d9aa34ae94243a81
 			}
 		}
 	}
@@ -59,11 +43,15 @@ void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) { //add func
 	}
 }
 
-void Matrix::remove( unsigned int x, unsigned int y ) { //remove a piece from the board
+Siam::Object* Matrix::remove( unsigned int x, unsigned int y ) { //remove a piece from the board
+	Siam::Object* obj;
+
 	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) { //check if we are within the boundaries
 		try {
 			if( this->at( x, y ) != nullptr ) { //delete the pointer on object
+				obj = this->at( x, y );
 				this->set( x, y, nullptr );
+				return obj;
 			} else {
 				throw Siam::exceptions::invalid_move( "Remove: Empty space" );
 			}

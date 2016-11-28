@@ -4,7 +4,6 @@
 	#include <vector>
 	#include <string>
 	#include "../object.hpp"
-	#include "../player.hpp"
 	#include "../matrixs/direction.hpp"
 	#include "../objects/types/type.hpp"
 

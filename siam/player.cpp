@@ -8,11 +8,11 @@ using namespace Siam::Objects;
 Player::Player( string name, Siam::Objects::Types::Type animalchosen ) : m_name( name ), m_animalchosen( animalchosen ) {
 	for( unsigned int i = 0; i < 5; i++ ) {
 		if( animalchosen == Types::Type::Elephant )
-			m_pieces.push( new Siam::Objects::Elephant( "E", 1, Siam::Matrixs::Direction::Right, nullptr ) );
+			m_pieces.push( new Siam::Objects::Elephant( "E", 1, Siam::Matrixs::Direction::Right ) );
 		else if( animalchosen == Types::Type::Rhinoceros )
-			m_pieces.push( new Siam::Objects::Rhinoceros( "R", 1, Siam::Matrixs::Direction::Left, nullptr ) );
+			m_pieces.push( new Siam::Objects::Rhinoceros( "R", 1, Siam::Matrixs::Direction::Left ) );
 		else
-			throw exceptions::invalid_object();
+			throw exceptions::invalid_object_type();
 	}
 }
 
