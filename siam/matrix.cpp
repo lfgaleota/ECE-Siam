@@ -5,7 +5,7 @@ using namespace Siam;
 using namespace Siam::Matrixs;
 using namespace Siam::Objects;
 
-Matrix::Matrix() : m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
+Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) {
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
@@ -157,14 +157,4 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) { //r
 
 const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read access to the board
 	return m_board;
-}
-
-unsigned int Matrix::gettour() //read access to tour
-{
-    return m_tour ;
-}
-
-void Matrix::settour() //write access to tour -> only does tour++
-{
-    m_tour++ ;
 }

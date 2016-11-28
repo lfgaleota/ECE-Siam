@@ -12,9 +12,6 @@
 
 		class Matrix {
 			private:
-				unsigned int m_tour;
-				Siam::Object t;
-
 				std::vector<std::vector<Siam::Object*>> m_board; //game matrix
 
 				inline Siam::Object* at( unsigned int x, unsigned int y ); // returns references on coordinates. Also checks against bounds
@@ -38,9 +35,6 @@
 				Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir ); //gets direction of the object (read access)
 
 				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
-
-				unsigned int gettour(); //read access to tour
-				void settour() ; //write access to tour
 		};
 
 	}
