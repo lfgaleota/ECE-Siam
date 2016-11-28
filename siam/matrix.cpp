@@ -86,7 +86,7 @@ inline void Matrix::set( unsigned int x, unsigned int y, Siam::Object* obj ) { /
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x ][ y ] = obj;
 	else
-		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
+		throw out_of_range( "Accessing outside the defined matrix" );
 }
 
 inline Siam::Object* Matrix::at( unsigned int x, unsigned int y, DirectionVector dvec ) { //surcharged version of at
@@ -97,7 +97,7 @@ inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, S
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x + dvec.x ][ y + dvec.y ] = obj;
 	else
-		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
+		throw out_of_range( "Accessing outside the defined matrix" );
 }
 
 int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
