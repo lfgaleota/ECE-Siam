@@ -187,6 +187,8 @@ void move( Siam::Matrix& board, std::vector<Siam::Player>& players, Siam::Player
 				if( obj->getType() == Siam::Objects::Types::Type::Mountain ) {
 					// Si c'est une montagne, on incrémente le compteur du joueur actuel
 					player.incrementMountainsCount();
+					// Et on détruit la montagne, bien sûr!
+					delete obj;
 				} else {
 					// Sinon on remet la pièce dans la pile de pièces du joueur
 					for( auto& loopplayer : players ) {
@@ -261,6 +263,7 @@ void tour( Siam::Matrix& board, std::vector<Siam::Player>& players, std::vector<
 	display( board );
 
 	std::cout << "Vous etes " << currentPlayer->getName() << "." << std::endl;
+	std::cout << "Vous avez pousse " << currentPlayer->getMountainsCount() << " montagnes." << std::endl;
 
 	do {
 		cout << "vos possibilites sont : " << endl;
