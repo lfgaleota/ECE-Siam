@@ -6,6 +6,7 @@
 	#include "object.hpp"
 	#include "exceptions/exceptions.hpp"
 	#include "matrixs/direction.hpp"
+	#include "objects/mountain.hpp"
 
 	namespace Siam {
 
@@ -26,7 +27,7 @@
 				int getBackForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //strength backing object
 
 			public:
-				Matrix( std::vector<Siam::Object*> remplir ); //overloard constructor
+				Matrix(); //overloard constructor
 				virtual ~Matrix(); //destructor
 
 				void add( Siam::Object* A, unsigned int x, unsigned int y ); //add a piece on the board at x,y spot -> only if possible

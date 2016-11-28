@@ -3,23 +3,17 @@
 using namespace std;
 using namespace Siam;
 using namespace Siam::Matrixs;
+using namespace Siam::Objects;
 
-Matrix::Matrix( vector<Siam::Object*> remplir )
-		: m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
-	unsigned int k = 0;
-
+Matrix::Matrix() : m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
-				this->set( i, j, remplir[ k ] );
-				k++;
-				//cout << 'X' ;
+				this->set( i, j, new Mountain( "M", 0 ) );
 			} else {
-				this->set( i, j, nullptr ); //new Mountain( "  ", 0.9 ); --> du coup on fait pas ça on va faire un NULL plutot
-				//cout << 'A' ;
+				this->set( i, j, nullptr );
 			}
 		}
-		//cout << endl ;
 	}
 
 }
