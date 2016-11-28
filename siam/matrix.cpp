@@ -69,9 +69,9 @@ DirectionVector Matrix::getDirectionVector( Direction dir ) { //used to get the 
 			return DirectionVector( -1, 0 );
 		case Right:
 			return DirectionVector( 1, 0 );
-		case Top:
+		case Up:
 			return DirectionVector( 0, -1 );
-		case Bottom:
+		case Down:
 			return DirectionVector( 0, 1 );
 	}
 

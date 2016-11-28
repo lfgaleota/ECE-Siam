@@ -7,8 +7,8 @@ namespace Siam {
 		enum Direction {
 			Left,
 			Right,
-			Top,
-			Bottom
+			Up,
+			Down
 		};
 
 		struct DirectionVector {

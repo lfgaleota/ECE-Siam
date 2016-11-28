@@ -36,10 +36,10 @@ void display( Siam::Matrix& board ) {
 					case Siam::Matrixs::Direction::Right:
 						std::cout << ">";
 						break;
-					case Siam::Matrixs::Direction::Top:
+					case Siam::Matrixs::Direction::Up:
 						std::cout << "/";
 						break;
-					case Siam::Matrixs::Direction::Bottom:
+					case Siam::Matrixs::Direction::Down:
 						std::cout << "\\";
 						break;
 				}
@@ -98,13 +98,13 @@ void ajout( Siam::Matrix& board, Siam::Player& player ) {
 				case 'h' :
 					obj = player.retrievePiece();
 					board.add( obj, x, y );
-					board.orient( x, y, Siam::Matrixs::Direction::Top );
+					board.orient( x, y, Siam::Matrixs::Direction::Up );
 					break;
 
 				case 'b' :
 					obj = player.retrievePiece();
 					board.add( obj, x, y );
-					board.orient( x, y, Siam::Matrixs::Direction::Bottom );
+					board.orient( x, y, Siam::Matrixs::Direction::Down );
 					break;
 
 				default:
@@ -170,11 +170,11 @@ void move( Siam::Matrix& board, std::vector<Siam::Player>& players, Siam::Player
 					break;
 
 				case 'h' :
-					obj = board.move( x, y, Siam::Matrixs::Direction::Top );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Up );
 					break;
 
 				case 'b' :
-					obj = board.move( x, y, Siam::Matrixs::Direction::Bottom );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Down );
 					break;
 
 				default:
@@ -228,11 +228,11 @@ void orient( Siam::Matrix& board, Siam::Player& player ) {
 					break;
 
 				case 'h' :
-					board.orient( x, y, Siam::Matrixs::Direction::Top );
+					board.orient( x, y, Siam::Matrixs::Direction::Up );
 					break;
 
 				case 'b' :
-					board.orient( x, y, Siam::Matrixs::Direction::Bottom );
+					board.orient( x, y, Siam::Matrixs::Direction::Down );
 					break;
 
 				default:
@@ -277,7 +277,7 @@ void tour( Siam::Matrix& board, std::vector<Siam::Player>& players, std::vector<
 				break;
 			case 3:
 				//move
-				move( board, *currentPlayer );
+				move( board, players, *currentPlayer );
 				break;
 			case 4:
 				//orient
