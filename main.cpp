@@ -116,6 +116,9 @@ void ajout( Siam::Matrix& board, Siam::Player& player ) {
 			loop = true;
 			if( obj != nullptr )
 				player.stockPiece( obj );
+		} catch( Siam::exceptions::stack_empty e ) {
+			std::cerr << e.what() << std::endl;
+			loop = true;
 		}
 	}
 }
@@ -132,6 +135,8 @@ void remove( Siam::Matrix& board, Siam::Player& player ) {
 		cin >> y;
 
 		try {
+			if( board.getType( x, y ) != player.getAnimalChosen() )
+				throw Siam::exceptions::invalid_move( "Piece not to the player" );
 			obj = board.remove( x, y );
 			player.stockPiece( obj );
 		} catch( Siam::exceptions::invalid_move e ) {
@@ -139,6 +144,14 @@ void remove( Siam::Matrix& board, Siam::Player& player ) {
 			loop = true;
 			if( obj != nullptr )
 				board.add( obj, x, y );
+		} catch( Siam::exceptions::stack_full e ) {
+			std::cerr << e.what() << std::endl;
+			loop = true;
+			if( obj != nullptr )
+				board.add( obj, x, y );
+		} catch( Siam::exceptions::invalid_object_type e ) {
+			std::cerr << "Empty space" << std::endl;
+			loop = true;
 		}
 	}
 }
