@@ -13,6 +13,7 @@
 		class Matrix {
 			private:
 				std::vector<std::vector<Siam::Object*>> m_board; //game matrix
+				unsigned int m_mountainCount;
 
 				inline Siam::Object* at( unsigned int x, unsigned int y ); // returns references on coordinates. Also checks against bounds
 				inline void set( unsigned int x, unsigned int y, Siam::Object* obj ); //Places object at given coordinates. (only if possible)
@@ -36,6 +37,8 @@
 
 				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
 				Siam::Objects::Types::Type getType( unsigned int x, unsigned int y);
+
+				unsigned int getMountainsCount();
 		};
 
 	}

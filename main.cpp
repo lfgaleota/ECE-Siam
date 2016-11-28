@@ -298,6 +298,21 @@ void tour( Siam::Matrix& board, std::vector<Siam::Player>& players, std::vector<
 	currentPlayer++;
 }
 
+bool isFinished( Siam::Matrix& board ) {
+	return ( board.getMountainsCount() > 0 );
+}
+
+void victory( std::vector<Siam::Player>& players ) {
+	std::vector<Siam::Player>::iterator winingPlayer = players.begin();
+
+	for( auto it = players.begin(); it != players.end(); it++ ) {
+		if( it->getMountainsCount() > it->getMountainsCount() )
+			winingPlayer = it;
+	}
+
+	std::cout << "Bravo " << winingPlayer->getName() << ", tu as gagne!" << std::endl;
+}
+
 int main() {
 	std::vector<Siam::Player> players;
 	players.push_back( Siam::Player( "Louis-Félix", Siam::Objects::Types::Type::Rhinoceros ) );
@@ -307,7 +322,9 @@ int main() {
 
 	Siam::Matrix board = Siam::Matrix(); //on initialise le terrain de jeu !
 
-	while( true )
+	while( isFinished( board ) )
 		tour( board, players, currentPlayer );
+	victory( players );
+
 	return 0;
 }

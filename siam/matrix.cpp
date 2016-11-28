@@ -10,6 +10,7 @@ Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
 				this->set( i, j, new Mountain( "M", 0 ) );
+				m_mountainCount++;
 			} else {
 				this->set( i, j, nullptr );
 			}
@@ -174,6 +175,9 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //
 		}
 	}
 
+	if( ejectedobj != nullptr && ejectedobj->getType() == Types::Type::Mountain )
+		// L'objet à ejecter est une montagne? On décréménte le compteur de montagne!
+		this->m_mountainCount--;
 	return ejectedobj;
 }
 
@@ -186,7 +190,7 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) { //r
 }
 
 const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read access to the board
-	return m_board;
+	return this->m_board;
 }
 
 Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
@@ -200,4 +204,8 @@ Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
 	} catch( out_of_range e ) {
 		throw Siam::exceptions::invalid_move( "Get type: out of range" );
 	}
+}
+
+unsigned int Matrix::getMountainsCount() {
+	return this->m_mountainCount;
 }
