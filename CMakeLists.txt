@@ -28,3 +28,9 @@ set(SOURCE_FILES
 )
 
 add_executable(ECE_Siam ${SOURCE_FILES})
+
+if(UNIX)
+	set(SYSTEM_SPECIFIC_LIBRARIES tinfo)
+endif(UNIX)
+
+target_link_libraries(ECE_Siam ${SYSTEM_SPECIFIC_LIBRARIES})
