@@ -23,11 +23,8 @@
 				inline Siam::Object* at( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //surcharged version of at --> includes direction vector
 				inline void set( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec, Siam::Object* obj ); //surcharged version of set --> includes direction vector
 
-				int getFrontForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //strength facing object
-				int getBackForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //strength backing object
-
 			public:
-				Matrix(); //overloard constructor
+				Matrix();
 				virtual ~Matrix(); //destructor
 
 				void add( Siam::Object* A, unsigned int x, unsigned int y ); //add a piece on the board at x,y spot -> only if possible

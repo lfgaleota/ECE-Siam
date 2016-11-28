@@ -96,34 +96,7 @@ inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, S
 		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
 }
 
-int Matrix::getBackForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
-	int forceSum = 0;
-
-	try {
-		Object* initobj = this->at( x, y );
-
-		Object* obj = initobj;
-		DirectionVector invdvec = -1 * dvec;
-
-		if( initobj != nullptr ) {
-			try {
-				for( int nb = 0; obj != nullptr && initobj->getType() == obj->getType(); nb++, obj = this->at( x, y,
-				                                                                                               nb *
-				                                                                                               invdvec ) )
-					if( this->getDirectionVector( obj->getDirection() ) == dvec )
-						forceSum += obj->getForce();
-			} catch( out_of_range e ) {}
-
-			return forceSum;
-		} else {
-			throw Siam::exceptions::invalid_move( "Back force: empty space" );
-		}
-	} catch( out_of_range e ) {
-		throw Siam::exceptions::invalid_move( "Back force: out of range" );
-	}
-}
-
-int Matrix::getFrontForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
+int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	int forceSum = 0;
 
 	try {
@@ -133,7 +106,7 @@ int Matrix::getFrontForce( unsigned int x, unsigned int y, DirectionVector dvec 
 
 		if( initobj != nullptr ) {
 			try {
-				obj = this->at( x, y, dvec );
+				obj = this->at( x, y );
 				for( int nb = 1; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {
 					if( initobj->getType() == obj->getType() && this->getDirectionVector( obj->getDirection() ) == dvec )
 						forceSum += obj->getForce();
@@ -149,10 +122,6 @@ int Matrix::getFrontForce( unsigned int x, unsigned int y, DirectionVector dvec 
 	} catch( out_of_range e ) {
 		throw Siam::exceptions::invalid_move( "Front force: out of range" );
 	}
-}
-
-int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
-	return this->getBackForce( x, y, dvec ) + this->getFrontForce( x, y, dvec );
 }
 
 void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
