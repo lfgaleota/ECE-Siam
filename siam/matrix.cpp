@@ -59,23 +59,23 @@ void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) { //add func
 	}
 }
 
-void Matrix::remove( unsigned int x, unsigned int y ) {
-	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) {
+void Matrix::remove( unsigned int x, unsigned int y ) { //remove a piece from the board
+	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) { //check if we are within the boundaries
 		try {
-			if( this->at( x, y ) != nullptr ) {
+			if( this->at( x, y ) != nullptr ) { //delete the pointer on object
 				this->set( x, y, nullptr );
 			} else {
 				throw Siam::exceptions::invalid_move( "Remove: Empty space" );
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move( "Remove: Out of bound" );
+			throw Siam::exceptions::invalid_move( "Remove: Out of bound" ); //shielding
 		}
 	} else {
 		throw Siam::exceptions::invalid_move( "Remove: Not authorized" );
 	}
 }
 
-DirectionVector Matrix::getDirectionVector( Direction dir ) {
+DirectionVector Matrix::getDirectionVector( Direction dir ) { //used to get the direction of an Object
 	switch( dir ) {
 		case Left:
 			return DirectionVector( -1, 0 );
@@ -90,22 +90,22 @@ DirectionVector Matrix::getDirectionVector( Direction dir ) {
 	return DirectionVector();
 }
 
-inline Siam::Object* Matrix::at( unsigned int x, unsigned int y ) {
+inline Siam::Object* Matrix::at( unsigned int x, unsigned int y ) { //at is a function that replaces [] with more efficiency
 	return this->m_board.at( x ).at( y );
 }
 
-inline void Matrix::set( unsigned int x, unsigned int y, Siam::Object* obj ) {
+inline void Matrix::set( unsigned int x, unsigned int y, Siam::Object* obj ) { //places an object in a spot x,y
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x ][ y ] = obj;
 	else
 		throw out_of_range( "Accessing outside the defined Matrix::Matrix" );
 }
 
-inline Siam::Object* Matrix::at( unsigned int x, unsigned int y, DirectionVector dvec ) {
+inline Siam::Object* Matrix::at( unsigned int x, unsigned int y, DirectionVector dvec ) { //surcharged version of at
 	return this->m_board.at( x + dvec.x ).at( y + dvec.y );
 }
 
-inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, Siam::Object* obj ) {
+inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, Siam::Object* obj ) { //surcharged version of set
 	if( x < m_board.size() && y < m_board.size() )
 		this->m_board[ x + dvec.x ][ y + dvec.y ] = obj;
 	else
@@ -140,45 +140,43 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	}
 }
 
-void Matrix::move( unsigned int x, unsigned int y, Direction direction ) {
-	DirectionVector dvec = this->getDirectionVector( direction );
+void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //move a piece
+	DirectionVector dvec = this->getDirectionVector( direction ); //get the direction of the piece
 
-	if( this->at( x, y ) != nullptr ) {
+	if( this->at( x, y ) != nullptr ) { //if the chosen spot is not empty
 		try {
-			if( this->at( x, y, dvec ) == nullptr ) {
+			if( this->at( x, y, dvec ) == nullptr ) { //if the arrival spot is empty just make the change
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
 			} else {
-				if( this->at( x, y )->getForce() == this->at( x, y, dvec )->getForce() ) {
+				if( this->at( x, y )->getForce() == this->at( x, y, dvec )->getForce() ) { //else check for the power balance
 
 				}
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move( "Move: out of range" );
+			throw Siam::exceptions::invalid_move( "Move: out of range" ); //shielding
 		}
 	}
 }
 
-void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) {
-	//reçoit des coordonnées et une direction
-	//prend l'objet à ces coordonnées et modifie sa direction comme il faut.
+void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) { //reorient a piece
 	try {
-		this->at( x, y )->setDirection( direction );
+		this->at( x, y )->setDirection( direction ); //reorienting
 	} catch( out_of_range e ) {
-		throw Siam::exceptions::invalid_move( "Set direction: out of range" );
+		throw Siam::exceptions::invalid_move( "Set direction: out of range" ); //shielding
 	}
 }
 
-const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() {
+const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read access to the board
 	return m_board;
 }
 
-unsigned int Matrix::gettour()
+unsigned int Matrix::gettour() //read access to tour
 {
     return m_tour ;
 }
 
-void Matrix::settour()
+void Matrix::settour() //write access to tour -> only does tour++
 {
     m_tour++ ;
 }

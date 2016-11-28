@@ -226,7 +226,7 @@ int main() {
 
     //board.remove( x, y ); //on enlève une pièce qui est au bord
 
-    tour(&player1, &player2, board);
-    tour(&player1, &player2, board);
+    //tour(&player1, &player2, board);
+    //tour(&player1, &player2, board);
     return 0;
 }
