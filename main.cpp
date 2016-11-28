@@ -144,7 +144,47 @@ void remove( Siam::Matrix& board, Siam::Player& player ) {
 }
 
 void move( Siam::Matrix& board, Siam::Player& player ) {
+	unsigned int x, y;
+	char direction;
 
+	for( bool loop = true; loop; ) {
+		loop = false;
+
+		cout << "A quelles coordonnees ?" << endl;
+		cin >> x;
+		cin >> y;
+		cout << "Dans quelle direction ?(h/b/g/d)" << endl;
+		cin >> direction;
+
+		try {
+			if( board.getType( x, y ) != player.getAnimalChosen() )
+				throw Siam::exceptions::invalid_move( "Piece not to the player" );
+			switch( direction ) {
+				case 'g' :
+					board.move( x, y, Siam::Matrixs::Direction::Left );
+					break;
+
+				case 'd' :
+					board.move( x, y, Siam::Matrixs::Direction::Right );
+					break;
+
+				case 'h' :
+					board.move( x, y, Siam::Matrixs::Direction::Top );
+					break;
+
+				case 'b' :
+					board.move( x, y, Siam::Matrixs::Direction::Bottom );
+					break;
+
+				default:
+					loop = true;
+					break;
+			}
+		} catch( Siam::exceptions::invalid_move e ) {
+			std::cerr << e.what() << std::endl;
+			loop = true;
+		}
+	}
 }
 
 void orient( Siam::Matrix& board, Siam::Player& player ) {
@@ -161,6 +201,8 @@ void orient( Siam::Matrix& board, Siam::Player& player ) {
 		cin >> direction;
 
 		try {
+			if( board.getType( x, y ) != player.getAnimalChosen() )
+				throw Siam::exceptions::invalid_move( "Piece not to the player" );
 			switch( direction ) {
 				case 'g' :
 					board.orient( x, y, Siam::Matrixs::Direction::Left );

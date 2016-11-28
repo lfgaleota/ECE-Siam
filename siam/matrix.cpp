@@ -130,6 +130,8 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 
 void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //move a piece
 	DirectionVector dvec = this->getDirectionVector( direction ); //get the direction of the piece
+	Object* obj;
+	int nb = 0;
 
 	if( this->at( x, y ) != nullptr ) { //if the chosen spot is not empty
 		try {
@@ -137,8 +139,17 @@ void Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //mov
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
 			} else {
-				if( this->at( x, y )->getForce() == this->at( x, y, dvec )->getForce() ) { //else check for the power balance
+				if( this->getForce( x, y, dvec ) > 0 ) { //else check for the power balance
+					try {
+						obj = this->at( x, y );
+						for( nb = 0; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {}
+					} catch( out_of_range e ) {}
 
+					for( ; nb > 0 ; nb-- ) {
+						obj = this->at( x, y, nb * dvec );
+						this->set( x, y, nb * dvec, this->at( x, y, ( nb - 1 ) * dvec ) );
+						this->set( x, y, ( nb - 1 ) * dvec, obj );
+					}
 				}
 			}
 		} catch( out_of_range e ) {
@@ -157,4 +168,12 @@ void Matrix::orient( unsigned int x, unsigned int y, Direction direction ) { //r
 
 const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read access to the board
 	return m_board;
+}
+
+Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
+	try {
+		return this->at( x, y )->getType();
+	} catch( out_of_range e ) {
+		throw Siam::exceptions::invalid_move( "Get type: out of range" );
+	}
 }
