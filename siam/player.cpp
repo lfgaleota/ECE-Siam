@@ -45,3 +45,11 @@ Object* Player::retrievePiece() {
 		throw exceptions::stack_empty( "No more pieces for this player" );
 	}
 }
+
+unsigned int Player::getMountainsCount() {
+	return this->m_mountains;
+}
+
+void Player::incrementMountainsCount() {
+	this->m_mountains++;
+}

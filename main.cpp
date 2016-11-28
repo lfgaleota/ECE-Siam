@@ -143,9 +143,10 @@ void remove( Siam::Matrix& board, Siam::Player& player ) {
 	}
 }
 
-void move( Siam::Matrix& board, Siam::Player& player ) {
+void move( Siam::Matrix& board, std::vector<Siam::Player>& players, Siam::Player& player ) {
 	unsigned int x, y;
 	char direction;
+	Siam::Object* obj = nullptr;
 
 	for( bool loop = true; loop; ) {
 		loop = false;
@@ -161,24 +162,38 @@ void move( Siam::Matrix& board, Siam::Player& player ) {
 				throw Siam::exceptions::invalid_move( "Piece not to the player" );
 			switch( direction ) {
 				case 'g' :
-					board.move( x, y, Siam::Matrixs::Direction::Left );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Left );
 					break;
 
 				case 'd' :
-					board.move( x, y, Siam::Matrixs::Direction::Right );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Right );
 					break;
 
 				case 'h' :
-					board.move( x, y, Siam::Matrixs::Direction::Top );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Top );
 					break;
 
 				case 'b' :
-					board.move( x, y, Siam::Matrixs::Direction::Bottom );
+					obj = board.move( x, y, Siam::Matrixs::Direction::Bottom );
 					break;
 
 				default:
 					loop = true;
 					break;
+			}
+
+			if( obj != nullptr ) {
+				// On a ejecté une case!
+				if( obj->getType() == Siam::Objects::Types::Type::Mountain ) {
+					// Si c'est une montagne, on incrémente le compteur du joueur actuel
+					player.incrementMountainsCount();
+				} else {
+					// Sinon on remet la pièce dans la pile de pièces du joueur
+					for( auto& loopplayer : players ) {
+						if( loopplayer.getAnimalChosen() == obj->getType() )
+							loopplayer.stockPiece( obj );
+					}
+				}
 			}
 		} catch( Siam::exceptions::invalid_move e ) {
 			std::cerr << e.what() << std::endl;
