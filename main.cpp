@@ -53,28 +53,19 @@ void display( Siam::Matrix& board ) {
 	}
 }
 
-void playerchoice( Siam::Player* player1, Siam::Player* player2 ) {
+Siam::Player initPlayer( Siam::Player* player ) {
 	bool choix;
+	Siam::Objects::Types::Type animal;
 	std::string name;
 
-	cout << "joueur 1 entrez votre nom : ";
+	cout << "joueur entrez votre nom : ";
 	cin >> name;
-	player1->setname( name );
-	cout << "joueur 2 entrez votre nom : ";
-	cin >> name;
-	player2->setname( name );
 
-	cout << "vous etes plutot du genre a jouer les elephants " << player1->getName() << " non ?" << endl;
+	cout << "vous etes plutot du genre a jouer les elephants " << name << " non ?" << endl;
 	cout << "0:OUI 1:NON" << endl;
 	cin >> choix;
 
-	player1->saveChoice( choix );
-	player2->saveChoice( !choix );
-
-	cout << player1->getName() << " jouera les " << player1->getAnimalChosen() << endl;
-	cout << player2->getName() << " jouera les " << player2->getAnimalChosen() << endl;
-
-
+	return Siam::Player( name, ( choix ? Siam::Objects::Types::Type::Elephant : Siam::Objects::Types::Type::Rhinoceros ) );
 }
 
 void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) {
@@ -187,9 +178,7 @@ void tour( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) {
 int main() {
 	unsigned int x = 0, y = 0;
 
-	Siam::Player player1( "Louis-Félix" ), player2( "Romain" );
-
-	playerchoice( & player1, & player2 );
+	Siam::Player player1( "Louis-Félix", Siam::Objects::Types::Type::Rhinoceros ), player2( "Romain", Siam::Objects::Types::Type::Elephant );
 
 	Siam::Matrix board(); //on initialise le terrain de jeu !
 

@@ -10,18 +10,15 @@
 		class Player {
 			private:
 				std::string m_name;
-				std::string m_animalchosen ;
+				Siam::Objects::Types::Type m_animalchosen;
 
 			public:
-				Player();
-				Player( std::string name );
+				Player( std::string name, Siam::Objects::Types::Type animalchosen );
 
 				~Player();
 
-				void saveChoice( bool choice ); //recevra le choix de l'user sous forme de vrai/faux
-				std::string getAnimalChosen(); //pour faire un test ça juste
+				Siam::Objects::Types::Type getAnimalChosen(); //pour faire un test ça juste
 				std::string getName();
-				void setname(std::string name);
 		};
 
 	}
