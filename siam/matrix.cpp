@@ -1,31 +1,30 @@
 #include "inc/matrix.hpp"
 
-using namespace std;
+using namespace std; //inclusion of the namespaces
 using namespace Siam;
 using namespace Siam::Matrixs;
 
-Matrix::Matrix( vector<Siam::Object*> remplir )
-		: m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) {
+Matrix::Matrix( vector<Siam::Object*> remplir ) //constructor
+		: m_tour( 0 ), m_board( 5, vector<Siam::Object*>( 5 ) ) { //dimensions initialization -> vector<vector<object*>(dimension1, vector<object*> (dimension2))
 	unsigned int k = 0;
 
-	for( unsigned int i = 0; i < 5; i++ ) {
+	for( unsigned int i = 0; i < 5; i++ ) { //fill it up !
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
 				this->set( i, j, remplir[ k ] );
 				k++;
-				//cout << 'X' ;
+
 			} else {
-				this->set( i, j, nullptr ); //new Mountain( "  ", 0.9 ); --> du coup on fait pas ça on va faire un NULL plutot
-				//cout << 'A' ;
+				this->set( i, j, nullptr ); //if this is not a mountain case, initiate at nullptr
+
 			}
 		}
-		//cout << endl ;
 	}
 
 }
 
-Matrix::~Matrix() {
-	for( auto& invec : this->m_board ) {
+Matrix::~Matrix() { //destructor
+	for( auto& invec : this->m_board ) { //also delete every Object in all the cases
 		for( auto& elem : invec ) {
 			if( elem != nullptr )
 				delete elem;
@@ -33,16 +32,16 @@ Matrix::~Matrix() {
 	}
 }
 
-void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) {
-	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) {
+void Matrix::add( Siam::Object* A, unsigned int x, unsigned int y ) { //add function
+	if( ( x == 0 ) || ( x == 4 ) || ( y == 0 ) || ( y == 4 ) ) { //check if we are effectively on the edge of the board
 		try {
-			if( this->at( x, y ) == nullptr ) {
+			if( this->at( x, y ) == nullptr ) { // then if the chosen spot is empty we'll just fill it
 				this->set( x, y, A );
 			} else {
-				throw Siam::exceptions::invalid_move( "Add: Already occupied" );
+				throw Siam::exceptions::invalid_move( "Add: Already occupied" ); //else an error
 			}
 		} catch( out_of_range e ) {
-			throw Siam::exceptions::invalid_move( "Add: Out of bound" );
+			throw Siam::exceptions::invalid_move( "Add: Out of bound" ); //shielding
 		}
 	} else {
 		throw Siam::exceptions::invalid_move( "Add: Not authorized" );

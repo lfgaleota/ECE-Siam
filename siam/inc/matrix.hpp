@@ -41,8 +41,8 @@
 
 				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
 
-				unsigned int gettour();
-				void settour() ;
+				unsigned int gettour(); //read access to tour
+				void settour() ; //write access to tour
 		};
 
 	}
