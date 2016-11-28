@@ -20,7 +20,6 @@
 
 			public:
 				Player( std::string name, Siam::Objects::Types::Type animalchosen );
-				~Player();
 
 				void stockPiece( Siam::Object* piece );
 				Siam::Object* retrievePiece();
@@ -30,6 +29,8 @@
 
 				Siam::Objects::Types::Type getAnimalChosen(); //pour faire un test ça juste
 				std::string getName();
+
+				void removeRemainingObjects();
 		};
 
 	}

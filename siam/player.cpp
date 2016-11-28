@@ -16,10 +16,6 @@ Player::Player( string name, Siam::Objects::Types::Type animalchosen ) : m_name(
 	}
 }
 
-Player::~Player() {
-
-}
-
 Siam::Objects::Types::Type Player::getAnimalChosen() {
 	return m_animalchosen;
 }
@@ -52,4 +48,14 @@ unsigned int Player::getMountainsCount() {
 
 void Player::incrementMountainsCount() {
 	this->m_mountains++;
+}
+
+void Player::removeRemainingObjects() {
+	for( Object* obj = nullptr; !this->m_pieces.empty(); ) {
+		obj = this->m_pieces.top();
+		if ( obj != nullptr ) {
+			delete obj;
+		}
+		this->m_pieces.pop();
+	}
 }
