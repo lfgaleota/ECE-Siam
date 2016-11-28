@@ -1,0 +1,5 @@
+class stack_full : public std::logic_error {
+	public:
+		explicit stack_full( const std::string& what_arg ) : logic_error( what_arg ) {}
+		explicit stack_full( const char* what_arg ) : logic_error( what_arg ) {}
+};
