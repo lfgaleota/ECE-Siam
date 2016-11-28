@@ -198,6 +198,9 @@ void move( Siam::Matrix& board, std::vector<Siam::Player>& players, Siam::Player
 		} catch( Siam::exceptions::invalid_move e ) {
 			std::cerr << e.what() << std::endl;
 			loop = true;
+		} catch( Siam::exceptions::invalid_object_type e ) {
+			std::cerr << "Empty space" << std::endl;
+			loop = true;
 		}
 	}
 }
@@ -241,6 +244,9 @@ void orient( Siam::Matrix& board, Siam::Player& player ) {
 			}
 		} catch( Siam::exceptions::invalid_move e ) {
 			std::cerr << e.what() << std::endl;
+			loop = true;
+		} catch( Siam::exceptions::invalid_object_type e ) {
+			std::cerr << "Empty space" << std::endl;
 			loop = true;
 		}
 	}
@@ -298,7 +304,7 @@ int main() {
 
 	Siam::Matrix board = Siam::Matrix(); //on initialise le terrain de jeu !
 
-	tour( board, players, currentPlayer );
-	tour( board, players, currentPlayer );
+	while( true )
+		tour( board, players, currentPlayer );
 	return 0;
 }

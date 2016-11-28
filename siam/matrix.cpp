@@ -190,8 +190,13 @@ const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read acces
 }
 
 Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
+	Object* obj;
 	try {
-		return this->at( x, y )->getType();
+		obj = this->at( x, y );
+		if( obj != nullptr )
+			return obj->getType();
+		else
+			throw Siam::exceptions::invalid_object_type();
 	} catch( out_of_range e ) {
 		throw Siam::exceptions::invalid_move( "Get type: out of range" );
 	}
