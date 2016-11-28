@@ -205,7 +205,7 @@ int main() {
 
     Siam::Objects::Mountain M1( "M", 0.9 ), M2( "M", 0.9 ), M3( "M", 0.9 ); //création des trois montagnes nécéssaires au jeu
     vector<Siam::Object*> remplir; // on va les stocker dans un vector c'est plus pratique à manipuler
-    Siam::Player player1("Louis-Felix"), player2("Romain") ;
+    Siam::Player player1( "Louis-Félix" ), player2( "Romain" ) ;
 
     playerchoice(&player1, &player2);
 
@@ -213,7 +213,7 @@ int main() {
     remplir.push_back( & M2 );
     remplir.push_back( & M3 );
 
-    Siam::Matrix board( remplir ); //on initialise le terrain de jeu !
+    Siam::Matrix board(); //on initialise le terrain de jeu !
 
     //board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
     //board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Right, nullptr ), x + 1, y ); //test d'entrée dans la matrice d'une entité
