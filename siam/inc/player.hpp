@@ -18,9 +18,9 @@
 
 				~Player();
 
-				void savechoice(bool choice); //recevra le choix de l'user sous forme de vrai/faux
-				std::string getanimalchosen(); //pour faire un test ça juste
-				std::string getname();
+				void saveChoice( bool choice ); //recevra le choix de l'user sous forme de vrai/faux
+				std::string getAnimalChosen(); //pour faire un test Ã§a juste
+				std::string getName();
 				void setname(std::string name);
 		};
 

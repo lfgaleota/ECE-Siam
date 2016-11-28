@@ -64,15 +64,15 @@ void playerchoice( Siam::Player* player1, Siam::Player* player2 ) {
 	cin >> name;
 	player2->setname( name );
 
-	cout << "vous etes plutot du genre a jouer les elephants " << player1->getname() << " non ?" << endl;
+	cout << "vous etes plutot du genre a jouer les elephants " << player1->getName() << " non ?" << endl;
 	cout << "0:OUI 1:NON" << endl;
 	cin >> choix;
 
-	player1->savechoice( choix );
-	player2->savechoice( !choix );
+	player1->saveChoice( choix );
+	player2->saveChoice( !choix );
 
-	cout << player1->getname() << " jouera les " << player1->getanimalchosen() << endl;
-	cout << player2->getname() << " jouera les " << player2->getanimalchosen() << endl;
+	cout << player1->getName() << " jouera les " << player1->getAnimalChosen() << endl;
+	cout << player2->getName() << " jouera les " << player2->getAnimalChosen() << endl;
 
 
 }
@@ -91,7 +91,7 @@ void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) 
 
 		case 'g' :
 
-			if( player1->getanimalchosen() == "Elephant" ) {
+			if( player1->getAnimalChosen() == "Elephant" ) {
 				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
 			} else
 				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Left, nullptr ), x, y );
@@ -100,7 +100,7 @@ void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) 
 		case 'd' :
 
 
-			if( player1->getanimalchosen() == "Elephant" ) {
+			if( player1->getAnimalChosen() == "Elephant" ) {
 				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Right, nullptr ), x, y );
 			} else
 				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Right, nullptr ), x, y );
@@ -109,7 +109,7 @@ void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) 
 		case 'h' :
 
 
-			if( player1->getanimalchosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
+			if( player1->getAnimalChosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
 				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Top, nullptr ), x, y );
 			} else
 				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Top, nullptr ), x, y );
@@ -118,7 +118,7 @@ void ajout( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) 
 		case 'b' :
 
 
-			if( player1->getanimalchosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
+			if( player1->getAnimalChosen() == "Elephant" && x <= 4 && x >= 0 && y <= 4 && y >= 0 ) {
 				board.add( new Siam::Objects::Elephant( "E1", 1, Siam::Matrixs::Direction::Bottom, nullptr ), x, y );
 			} else
 				board.add( new Siam::Objects::Rhinoceros( "R1", 1, Siam::Matrixs::Direction::Bottom, nullptr ), x, y );
@@ -151,9 +151,9 @@ void tour( Siam::Player* player1, Siam::Player* player2, Siam::Matrix& board ) {
 	int choix;
 
 	if( board.gettour() % 2 == 0 )
-		cout << "c'est au tour de " << player1->getname() << endl;
+		cout << "c'est au tour de " << player1->getName() << endl;
 	else
-		cout << "c'est au tour de " << player2->getname() << endl;
+		cout << "c'est au tour de " << player2->getName() << endl;
 
 	cout << "vos possibilites sont : " << endl;
 	cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
