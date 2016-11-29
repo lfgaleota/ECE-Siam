@@ -59,3 +59,7 @@ void Player::removeRemainingObjects() {
 		this->m_pieces.pop(); //pops it from the stack
 	}
 }
+
+unsigned long Player::getRemainingObjects() const {
+	return this->m_pieces.size();
+}

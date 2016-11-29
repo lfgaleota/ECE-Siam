@@ -30,6 +30,7 @@
 				Siam::Objects::Types::Type getAnimalChosen() const; //is it useless now ?
 				std::string getName() const; //this is not i think
 
+				unsigned long getRemainingObjects() const;
 				void removeRemainingObjects(); //empty the stack
 		};
 
