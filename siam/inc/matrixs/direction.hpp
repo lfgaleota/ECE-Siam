@@ -1,17 +1,17 @@
 #ifndef _ECE_SIAM_DIRECTION_HPP_
 #define _ECE_SIAM_DIRECTION_HPP_
 
-namespace Siam {
-	namespace Matrixs {
+namespace Siam { //in the namespace Siam
+	namespace Matrixs { //in the namespace matrix
 
-		enum Direction {
+		enum Direction { //directions enumeration
 			Left,
 			Right,
 			Up,
 			Down
 		};
 
-		struct DirectionVector {
+		struct DirectionVector { //building the direction vector
 			const int x;
 			const int y;
 

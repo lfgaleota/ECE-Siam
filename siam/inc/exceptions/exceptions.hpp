@@ -5,7 +5,7 @@
 	#include <string>
 
 	namespace Siam {
-		namespace exceptions {
+		namespace exceptions { //exeptions inclusions
 			#include "invalid_move"
 			#include "invalid_object_type"
 			#include "stack_empty"
