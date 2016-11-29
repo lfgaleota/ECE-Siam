@@ -25,10 +25,10 @@
 				Siam::Object* retrievePiece(); // gets a piece from the stack of pieces until there are 5 on the board
 
 				void incrementMountainsCount(); //number of mountains you pushed
-				unsigned int getMountainsCount();
+				unsigned int getMountainsCount() const;
 
-				Siam::Objects::Types::Type getAnimalChosen(); //is it useless now ?
-				std::string getName(); //this is not i think
+				Siam::Objects::Types::Type getAnimalChosen() const; //is it useless now ?
+				std::string getName() const; //this is not i think
 
 				void removeRemainingObjects(); //empty the stack
 		};

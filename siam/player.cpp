@@ -16,12 +16,12 @@ Player::Player( string name, Siam::Objects::Types::Type animalchosen ) : m_name(
 	}
 }
 
-Siam::Objects::Types::Type Player::getAnimalChosen() { //read access to the chosen animal
-	return m_animalchosen;
+Siam::Objects::Types::Type Player::getAnimalChosen() const { //read access to the chosen animal
+	return this->m_animalchosen;
 }
 
-std::string Player::getName() { //read access to name attribute
-	return m_name;
+std::string Player::getName() const { //read access to name attribute
+	return this->m_name;
 }
 
 void Player::stockPiece( Siam::Object* piece ) {
@@ -42,7 +42,7 @@ Object* Player::retrievePiece() {
 	}
 }
 
-unsigned int Player::getMountainsCount() { //this is pretty clear
+unsigned int Player::getMountainsCount() const { //this is pretty clear
 	return this->m_mountains;
 }
 
