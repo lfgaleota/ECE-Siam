@@ -9,28 +9,28 @@
 	#include "../inc/objects/elephant.hpp"
 	#include "../inc/objects/rhinoceros.hpp"
 
-	namespace Siam {
+	namespace Siam { //in the namespace Siam
 
-		class Player {
-			private:
+		class Player { //player Class
+			private: //attributes
 				std::string m_name;
 				Siam::Objects::Types::Type m_animalchosen;
 				std::stack<Siam::Object*> m_pieces;
 				unsigned int m_mountains = 0;
 
-			public:
-				Player( std::string name, Siam::Objects::Types::Type animalchosen );
+			public: //methodes
+				Player( std::string name, Siam::Objects::Types::Type animalchosen ); //we only need an overload constructor because there are no pointers in the class
 
-				void stockPiece( Siam::Object* piece );
-				Siam::Object* retrievePiece();
+				void stockPiece( Siam::Object* piece ); //allows to stock the piece type of the player -> in a stack of maximum 5 for now
+				Siam::Object* retrievePiece(); // gets a piece from the stack of pieces until there are 5 on the board
 
-				void incrementMountainsCount();
+				void incrementMountainsCount(); //number of mountains you pushed
 				unsigned int getMountainsCount();
 
-				Siam::Objects::Types::Type getAnimalChosen(); //pour faire un test ça juste
-				std::string getName();
+				Siam::Objects::Types::Type getAnimalChosen(); //is it useless now ?
+				std::string getName(); //this is not i think
 
-				void removeRemainingObjects();
+				void removeRemainingObjects(); //empty the stack
 		};
 
 	}

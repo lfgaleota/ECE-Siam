@@ -119,7 +119,7 @@ void Game::removeFromBoard() {
 
 		try {
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() )
-				throw Siam::exceptions::invalid_move( "Piece not to the player" );
+				throw Siam::exceptions::invalid_move( "You do not own this piece !" );
 			obj = this->m_board.remove( x, y );
 			this->m_currentPlayer->stockPiece( obj );
 		} catch( Siam::exceptions::invalid_move e ) {
@@ -311,7 +311,7 @@ void Game::victory() {
 
 Game::Game( vector<Player> players ) {
 	Siam::Matrix board = Siam::Matrix();
-	
+
 	this->m_players = players;
 	this->m_currentPlayer = players.begin();
 
