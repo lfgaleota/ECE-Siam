@@ -4,7 +4,7 @@
 	#include "entity.hpp"
 
 	namespace Siam { //in the namespace Siam
-		namespace Objects {
+		namespace Objects { //in the namespace Objects
 
 			class Rhinoceros : public Entity { //create a Rhino
 				public:

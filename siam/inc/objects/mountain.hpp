@@ -5,8 +5,8 @@
 	#include <string>
 	#include "../object.hpp"
 
-	namespace Siam {
-		namespace Objects {
+	namespace Siam { //in the namespace Siam
+		namespace Objects { //in the namespace Objects
 
 			class Mountain : public Siam::Object { //inherits from object
 				public:

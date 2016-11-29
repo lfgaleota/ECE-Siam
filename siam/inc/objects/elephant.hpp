@@ -3,8 +3,8 @@
 
 	#include "entity.hpp"
 
-	namespace Siam {
-		namespace Objects {
+	namespace Siam { //in the namespace Siam
+		namespace Objects { //in the namespace Objects
 
 			class Elephant : public Entity {
 				public:

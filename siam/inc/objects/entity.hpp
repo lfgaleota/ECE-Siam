@@ -7,8 +7,8 @@
 	#include "../matrixs/direction.hpp"
 	#include "../objects/types/type.hpp"
 
-	namespace Siam {
-		namespace Objects {
+	namespace Siam { //in the namespace Siam
+		namespace Objects { //in the namespace Objects
 
 			class Entity : public Siam::Object { //inherits from object
 				public:
