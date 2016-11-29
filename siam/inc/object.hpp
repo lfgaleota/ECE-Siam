@@ -6,9 +6,9 @@
 	#include "matrixs/direction.hpp"
 	#include "objects/types/type.hpp"
 
-	namespace Siam {
+	namespace Siam { //in the namespace Siam
 
-		class Object {
+		class Object { //mother class Object
 			protected:
 				std::string m_nom;
 				float m_force;
