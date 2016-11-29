@@ -1,114 +1,116 @@
-#ifndef _CLI_HPP_
-#define _CLI_HPP_
+#ifndef _FUNCTIONS_CLI_HPP_
+	#define _FUNCTIONS_CLI_HPP_
 
-#include <iostream>
-#include <cstdio>
+	#include <iostream>
+	#include <cstdio>
 
-#ifdef ANSI_TERM
+	#ifdef ANSI_TERM
 
-	#include <unistd.h>
+		#include <unistd.h>
 
-#elif _WIN32 || __WIN32 || __WIN32__
+	#elif _WIN32 || __WIN32 || __WIN32__
 
-	#define WIN
+		#define WIN
 
-	#include <windows.h>
+		#include <windows.h>
 
-#elif __APPLE__ || __linux || __linux__ || __unix || __unix__ || __posix
+	#elif __APPLE__ || __linux || __linux__ || __unix || __unix__ || __posix
 
-	#define UNIX
+		#define UNIX
 
-	#include <sys/ioctl.h>
-	#include <unistd.h>
-	#include <term.h>
+		#include <sys/ioctl.h>
+		#include <unistd.h>
+		#include <term.h>
 
-#endif
+	#endif
 
-#if defined( ANSI_TERM ) || defined( UNIX )
-	#define FOREGROUND_BLUE 0x01
-	#define FOREGROUND_RED 0x02
-	#define FOREGROUND_GREEN 0x04
-	#define FOREGROUND_INTENSITY 0x08
-	#define BACKGROUND_BLUE 0x10
-	#define BACKGROUND_RED 0x20
-	#define BACKGROUND_GREEN 0x40
-	#define BACKGROUND_INTENSITY 0x80
-#endif
+	#if defined( ANSI_TERM ) || defined( UNIX )
+		#define FOREGROUND_BLUE 0x01
+		#define FOREGROUND_RED 0x02
+		#define FOREGROUND_GREEN 0x04
+		#define FOREGROUND_INTENSITY 0x08
+		#define BACKGROUND_BLUE 0x10
+		#define BACKGROUND_RED 0x20
+		#define BACKGROUND_GREEN 0x40
+		#define BACKGROUND_INTENSITY 0x80
+	#endif
 
-class CLI {
-	private:
-		#if defined( WIN )
-		CONSOLE_SCREEN_BUFFER_INFO attributes;
-		#endif
+	namespace Functions {
+		class CLI {
+			private:
+				#if defined( WIN )
+				CONSOLE_SCREEN_BUFFER_INFO attributes;
+				#endif
 
-	public:
-		/****
-			Constructeur de la classe.
-		****/
-		CLI();
+			public:
+				/****
+					Constructeur de la classe.
+				****/
+				CLI();
 
-		/****
-			Destructeur de la classe, permet de remettre à zéro la mise en forme de la console et effacer l'écran pour quitter proprement.
-		****/
-		~CLI();
+				/****
+					Destructeur de la classe, permet de remettre à zéro la mise en forme de la console et effacer l'écran pour quitter proprement.
+				****/
+				~CLI();
 
-		/****
-			Permet d'effacer la sortie de la console. Dépend du système.
-			Demande:
-				- Rien
-			Retourne:
-				- Rien
-		****/
-		static void clearScreen();
+				/****
+					Permet d'effacer la sortie de la console. Dépend du système.
+					Demande:
+						- Rien
+					Retourne:
+						- Rien
+				****/
+				static void clearScreen();
 
-		/****
-			Permet de changer la couleur d'avant-plan et d'arrière-plan de la console. Dépend du système.
-			Demande:
-				- Ensemble de couleur
-			Retourne:
-				- Rien
-		****/
-		void setColor( unsigned char color );
+				/****
+					Permet de changer la couleur d'avant-plan et d'arrière-plan de la console. Dépend du système.
+					Demande:
+						- Ensemble de couleur
+					Retourne:
+						- Rien
+				****/
+				void setColor( unsigned char color );
 
-		/****
-			Permet de réinitialiser la mise en forme de la console. Dépend du système.
-			Demande:
-				- Rien
-			Retourne:
-				- Rien
-		****/
-		void resetColor();
+				/****
+					Permet de réinitialiser la mise en forme de la console. Dépend du système.
+					Demande:
+						- Rien
+					Retourne:
+						- Rien
+				****/
+				void resetColor();
 
-		/****
-			Permet de déplacer le curseur à des coordonnées précise. Dépend du système.
-			Demande:
-				- Colonne
-				- Ligne
-			Retourne:
-				- Rien
-		****/
-		static void moveCursor( unsigned int line, unsigned int column );
+				/****
+					Permet de déplacer le curseur à des coordonnées précise. Dépend du système.
+					Demande:
+						- Colonne
+						- Ligne
+					Retourne:
+						- Rien
+				****/
+				static void moveCursor( unsigned int line, unsigned int column );
 
-		/****
-			Permet de récupérer les coordonnées permettant de centrer un élément de taille donnée dans la console. Dépend du système.
-			Demande:
-				- Largeur de l'élément
-				- Hauteur de l'élément
-			Retourne:
-				- Colonne où placer l'élément (par référence)
-				- Ligne où palcer l'élément (par référence)
-		****/
-		static void
-		setOffsets( unsigned int width, unsigned int height, unsigned int& offset_x, unsigned int& offset_y );
+				/****
+					Permet de récupérer les coordonnées permettant de centrer un élément de taille donnée dans la console. Dépend du système.
+					Demande:
+						- Largeur de l'élément
+						- Hauteur de l'élément
+					Retourne:
+						- Colonne où placer l'élément (par référence)
+						- Ligne où palcer l'élément (par référence)
+				****/
+				static void
+				setOffsets( unsigned int width, unsigned int height, unsigned int& offset_x, unsigned int& offset_y );
 
-		/****
-			Permet d'effectuer une pause silencieuse dans la console.
-			Demande:
-				- Rien
-			Retourne:
-				- Rien
-		****/
-		static void pause();
-};
+				/****
+					Permet d'effectuer une pause silencieuse dans la console.
+					Demande:
+						- Rien
+					Retourne:
+						- Rien
+				****/
+				static void pause();
+		};
+	}
 
 #endif

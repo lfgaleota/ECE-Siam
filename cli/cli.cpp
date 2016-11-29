@@ -1,5 +1,7 @@
 #include "cli.hpp"
 
+using namespace Functions;
+
 /****
 	Destructeur de la classe, permet de remettre à zéro la mise en forme de la console et effacer l'écran pour quitter proprement.
 ****/
