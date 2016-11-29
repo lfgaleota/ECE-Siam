@@ -7,23 +7,23 @@
 	#include "object.hpp"
 	#include "player.hpp"
 
-	namespace Siam {
-		class Game {
-			private:
-				Siam::Matrix m_board;
-				std::vector<Siam::Player> m_players;
-				std::vector<Siam::Player>::iterator m_currentPlayer;
-				void display();
-				void addOnBoard();
-				void removeFromBoard();
-				void moveOnBoard();
-				void orientOnBoard();
-				void playerTurn();
+	namespace Siam { //in the namespace Siam
+		class Game { //create a game class
+			private: //contains
+				Siam::Matrix m_board; //a board
+				std::vector<Siam::Player> m_players; //players
+				std::vector<Siam::Player>::iterator m_currentPlayer; //an iterator of players (we need to know who's turn it is)
+				void display(); //display (for now)
+				void addOnBoard(); //add a piece to the board
+				void removeFromBoard(); //remove a piece from the board
+				void moveOnBoard(); //make a move
+				void orientOnBoard(); //reorient a piece on the board
+				void playerTurn(); //a turn
 				bool isFinished();
-				void victory();
+				void victory(); //victory !
 
 			public:
-				Game( std::vector<Siam::Player> players );
+				Game( std::vector<Siam::Player> players ); //game method
 		};
 	}
 

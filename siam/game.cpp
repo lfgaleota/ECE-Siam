@@ -4,15 +4,15 @@ using namespace std;
 using namespace Siam;
 using namespace Siam::Objects;
 
-void Game::display() {
-	auto& matrix = this->m_board.getBoard();
-	Siam::Object* elem = nullptr;
+void Game::display() { //displays the matrix
+	auto& matrix = this->m_board.getBoard(); //get a read access to the matrix
+	Siam::Object* elem = nullptr; //we'll need this to fill the blank spots
 
-	for( unsigned int j = 0; j < matrix.size(); j++ ) {
+	for( unsigned int j = 0; j < matrix.size(); j++ ) { //browse
 		for( unsigned int i = 0; i < matrix[ j ].size(); i++ ) {
 			elem = matrix[ i ][ j ];
 
-			if( elem != nullptr ) {
+			if( elem != nullptr ) { //different types of display function of the spot content
 				switch( elem->getType() ) {
 					case Siam::Objects::Types::Type::Mountain:
 						std::cout << "M";
@@ -28,7 +28,7 @@ void Game::display() {
 					case Siam::Objects::Types::Type::Entity:
 						break;
 				}
-				switch( elem->getDirection() ) {
+				switch( elem->getDirection() ) { //display the direction of a piece
 					case Siam::Matrixs::Direction::Left:
 						std::cout << "<";
 						break;
@@ -50,7 +50,7 @@ void Game::display() {
 	}
 }
 
-void Game::addOnBoard() {
+void Game::addOnBoard() { //add a piece to the board
 	unsigned int x, y;
 	char direction;
 	Siam::Object* obj = nullptr;
@@ -58,14 +58,14 @@ void Game::addOnBoard() {
 	for( bool loop = true; loop; ) {
 		loop = false;
 
-		cout << "A quelles coordonnees ?" << endl;
-		cin >> x;
+		cout << "A quelles coordonnees ?" << endl; //displays instructions
+		cin >> x; //gets the requirements
 		cin >> y;
 		cout << "Dans quelle direction ?(h/b/g/d)" << endl;
 		cin >> direction;
 
 		try {
-			switch( direction ) {
+			switch( direction ) { //effectively adds the piece and orients it
 				case 'g' :
 					obj = this->m_currentPlayer->retrievePiece();
 					this->m_board.add( obj, x, y );
@@ -94,7 +94,7 @@ void Game::addOnBoard() {
 					loop = true;
 					break;
 			}
-		} catch( Siam::exceptions::invalid_move e ) {
+		} catch( Siam::exceptions::invalid_move e ) { //shielding
 			std::cerr << e.what() << std::endl;
 			loop = true;
 			if( obj != nullptr )
@@ -106,18 +106,18 @@ void Game::addOnBoard() {
 	}
 }
 
-void Game::removeFromBoard() {
+void Game::removeFromBoard() { //remove a piece from the board
 	unsigned int x, y;
 	Siam::Object* obj = nullptr;
 
 	for( bool loop = true; loop; ) {
 		loop = false;
 
-		cout << "A quelles coordonnees ?" << endl;
+		cout << "A quelles coordonnees ?" << endl; //displays instructions
 		cin >> x;
 		cin >> y;
 
-		try {
+		try { //don't ask man, it works
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() )
 				throw Siam::exceptions::invalid_move( "You do not own this piece !" );
 			obj = this->m_board.remove( x, y );
@@ -139,7 +139,7 @@ void Game::removeFromBoard() {
 	}
 }
 
-void Game::moveOnBoard() {
+void Game::moveOnBoard() { //make a move on the board
 	unsigned int x, y;
 	char direction;
 	Siam::Object* obj = nullptr;
@@ -147,16 +147,16 @@ void Game::moveOnBoard() {
 	for( bool loop = true; loop; ) {
 		loop = false;
 
-		cout << "A quelles coordonnees ?" << endl;
+		cout << "A quelles coordonnees ?" << endl; //display instructions
 		cin >> x;
 		cin >> y;
 		cout << "Dans quelle direction ?(h/b/g/d)" << endl;
 		cin >> direction;
 
 		try {
-			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() )
-				throw Siam::exceptions::invalid_move( "Piece not to the player" );
-			switch( direction ) {
+			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //check if you can move the piece
+				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //shields it
+			switch( direction ) { //else moves the piece according to the instructions
 				case 'g' :
 					obj = this->m_board.move( x, y, Siam::Matrixs::Direction::Left );
 					break;
@@ -179,21 +179,21 @@ void Game::moveOnBoard() {
 			}
 
 			if( obj != nullptr ) {
-				// On a ejecté une case!
+				// we ejected a spot
 				if( obj->getType() == Siam::Objects::Types::Type::Mountain ) {
-					// Si c'est une montagne, on incrémente le compteur du joueur actuel
+					// if it's a mountain increment his mountaincount
 					this->m_currentPlayer->incrementMountainsCount();
-					// Et on détruit la montagne, bien sûr!
+					// And of course destroy the mountain
 					delete obj;
 				} else {
-					// Sinon on remet la pièce dans la pile de pièces du joueur
+					// else put the piece back in the right stack
 					for( auto& loopplayer : this->m_players ) {
 						if( loopplayer.getAnimalChosen() == obj->getType() )
 							loopplayer.stockPiece( obj );
 					}
 				}
 			}
-		} catch( Siam::exceptions::invalid_move e ) {
+		} catch( Siam::exceptions::invalid_move e ) { //shielding
 			std::cerr << e.what() << std::endl;
 			loop = true;
 		} catch( Siam::exceptions::invalid_object_type e ) {
@@ -203,22 +203,22 @@ void Game::moveOnBoard() {
 	}
 }
 
-void Game::orientOnBoard() {
+void Game::orientOnBoard() { //reorient a piece on the board
 	unsigned int x, y;
 	char direction;
 
 	for( bool loop = true; loop; ) {
 		loop = false;
 
-		cout << "A quelles coordonnees ?" << endl;
+		cout << "A quelles coordonnees ?" << endl; //displays instructions
 		cin >> x;
 		cin >> y;
 		cout << "Dans quelle direction ?(h/b/g/d)" << endl;
 		cin >> direction;
 
 		try {
-			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() )
-				throw Siam::exceptions::invalid_move( "Piece not to the player" );
+			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //just orients a piece according to the player wishes
+				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //checks if u are allowed to do it first
 			switch( direction ) {
 				case 'g' :
 					this->m_board.orient( x, y, Siam::Matrixs::Direction::Left );
@@ -240,7 +240,7 @@ void Game::orientOnBoard() {
 					loop = true;
 					break;
 			}
-		} catch( Siam::exceptions::invalid_move e ) {
+		} catch( Siam::exceptions::invalid_move e ) { //shielding
 			std::cerr << e.what() << std::endl;
 			loop = true;
 		} catch( Siam::exceptions::invalid_object_type e ) {
@@ -250,7 +250,7 @@ void Game::orientOnBoard() {
 	}
 }
 
-void Game::playerTurn() {
+void Game::playerTurn() { //unfolding of a turn
 	int choice;
 
 	if( this->m_currentPlayer == this->m_players.end() )
@@ -258,11 +258,11 @@ void Game::playerTurn() {
 
 	display();
 
-	std::cout << "Vous etes " << this->m_currentPlayer->getName() << "." << std::endl;
+	std::cout << "Vous etes " << this->m_currentPlayer->getName() << "." << std::endl; //display information
 	std::cout << "Vous avez pousse " << this->m_currentPlayer->getMountainsCount() << " montagnes." << std::endl;
 
 	do {
-		cout << "vos possibilites sont : " << endl;
+		cout << "vos possibilites sont : " << endl; //display instructions
 		cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
 		cout << "   2. Enlever une piece du terrain" << endl;
 		cout << "   3. Bouger une piece sur le terrain" << endl;
@@ -271,7 +271,7 @@ void Game::playerTurn() {
 		cout << "quel est votre choix ?";
 		cin >> choice;
 
-		switch( choice ) {
+		switch( choice ) { //what type of turn would you like to take ?
 			case 1:
 				//add
 				addOnBoard();
@@ -294,11 +294,11 @@ void Game::playerTurn() {
 	this->m_currentPlayer++;
 }
 
-bool Game::isFinished() {
+bool Game::isFinished() { //if a moutain was pushed out, then the game is finished
 	return ( this->m_board.getMountainsCount() > 0 );
 }
 
-void Game::victory() {
+void Game::victory() { //WIN
 	std::vector<Siam::Player>::iterator winingPlayer = this->m_players.begin();
 
 	for( auto it = this->m_players.begin(); it != this->m_players.end(); it++ ) {
@@ -309,16 +309,16 @@ void Game::victory() {
 	std::cout << "Bravo " << winingPlayer->getName() << ", tu as gagne!" << std::endl;
 }
 
-Game::Game( vector<Player> players ) {
-	Siam::Matrix board = Siam::Matrix();
+Game::Game( vector<Player> players ) { //that's how it goes down
+	Siam::Matrix board = Siam::Matrix(); //initialize the matrix
 
-	this->m_players = players;
-	this->m_currentPlayer = players.begin();
+	this->m_players = players; //and the players
+	this->m_currentPlayer = players.begin(); //first player "selected"
 
-	while( isFinished() )
-		playerTurn();
-	victory();
+	while( isFinished() ) //while nobody won
+		playerTurn(); //turns
+	victory(); //if you won -> victory
 
 	for( auto& player : this->m_players )
-		player.removeRemainingObjects();
+		player.removeRemainingObjects(); //delete everything in the stacks
 }
