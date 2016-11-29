@@ -32,27 +32,29 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="cli/cli.cpp"/>
-		<Unit filename="cli/cli.hpp"/>
-		<Unit filename="main.cpp"/>
-		<Unit filename="siam/inc/exceptions/exceptions.hpp"/>
-		<Unit filename="siam/inc/matrix.hpp"/>
-		<Unit filename="siam/inc/matrixs/direction.hpp"/>
-		<Unit filename="siam/inc/object.hpp"/>
-		<Unit filename="siam/inc/objects/elephant.hpp"/>
-		<Unit filename="siam/inc/objects/entity.hpp"/>
-		<Unit filename="siam/inc/objects/mountain.hpp"/>
-		<Unit filename="siam/inc/objects/rhinoceros.hpp"/>
-		<Unit filename="siam/inc/player.hpp"/>
-		<Unit filename="siam/matrix.cpp"/>
-		<Unit filename="siam/matrixs/direction.cpp"/>
-		<Unit filename="siam/object.cpp"/>
-		<Unit filename="siam/objects/elephant.cpp"/>
-		<Unit filename="siam/objects/entity.cpp"/>
-		<Unit filename="siam/objects/mountain.cpp"/>
-		<Unit filename="siam/objects/rhinoceros.cpp"/>
-		<Unit filename="siam/player.cpp"/>
-		<Unit filename="siam/inc/objects/types/type.hpp"/>
+		<Unit filename="cli/cli.cpp" />
+		<Unit filename="cli/cli.hpp" />
+		<Unit filename="main.cpp" />
+		<Unit filename="siam/game.cpp" />
+		<Unit filename="siam/inc/exceptions/exceptions.hpp" />
+		<Unit filename="siam/inc/game.hpp" />
+		<Unit filename="siam/inc/matrix.hpp" />
+		<Unit filename="siam/inc/matrixs/direction.hpp" />
+		<Unit filename="siam/inc/object.hpp" />
+		<Unit filename="siam/inc/objects/elephant.hpp" />
+		<Unit filename="siam/inc/objects/entity.hpp" />
+		<Unit filename="siam/inc/objects/mountain.hpp" />
+		<Unit filename="siam/inc/objects/rhinoceros.hpp" />
+		<Unit filename="siam/inc/objects/types/type.hpp" />
+		<Unit filename="siam/inc/player.hpp" />
+		<Unit filename="siam/matrix.cpp" />
+		<Unit filename="siam/matrixs/direction.cpp" />
+		<Unit filename="siam/object.cpp" />
+		<Unit filename="siam/objects/elephant.cpp" />
+		<Unit filename="siam/objects/entity.cpp" />
+		<Unit filename="siam/objects/mountain.cpp" />
+		<Unit filename="siam/objects/rhinoceros.cpp" />
+		<Unit filename="siam/player.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
