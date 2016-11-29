@@ -3,10 +3,10 @@
 
 	#include "entity.hpp"
 
-	namespace Siam {
+	namespace Siam { //in the namespace Siam
 		namespace Objects {
 
-			class Rhinoceros : public Entity {
+			class Rhinoceros : public Entity { //create a Rhino
 				public:
 					Rhinoceros();//default constructor
 					Rhinoceros( std::string nom, float force, Siam::Matrixs::Direction direction );//overload constructor
