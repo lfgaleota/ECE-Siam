@@ -132,6 +132,23 @@ void CLI::clearScreen() {
 }
 
 /****
+	Permet de récupérer la taille de la console. Dépend du système.
+	Demande:
+		- Rien
+	Retourne:
+		- Largeur de la console (par référence)
+		- Hauteur de la console (par référence)
+****/
+void CLI::getSize( unsigned int& width, unsigned int& height ) {
+	// On récupère la taille
+	struct winsize w;
+	ioctl( STDOUT_FILENO, TIOCGWINSZ, & w );
+
+	width = w.ws_row;
+	height = w.ws_col;
+}
+
+/****
 	Permet de récupérer les coordonnées permettant de centrer un élément de taille donnée dans la console. Dépend du système.
 	Demande:
 		- Largeur de l'élément
@@ -287,6 +304,32 @@ void CLI::resetColor() {
 
 	// Restauration des attributs initiaux
 	SetConsoleTextAttribute( hConsole, this->attributes.wAttributes );
+}
+
+/****
+	Permet de récupérer la taille de la console. Dépend du système.
+	Demande:
+		- Rien
+	Retourne:
+		- Largeur de la console (par référence)
+		- Hauteur de la console (par référence)
+****/
+void CLI::getSize( unsigned int& width, unsigned int& height ) {
+	// Récupération d'un handle vers la console
+	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
+
+	// Définition des variables utiles
+	CONSOLE_SCREEN_BUFFER_INFO consoleInfos;
+
+	// Récupération des attributs actuels de la console
+	GetConsoleScreenBufferInfo( hConsole, &consoleInfos );
+
+	/*
+	 * consoleInfos.srWindow.Right - consoleInfos.srWindow.Left donne le nombre de colonnes en partant de 0
+	 * consoleInfos.srWindow.Bottom - consoleInfos.srWindow.Top  donne le nombre de lignes en partant de 0
+	 */
+	width = consoleInfos.srWindow.Right - consoleInfos.srWindow.Left + 1;
+	height = consoleInfos.srWindow.Bottom - consoleInfos.srWindow.Top + 1;
 }
 
 /****

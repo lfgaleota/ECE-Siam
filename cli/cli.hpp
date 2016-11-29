@@ -91,6 +91,16 @@
 				static void moveCursor( unsigned int line, unsigned int column );
 
 				/****
+					Permet de récupérer la taille de la console. Dépend du système.
+					Demande:
+						- Rien
+					Retourne:
+						- Largeur de la console (par référence)
+						- Hauteur de la console (par référence)
+				****/
+				void getSize( unsigned int& width, unsigned int& height );
+
+				/****
 					Permet de récupérer les coordonnées permettant de centrer un élément de taille donnée dans la console. Dépend du système.
 					Demande:
 						- Largeur de l'élément
