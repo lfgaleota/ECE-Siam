@@ -6,7 +6,7 @@
 	#include "../objects/types/type.hpp"
 	#include "../player.hpp"
 	#include "../../../cli/cli.hpp"
-	
+
 	namespace Siam {
 		namespace UI {
 			class Game {
@@ -16,6 +16,7 @@
 
 				public:
 					Game( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players ) : m_board( board ), m_players( players ) {};
+					virtual ~Game() {};
 					virtual void showError( std::string msg ) = 0;
 					virtual void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir )= 0;
 					virtual void addPiece( const Object* ) = 0;

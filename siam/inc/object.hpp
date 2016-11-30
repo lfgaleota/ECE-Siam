@@ -17,6 +17,7 @@
 			public:
 				Object(); //default constructor
 				Object( std::string nom, float force, Siam::Matrixs::Direction direction = Siam::Matrixs::Direction::Left ); //overload constructor
+				virtual ~Object();
 
 				float getForce(); //read access to strength of object
 

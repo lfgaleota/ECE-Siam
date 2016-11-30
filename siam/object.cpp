@@ -15,6 +15,11 @@ Object::Object( string nom, float force, Siam::Matrixs::Direction direction ) //
 
 }
 
+Object::~Object()
+{
+
+}
+
 float Object::getForce() { //read access to force
 	return m_force;
 }

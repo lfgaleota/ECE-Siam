@@ -8,6 +8,7 @@
 	#include "../../player.hpp"
 	#include "../game.hpp"
 	#include "../../../../cli/cli.hpp"
+	#include <fstream>
 
 	namespace Siam {
 		namespace UI {
@@ -17,6 +18,8 @@
 						Functions::CLI cli;
 						void displayMatrix();
 						void displayPlayers();
+						std::vector<std::string> m_displayMatrix;
+						void loadDisplayMatrix();
 
 					public:
 						CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players );
