@@ -34,5 +34,15 @@
 				void removeRemainingObjects(); //empty the stack
 		};
 
+		namespace Players {
+			enum Action {
+				Add,
+				Remove,
+				Move,
+				Orient,
+				Nothing
+			};
+		}
+
 	}
 #endif
