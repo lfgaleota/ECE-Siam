@@ -10,6 +10,7 @@
 			#include "invalid_object_type"
 			#include "stack_empty"
 			#include "stack_full"
+			#include "exit_game"
 		}
 	}
 #endif
