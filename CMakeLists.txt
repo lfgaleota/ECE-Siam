@@ -25,7 +25,12 @@ set(SOURCE_FILES
 	siam/inc/matrixs/direction.hpp
 	siam/inc/exceptions/exceptions.hpp
 	siam/inc/objects/types/type.hpp
-		siam/game.cpp siam/inc/game.hpp)
+	siam/inc/game.hpp
+	siam/game.cpp
+	siam/inc/ui/game.hpp
+	siam/ui/games/CLI.cpp
+	siam/inc/ui/games/CLI.hpp
+)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
 
