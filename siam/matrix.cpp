@@ -161,7 +161,7 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 
 							obj = this->at( x, y, *nbdvec );
 							this->set( x, y, *nbdvec, this->at( x, y, *nbsubdvec ) );
-							this->set( x, y, *nbdvec, obj );
+							this->set( x, y, *nbsubdvec, obj );
 
 							movements[ obj ] = make_pair( x + nbsubdvec->x, y + nbsubdvec->y );
 
