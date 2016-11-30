@@ -24,7 +24,7 @@ void CLI::displayMatrix() {
 
     for(int j=0; j<14; j++)
     {
-        cli.setColor(FOREGROUND_RED);
+        //cli.setColor(FOREGROUND_RED);
         cout << m_displayMatrix[j] << endl;
     }
 
@@ -34,7 +34,7 @@ void CLI::displayMatrix() {
             elem = this->m_board[ i ][ j ];
 
             cli.moveCursor(x,y);
-            cli.setColor(FOREGROUND_GREEN);
+            //cli.setColor(FOREGROUND_GREEN);
 
 
             if( elem != nullptr ) { //different types of display function of the spot content
@@ -53,19 +53,26 @@ void CLI::displayMatrix() {
                 case Types::Type::Entity:
                     break;
                 }
-                switch( elem->getDirection() ) { //display the direction of a piece
-                case Direction::Left:
-                    cout << "<";
-                    break;
-                case Direction::Right:
-                    cout << ">";
-                    break;
-                case Direction::Up:
-                    cout << "/";
-                    break;
-                case Direction::Down:
-                    cout << "\\";
-                    break;
+                if(elem->getType()== Types::Type::Mountain)
+                    cout << " " ;
+                else
+                {
+
+
+                    switch( elem->getDirection() ) { //display the direction of a piece
+                    case Direction::Left:
+                        cout << "<";
+                        break;
+                    case Direction::Right:
+                        cout << ">";
+                        break;
+                    case Direction::Up:
+                        cout << "/";
+                        break;
+                    case Direction::Down:
+                        cout << "\\";
+                        break;
+                    }
                 }
             } else {
                 cout << "  ";
@@ -188,7 +195,7 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
     while( true ) {
 
         cout << "vos possibilites sont : " << endl; //display instructions
-        cli.setColor(FOREGROUND_BLUE);
+        //cli.setColor(FOREGROUND_BLUE);
         cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
         cout << "   2. Enlever une piece du terrain" << endl;
         cout << "   3. Bouger une piece sur le terrain" << endl;
@@ -248,23 +255,23 @@ void CLI::loadDisplayMatrix() {
 
 void CLI::color(int t,int f)
 {
-        HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
-            SetConsoleTextAttribute(H,f*16+t);
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,f*16+t);
 
-            /*0: noir
-            1: bleu foncé
-            2: vert
-            3: bleu-gris
-            4: marron
-            5: pourpre
-            6: kaki
-            7: gris clair
-            8: gris
-            9: bleu
-            10: vert fluo
-            11: turquoise
-            12: rouge
-            13: rose fluo
-            14: jaune fluo
-            15: blanc*/
+    /*0: noir
+    1: bleu foncé
+    2: vert
+    3: bleu-gris
+    4: marron
+    5: pourpre
+    6: kaki
+    7: gris clair
+    8: gris
+    9: bleu
+    10: vert fluo
+    11: turquoise
+    12: rouge
+    13: rose fluo
+    14: jaune fluo
+    15: blanc*/
 }
