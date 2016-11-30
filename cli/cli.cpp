@@ -287,7 +287,7 @@ void CLI::setColor( unsigned char color ) {
 	// Récupération d'un handle vers la console
 	HANDLE hConsole = GetStdHandle( STD_OUTPUT_HANDLE );
 
-	// Appliquation des nouveaux attributs de couleur
+	// Application des nouveaux attributs de couleur
 	SetConsoleTextAttribute( hConsole, (WORD) color );
 }
 
