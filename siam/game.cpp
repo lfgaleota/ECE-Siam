@@ -67,25 +67,25 @@ void Game::addOnBoard() { //add a piece to the board
 		try {
 			switch( direction ) { //effectively adds the piece and orients it
 				case 'g' :
-					obj = this->m_currentPlayer->retrievePiece();
+					obj = this->m_currentPlayer->retrievePiece(); ///CURRENTPLAYER USED HERE
 					this->m_board.add( obj, x, y );
 					this->m_board.orient( x, y, Siam::Matrixs::Direction::Left );
 					break;
 
 				case 'd' :
-					obj = this->m_currentPlayer->retrievePiece();
+					obj = this->m_currentPlayer->retrievePiece(); ///CURRENTPLAYER USED HERE
 					this->m_board.add( obj, x, y );
 					this->m_board.orient( x, y, Siam::Matrixs::Direction::Right );
 					break;
 
 				case 'h' :
-					obj = this->m_currentPlayer->retrievePiece();
+					obj = this->m_currentPlayer->retrievePiece(); ///CURRENTPLAYER USED HERE
 					this->m_board.add( obj, x, y );
 					this->m_board.orient( x, y, Siam::Matrixs::Direction::Up );
 					break;
 
 				case 'b' :
-					obj = this->m_currentPlayer->retrievePiece();
+					obj = this->m_currentPlayer->retrievePiece(); ///CURRENTPLAYER USED HERE
 					this->m_board.add( obj, x, y );
 					this->m_board.orient( x, y, Siam::Matrixs::Direction::Down );
 					break;
@@ -98,7 +98,7 @@ void Game::addOnBoard() { //add a piece to the board
 			std::cerr << e.what() << std::endl;
 			loop = true;
 			if( obj != nullptr )
-				this->m_currentPlayer->stockPiece( obj );
+				this->m_currentPlayer->stockPiece( obj ); ///problem isn't here
 		} catch( Siam::exceptions::stack_empty e ) {
 			std::cerr << e.what() << std::endl;
 			loop = true;
@@ -121,7 +121,7 @@ void Game::removeFromBoard() { //remove a piece from the board
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() )
 				throw Siam::exceptions::invalid_move( "You do not own this piece !" );
 			obj = this->m_board.remove( x, y );
-			this->m_currentPlayer->stockPiece( obj );
+			this->m_currentPlayer->stockPiece( obj ); ///CURRENTPLAYER USED HERE
 		} catch( Siam::exceptions::invalid_move e ) {
 			std::cerr << e.what() << std::endl;
 			loop = true;
@@ -155,6 +155,7 @@ void Game::moveOnBoard() { //make a move on the board
 
 		try {
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //check if you can move the piece
+                ///CURRENTPLAYER USED HERE
 				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //shields it
 			switch( direction ) { //else moves the piece according to the instructions
 				case 'g' :
@@ -182,7 +183,7 @@ void Game::moveOnBoard() { //make a move on the board
 				// we ejected a spot
 				if( obj->getType() == Siam::Objects::Types::Type::Mountain ) {
 					// if it's a mountain increment his mountaincount
-					this->m_currentPlayer->incrementMountainsCount();
+					this->m_currentPlayer->incrementMountainsCount(); ///CURRENTPLAYER USED HERE
 					// And of course destroy the mountain
 					delete obj;
 				} else {
@@ -218,6 +219,7 @@ void Game::orientOnBoard() { //reorient a piece on the board
 
 		try {
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //just orients a piece according to the player wishes
+                ///CURRENTPLAYER USED HERE
 				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //checks if u are allowed to do it first
 			switch( direction ) {
 				case 'g' :
@@ -253,13 +255,14 @@ void Game::orientOnBoard() { //reorient a piece on the board
 void Game::playerTurn() { //unfolding of a turn
 	int choice;
 
-	if( this->m_currentPlayer == this->m_players.end() )
+	if( this->m_currentPlayer == this->m_players.end() ) ///Problem isn't here
 		this->m_currentPlayer = this->m_players.begin();
 
 	display();
 
 	std::cout << "Vous etes " << this->m_currentPlayer->getName() << "." << std::endl; //display information
-	std::cout << "Vous avez pousse " << this->m_currentPlayer->getMountainsCount() << " montagnes." << std::endl;
+	///problem isn't here
+	std::cout << "Vous avez pousse " << this->m_currentPlayer->getMountainsCount() << " montagnes." << std::endl; ///problem isn't here
 
 	do {
 		cout << "vos possibilites sont : " << endl; //display instructions
@@ -291,7 +294,11 @@ void Game::playerTurn() { //unfolding of a turn
 		}
 	} while( choice < 1 || choice > 4 );
 
-	this->m_currentPlayer++;
+		if( this->m_currentPlayer == this->m_players.end() ) ///PROBLEM IS HERE !!!!
+            this->m_currentPlayer = this->m_players.begin(); ///TOUJOURS UN PROBLEME DE CHANGEMENT MAIS LE PB ETAIT LE CURRENTPLAYER++ QUI BUGGAIT !
+        else
+            this->m_currentPlayer = this->m_players.end();
+
 }
 
 bool Game::isFinished() { //if a moutain was pushed out, then the game is finished
@@ -314,6 +321,7 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 
 	this->m_players = players; //and the players
 	this->m_currentPlayer = players.begin(); //first player "selected"
+	///CURRENTPLAYER USED HERE
 
 	while( isFinished() ) //while nobody won
 		playerTurn(); //turns
