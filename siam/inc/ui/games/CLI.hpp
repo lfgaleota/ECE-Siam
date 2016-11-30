@@ -9,6 +9,7 @@
 	#include "../game.hpp"
 	#include "../../../../cli/cli.hpp"
 	#include <fstream>
+	#include <windows.h>
 
 	namespace Siam {
 		namespace UI {
@@ -33,6 +34,7 @@
 						void playerTurnEnd( Siam::Player& player );
 						Players::Action getPlayerAction( Siam::Player& player );
 						void victory( Siam::Player& player );
+						void color(int t,int f);
 				};
 			}
 		}

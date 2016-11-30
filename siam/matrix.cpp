@@ -8,7 +8,7 @@ using namespace Siam::Objects;
 Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) {
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
-			if( ( i == 1 && j == 2 ) || ( i == 2 && j == 2 ) || ( i == 3 && j == 2 ) ) {
+			if( ( i == 2 && j == 1 ) || ( i == 2 && j == 2 ) || ( i == 2 && j == 3 ) ) {
 				this->set( i, j, new Mountain( "M", 0 ) );
 				m_mountainCount++;
 			} else {

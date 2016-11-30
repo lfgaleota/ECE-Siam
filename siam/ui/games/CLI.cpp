@@ -24,6 +24,7 @@ void CLI::displayMatrix() {
 
     for(int j=0; j<14; j++)
     {
+        color(13,0);
         cout << m_displayMatrix[j] << endl;
     }
 
@@ -33,6 +34,7 @@ void CLI::displayMatrix() {
             elem = this->m_board[ i ][ j ];
 
             cli.moveCursor(x,y);
+            color(10,0);
 
 
             if( elem != nullptr ) { //different types of display function of the spot content
@@ -74,6 +76,8 @@ void CLI::displayMatrix() {
         y=11;
 
     }
+    cout << endl << endl << endl ;
+    color(15,0);
 }
 
 void CLI::displayPlayers() {
@@ -182,7 +186,9 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
     int choice;
 
     while( true ) {
+
         cout << "vos possibilites sont : " << endl; //display instructions
+        color(11,0);
         cout << "   1. Ajouter une nouvelle piece sur le terrain" << endl;
         cout << "   2. Enlever une piece du terrain" << endl;
         cout << "   3. Bouger une piece sur le terrain" << endl;
@@ -190,6 +196,7 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
         cout << "   5. Ne rien faire" << endl;
         cout << "   6. Quitter" << endl;
         cout << endl;
+        color(15,0);
         cout << "quel est votre choix ?";
         cin >> choice;
 
@@ -237,4 +244,27 @@ void CLI::loadDisplayMatrix() {
 
 
 
+}
+
+void CLI::color(int t,int f)
+{
+        HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(H,f*16+t);
+
+            /*0: noir
+            1: bleu foncé
+            2: vert
+            3: bleu-gris
+            4: marron
+            5: pourpre
+            6: kaki
+            7: gris clair
+            8: gris
+            9: bleu
+            10: vert fluo
+            11: turquoise
+            12: rouge
+            13: rose fluo
+            14: jaune fluo
+            15: blanc*/
 }
