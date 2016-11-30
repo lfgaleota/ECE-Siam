@@ -47,6 +47,8 @@
 		<Unit filename="siam/inc/objects/rhinoceros.hpp" />
 		<Unit filename="siam/inc/objects/types/type.hpp" />
 		<Unit filename="siam/inc/player.hpp" />
+		<Unit filename="siam/inc/ui/game.hpp" />
+		<Unit filename="siam/inc/ui/games/CLI.hpp" />
 		<Unit filename="siam/matrix.cpp" />
 		<Unit filename="siam/matrixs/direction.cpp" />
 		<Unit filename="siam/object.cpp" />
@@ -55,6 +57,7 @@
 		<Unit filename="siam/objects/mountain.cpp" />
 		<Unit filename="siam/objects/rhinoceros.cpp" />
 		<Unit filename="siam/player.cpp" />
+		<Unit filename="siam/ui/games/CLI.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
