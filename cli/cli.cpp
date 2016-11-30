@@ -191,7 +191,7 @@ void CLI::moveCursor( unsigned int line, unsigned int column ) {
 /****
 	Permet de changer la couleur d'avant-plan et d'arrière-plan de la console. Dépend du système.
 	Demande:
-		- Ensemble de couleur
+		- Ensemble de couleur --> exemple : setColor(FOREGROUND_RED | BACKGROUND_BLUE); + si on ne met pas de background, il est noir par défaut !
 	Retourne:
 		- Rien
 ****/
