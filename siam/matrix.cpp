@@ -129,8 +129,10 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	}
 }
 
-Object* Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //move a piece
+Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<const Object*, pair<unsigned int, unsigned int>>& movements ) { //move a piece
 	DirectionVector dvec = this->getDirectionVector( direction ); //get the direction of the piece
+	DirectionVector* nbdvec;
+	DirectionVector* nbsubdvec;
 	Object *obj, *ejectedobj = nullptr;
 	int nb = 0;
 
@@ -139,6 +141,8 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //
 			if( this->at( x, y, dvec ) == nullptr ) { //if the arrival spot is empty just make the change
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
+
+				movements[ this->at( x, y, dvec ) ] =  make_pair( x, y );
 			} else {
 				if( this->getForce( x, y, dvec ) > 0 ) {
 					// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
@@ -152,9 +156,17 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction ) { //
 					for( ; nb > 0 ; nb-- ) {
 						try {
 							// On intervertie l'objet en cours et celui à côté dans le sens opposé au déplacement
-							obj = this->at( x, y, nb * dvec );
-							this->set( x, y, nb * dvec, this->at( x, y, ( nb - 1 ) * dvec ) );
-							this->set( x, y, ( nb - 1 ) * dvec, obj );
+							nbdvec = new DirectionVector( nb * dvec );
+							nbsubdvec = new DirectionVector( ( nb - 1 ) * dvec );
+
+							obj = this->at( x, y, *nbdvec );
+							this->set( x, y, *nbdvec, this->at( x, y, *nbsubdvec ) );
+							this->set( x, y, *nbdvec, obj );
+
+							movements[ obj ] = make_pair( x + nbsubdvec->x, y + nbsubdvec->y );
+
+							delete nbdvec;
+							delete nbsubdvec;
 						} catch( out_of_range e ) {
 							// On est en dehors! On va donc retourner l'object
 
@@ -208,4 +220,21 @@ Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
 
 unsigned int Matrix::getMountainsCount() {
 	return this->m_mountainCount;
+}
+
+Siam::Matrixs::Direction Matrix::getDirection( unsigned int x, unsigned int y ) {
+	Object* obj;
+	try {
+		obj = this->at( x, y );
+		if( obj != nullptr )
+			return obj->getDirection();
+		else
+			throw Siam::exceptions::invalid_object_type();
+	} catch( out_of_range e ) {
+		throw Siam::exceptions::invalid_move( "Get direction: out of range" );
+	}
+}
+
+const Siam::Object* Matrix::getObject( unsigned int x, unsigned int y ) {
+	return this->at( x, y );
 }
