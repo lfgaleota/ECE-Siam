@@ -194,9 +194,13 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 	this->m_players = players; //and the players
 	this->m_currentPlayer = this->m_players.begin(); //first player "selected"
 
-	while( isFinished() ) //while nobody won
-		playerTurn(); //turns
-	victory(); //if you won -> victory
+	try {
+		while( isFinished() ) //while nobody won
+			playerTurn(); //turns
+		victory(); //if you won -> victory
+	} catch( exceptions::exit_game e ) {
+		this->m_ui->showError( "Exiting" );
+	}
 
 	for( auto& player : this->m_players )
 		player.removeRemainingObjects(); //delete everything in the stacks

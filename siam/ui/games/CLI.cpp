@@ -174,6 +174,7 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 		cout << "   3. Bouger une piece sur le terrain" << endl;
 		cout << "   4. Changer l'orientation d'une piece" << endl;
 		cout << "   5. Ne rien faire" << endl;
+		cout << "   6. Quitter" << endl;
 		cout << endl;
 		cout << "quel est votre choix ?";
 		cin >> choice;
@@ -189,6 +190,8 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 				return Players::Action::Orient;
 			case 5:
 				return Players::Action::Nothing;
+			case 6:
+				throw exceptions::exit_game();
 			default:
 				break;
 		}
