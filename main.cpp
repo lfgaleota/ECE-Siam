@@ -1,4 +1,5 @@
 #include "siam/inc/game.hpp"
+#include "siam/inc/ui/games/CLI.hpp"
 
 int main() {
 	std::vector<Siam::Player> players;
