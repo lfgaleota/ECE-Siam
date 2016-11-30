@@ -17,12 +17,13 @@ namespace Siam { //in the namespace Siam
 
 			DirectionVector();
 			DirectionVector( int _x, int _y );
+			DirectionVector( const DirectionVector& cpy );
 		};
 
 	}
 }
 
-Siam::Matrixs::DirectionVector operator*( int lhs, Siam::Matrixs::DirectionVector& rhs );
-Siam::Matrixs::DirectionVector operator*( Siam::Matrixs::DirectionVector& lhs, int rhs );
+Siam::Matrixs::DirectionVector operator*( int lhs, Siam::Matrixs::DirectionVector const& rhs );
+Siam::Matrixs::DirectionVector operator*( Siam::Matrixs::DirectionVector const& lhs, int rhs );
 bool operator==( Siam::Matrixs::DirectionVector const& lhs, Siam::Matrixs::DirectionVector const& rhs );
 #endif
