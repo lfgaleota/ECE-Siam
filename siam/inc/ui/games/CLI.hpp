@@ -9,7 +9,7 @@
 	#include "../game.hpp"
 	#include "../../../../cli/cli.hpp"
 	#include <fstream>
-	#include <windows.h>
+	#include <sstream>
 
 	namespace Siam {
 		namespace UI {
@@ -17,13 +17,15 @@
 				class CLI : public Siam::UI::Game {
 					private:
 						Functions::CLI cli;
+						void display();
 						void displayMatrix();
 						void displayPlayers();
+						void displayActions();
 						std::vector<std::string> m_displayMatrix;
 						void loadDisplayMatrix();
 
 					public:
-						CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players );
+						CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer );
 						void showError( std::string msg );
 						void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir );
 						void addPiece( const Object* );

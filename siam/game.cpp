@@ -187,10 +187,10 @@ void Game::victory() { //WIN
 }
 
 Game::Game( vector<Player> players ) { //that's how it goes down
-	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players );
-
 	this->m_players = players; //and the players
 	this->m_currentPlayer = this->m_players.begin(); //first player "selected"
+
+	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer );
 
 	try {
 		while( isFinished() ) //while nobody won
