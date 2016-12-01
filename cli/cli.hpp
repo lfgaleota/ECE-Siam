@@ -147,6 +147,4 @@
 				static Keys::Key getKey();
 		};
 	}
-
-	#include "menu/menu.hpp"
 #endif
