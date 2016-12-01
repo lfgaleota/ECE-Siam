@@ -23,6 +23,8 @@
 						void displayActions();
 						std::vector<std::string> m_displayMatrix;
 						void loadDisplayMatrix();
+						void showPiece( Object* elem );
+						void highlightSelectedPiece( unsigned int x, unsigned int y, unsigned char color = BACKGROUND_GREEN | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
 					public:
 						CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer );

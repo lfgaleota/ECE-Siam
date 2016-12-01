@@ -23,6 +23,46 @@ void CLI::display() {
 	displayActions();
 }
 
+void CLI::showPiece( Object* elem ) {
+	if( elem != nullptr ) { //different types of display function of the spot content
+		switch( elem->getType()) {
+			case Types::Type::Mountain:
+				cout << "M";
+				break;
+			case Types::Type::Rhinoceros:
+				cout << "R";
+				break;
+			case Types::Type::Elephant:
+				cout << "E";
+				break;
+			case Types::Type::Object:
+				break;
+			case Types::Type::Entity:
+				break;
+		}
+		if( elem->getType() == Types::Type::Mountain )
+			cout << " ";
+		else {
+			switch( elem->getDirection()) { //display the direction of a piece
+				case Direction::Left:
+					cout << "<";
+					break;
+				case Direction::Right:
+					cout << ">";
+					break;
+				case Direction::Up:
+					cout << "/";
+					break;
+				case Direction::Down:
+					cout << "\\";
+					break;
+			}
+		}
+	} else {
+		cout << "  ";
+	}
+}
+
 void CLI::displayMatrix() {
 	Object* elem = nullptr; //we'll need this to fill the blank spots
 	unsigned int x = 0, y = 0;
@@ -31,58 +71,39 @@ void CLI::displayMatrix() {
 
 	for( unsigned int j = 0; j < this->m_displayMatrix.size(); j++ ) {
 		cli.moveCursor( y + j, x );
+		cli.setColor( FOREGROUND_RED | FOREGROUND_INTENSITY );
 		cout << m_displayMatrix[ j ];
 	}
+
+	cli.resetColor();
 
 	for( unsigned int j = 0; j < this->m_board.size(); j++ ) { //browse
 		for( unsigned int i = 0; i < this->m_board[ j ].size(); i++ ) {
 			elem = this->m_board[ i ][ j ];
 
 			cli.moveCursor( y + j * 2 + 4, x + i * 5 + 2 );
-			//cli.setColor(FOREGROUND_GREEN);
+			cli.setColor( FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
-
-			if( elem != nullptr ) { //different types of display function of the spot content
-				switch( elem->getType()) {
-					case Types::Type::Mountain:
-						cout << "M";
-						break;
-					case Types::Type::Rhinoceros:
-						cout << "R";
-						break;
-					case Types::Type::Elephant:
-						cout << "E";
-						break;
-					case Types::Type::Object:
-						break;
-					case Types::Type::Entity:
-						break;
-				}
-				if( elem->getType() == Types::Type::Mountain )
-					cout << " ";
-				else {
-
-
-					switch( elem->getDirection()) { //display the direction of a piece
-						case Direction::Left:
-							cout << "<";
-							break;
-						case Direction::Right:
-							cout << ">";
-							break;
-						case Direction::Up:
-							cout << "/";
-							break;
-						case Direction::Down:
-							cout << "\\";
-							break;
-					}
-				}
-			} else {
-				cout << "  ";
-			}
+			showPiece( elem );
 		}
 	}
+
+	cli.resetColor();
+}
+
+void CLI::highlightSelectedPiece( unsigned int x, unsigned int y, unsigned char color ) {
+	unsigned int offsetX = 0, offsetY = 0;
+
+	cli.setColor( color );
+
+	cli.setOffsets( this->m_displayMatrix.begin()->size(), this->m_displayMatrix.size(), offsetX, offsetY );
+	cli.moveCursor( offsetY + y * 2 + 4, offsetX + x * 5 + 2 );
+
+	showPiece( this->m_board[ x ][ y ] );
+
+	cli.moveCursor( offsetY + y * 2 + 4 + 1, offsetX + x * 5 + 2 );
+	cout << "__";
+
 	cli.resetColor();
 }
 
@@ -144,7 +165,7 @@ void CLI::displayActions() {
 	string menu[] = {
 			"Ajouter",
 	        "Retirer",
-	        "Déplacer",
+	        "Deplacer",
 	        "Orienter",
 	        "Passer"
 	};
@@ -158,37 +179,83 @@ void CLI::displayActions() {
 		cout << menu[ i ];
 	}
 
+	cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN | BACKGROUND_INTENSITY );
+	cout << 0;
+	cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN );
+	cout << "Quitter";
+
 	cli.resetColor();
 }
 
 void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
-	char direction;
+	Functions::Keys::Key key;
+	x = 0;
+	y = 0;
+
+	display();
+	highlightSelectedPiece( x, y );
 
 	for( bool loop = true; loop; ) {
-		loop = false;
+		key = cli.getKey();
 
-		cout << "A quelles coordonnees ?" << endl; //displays instructions
-		cin >> x; //gets the requirements
-		cin >> y;
+		switch( key ) {
+			case Functions::Keys::Key::ArrowUp:
+				if( y > 0 )
+					y--;
+				break;
+			case Functions::Keys::Key::ArrowDown:
+				if( y < this->m_board.size() - 1 )
+					y++;
+				break;
+			case Functions::Keys::Key::ArrowLeft:
+				if( x > 0 )
+					x--;
+				break;
+			case Functions::Keys::Key::ArrowRight:
+				if( x < this->m_board.begin()->size() - 1 )
+					x++;
+				break;
+			case Functions::Keys::Key::Enter:
+				loop = false;
+				break;
+			default:
+				break;
+		}
 
-		if( dir != nullptr ) {
-			cout << "Dans quelle direction ?(h/b/g/d)" << endl;
-			cin >> direction;
+		display();
+		highlightSelectedPiece( x, y );
+	}
 
-			switch( direction ) {
-				case 'g' :
+	if( dir != nullptr ) {
+		for( bool loop = true; loop; ) {
+			loop = false;
+			display();
+
+			if( x < this->m_board.begin()->size() - 1 )
+				highlightSelectedPiece( x + 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+			if( x > 0 )
+				highlightSelectedPiece( x - 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+			if( y < this->m_board.size() - 1 )
+				highlightSelectedPiece( x, y + 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+			if( y > 0 )
+				highlightSelectedPiece( x, y - 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+
+			key = cli.getKey();
+
+			switch( key ) {
+				case Functions::Keys::Key::ArrowLeft:
 					*dir = Direction::Left;
 					break;
 
-				case 'd' :
+				case Functions::Keys::Key::ArrowRight:
 					*dir = Direction::Right;
 					break;
 
-				case 'h' :
+				case Functions::Keys::Key::ArrowUp:
 					*dir = Direction::Up;
 					break;
 
-				case 'b' :
+				case Functions::Keys::Key::ArrowDown:
 					*dir = Direction::Down;
 					break;
 
