@@ -71,7 +71,7 @@ void Game::removeFromBoard() { //remove a piece from the board
 void Game::moveOnBoard() { //make a move on the board
 	unsigned int x, y;
 	Direction dir;
-	Siam::Object* obj = nullptr;
+	Siam::Object* ejectedobj = nullptr, *winingobj = nullptr;
 	map<const Object*, pair<unsigned int, unsigned int>> movements;
 
 	for( bool loop = true; loop; ) {
@@ -83,23 +83,34 @@ void Game::moveOnBoard() { //make a move on the board
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //check if you can move the piece
 				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //shields it
 
-			obj = this->m_board.move( x, y, dir, movements );
+			ejectedobj = this->m_board.move( x, y, dir, movements );
 			this->m_ui->movePiece( movements );
 
-			if( obj != nullptr ) {
+			if( ejectedobj != nullptr ) {
 				// we ejected a spot
-				if( obj->getType() == Siam::Objects::Types::Type::Mountain ) {
-					// if it's a mountain increment his mountaincount
-					this->m_currentPlayer->incrementMountainsCount();
+				if( ejectedobj->getType() == Siam::Objects::Types::Type::Mountain ) {
+					// we try to detect which player gets the point
+					winingobj = this->m_board.getWiningObject( x, y, dir );
+					if( winingobj != nullptr ) {
+						for( auto& loopplayer : this->m_players ) {
+							if( loopplayer.getAnimalChosen() == winingobj->getType() ) {
+								// if it's a mountain increment his mountaincount
+								loopplayer.incrementMountainsCount();
+								// Also the game is ended!
+								this->won = true;
+							}
+						}
+					} else {
+						cout << "No wining obj";
+						getchar();
+					}
 					// And of course destroy the mountain
-					delete obj;
-					// Also the game is ended!
-					this->won = true;
+					delete ejectedobj;
 				} else {
 					// else put the piece back in the right stack
 					for( auto& loopplayer : this->m_players ) {
-						if( loopplayer.getAnimalChosen() == obj->getType() )
-							loopplayer.stockPiece( obj );
+						if( loopplayer.getAnimalChosen() == ejectedobj->getType() )
+							loopplayer.stockPiece( ejectedobj );
 					}
 				}
 			}

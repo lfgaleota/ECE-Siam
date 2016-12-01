@@ -42,6 +42,8 @@
 
 				unsigned int getMountainsCount();
 				const Siam::Object* getObject( unsigned int x, unsigned int y );
+
+				Object* getWiningObject( unsigned int x, unsigned int y, Siam::Matrixs::Direction dir );
 		};
 
 	}

@@ -129,6 +129,32 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 	}
 }
 
+Object* Matrix::getWiningObject( unsigned int x, unsigned int y, Direction dir ) {
+	DirectionVector dvec = this->getDirectionVector( dir );
+	Object* obj = nullptr;
+	int nb = 0;
+
+	// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
+	try {
+		obj = this->at( x, y, dvec );
+		for( nb = 1; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {}
+	} catch( out_of_range e ) {}
+
+	// Maintenant nb contient le nombre de fois qu'on se déplace pour atteindre la prochaine case vide ou sortir du tableau
+	// On parcourt alors le tableau en sens inverse
+	for( ; nb > 0; nb-- ) {
+		try {
+			obj = this->at( x, y, nb * dvec );
+			if( obj == nullptr )
+				break;
+			if( obj->getDirection() == dir )
+				return obj;
+		} catch( out_of_range e ) {}
+	}
+
+	return obj;
+}
+
 Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<const Object*, pair<unsigned int, unsigned int>>& movements ) { //move a piece
 	DirectionVector dvec = this->getDirectionVector( direction ); //get the direction of the piece
 	DirectionVector* nbdvec;
@@ -153,7 +179,7 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 
 					// Maintenant nb contient le nombre de fois qu'on se déplace pour atteindre la prochaine case vide ou sortir du tableau
 					// On parcourt alors le tableau en sens inverse
-					for( ; nb > 0 ; nb-- ) {
+					for( ; nb > 0; nb-- ) {
 						try {
 							// On intervertie l'objet en cours et celui à côté dans le sens opposé au déplacement
 							nbdvec = new DirectionVector( nb * dvec );

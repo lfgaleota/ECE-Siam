@@ -317,7 +317,9 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 }
 
 void CLI::victory( Siam::Player& player ) {
+	cli.clearScreen();
 	std::cout << "Bravo " << player.getName() << ", tu as gagne!" << std::endl;
+	getchar();
 }
 
 void CLI::loadDisplayMatrix() {
