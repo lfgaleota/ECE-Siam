@@ -21,9 +21,6 @@ FMOD::~FMOD() {
 	for( auto& music : m_musics ) {
 		FMOD_Sound_Release( music.second );
 	}
-
-	// Libération du canal principal
-	FMOD_ChannelGroup_Release( this->m_masterChannel );
 	
 	// Libération du système
 	FMOD_System_Close( this->m_system );
