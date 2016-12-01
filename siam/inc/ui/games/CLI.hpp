@@ -2,21 +2,23 @@
 	#define _ECE_SIAM_UI_GAME_CLI_HPP_
 
 	#include <iostream>
+	#include <fstream>
+	#include <sstream>
 	#include "../../matrix.hpp"
 	#include "../../object.hpp"
 	#include "../../objects/types/type.hpp"
 	#include "../../player.hpp"
 	#include "../game.hpp"
 	#include "../../../../cli/cli.hpp"
-	#include <fstream>
-	#include <sstream>
+	#include "../audio/FMOD.hpp"
 
-	namespace Siam {
+namespace Siam {
 		namespace UI {
 			namespace Games {
 				class CLI : public Siam::UI::Game {
 					private:
 						Functions::CLI cli;
+						Siam::UI::Audio::FMOD fmod;
 						void display();
 						void displayMatrix();
 						void displayPlayers();

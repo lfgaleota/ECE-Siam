@@ -8,6 +8,7 @@ using namespace Siam::UI::Games;
 
 CLI::CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer ) : Game( board, players, currentPlayer ) {
 	cli = Functions::CLI();
+	fmod = Siam::UI::Audio::FMOD();
 	loadDisplayMatrix();
 	display();
 }
