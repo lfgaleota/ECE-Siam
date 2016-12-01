@@ -217,6 +217,8 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
         case 4:
             return Players::Action::Orient;
         case 5:
+            cli.clearScreen();
+            displayMatrix();
             return Players::Action::Nothing;
         case 6:
             throw exceptions::exit_game();
@@ -251,27 +253,4 @@ void CLI::loadDisplayMatrix() {
 
 
 
-}
-
-void CLI::color(int t,int f)
-{
-    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(H,f*16+t);
-
-    /*0: noir
-    1: bleu foncé
-    2: vert
-    3: bleu-gris
-    4: marron
-    5: pourpre
-    6: kaki
-    7: gris clair
-    8: gris
-    9: bleu
-    10: vert fluo
-    11: turquoise
-    12: rouge
-    13: rose fluo
-    14: jaune fluo
-    15: blanc*/
 }
