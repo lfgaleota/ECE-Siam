@@ -13,6 +13,7 @@
 		#define WIN
 
 		#include <windows.h>
+		#include <conio.h>
 
 	#elif __APPLE__ || __linux || __linux__ || __unix || __unix__ || __posix
 
@@ -36,6 +37,28 @@
 	#endif
 
 	namespace Functions {
+		namespace Keys {
+			enum Key {
+				ArrowLeft,
+				ArrowRight,
+				ArrowUp,
+				ArrowDown,
+				Enter,
+				Escape,
+				N0,
+				N1,
+				N2,
+				N3,
+				N4,
+				N5,
+				N6,
+				N7,
+				N8,
+				N9,
+				Invalid
+			};
+		}
+
 		class CLI {
 			private:
 				#if defined( WIN )
@@ -120,6 +143,8 @@
 						- Rien
 				****/
 				static void pause();
+
+				static Keys::Key getKey();
 		};
 	}
 
