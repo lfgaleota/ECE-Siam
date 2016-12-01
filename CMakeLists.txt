@@ -1,16 +1,20 @@
 cmake_minimum_required(VERSION 3.6)
 project(ECE_Siam)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 set(SOURCE_FILES
+	main.cpp
 	cli/cli.cpp
 	cli/cli.hpp
+	cli/menu/menu.hpp
+	cli/menu/menu.cpp
 	siam/objects/elephant.cpp
 	siam/inc/objects/elephant.hpp
 	siam/objects/entity.cpp
 	siam/inc/objects/entity.hpp
-	main.cpp
 	siam/matrix.cpp
 	siam/inc/matrix.hpp
 	siam/objects/mountain.cpp
@@ -28,15 +32,18 @@ set(SOURCE_FILES
 	siam/inc/game.hpp
 	siam/game.cpp
 	siam/inc/ui/game.hpp
-		siam/ui/games/CLI.cpp
+	siam/ui/games/CLI.cpp
 	siam/inc/ui/games/CLI.hpp
-		cli/menu/menu.hpp
-		cli/menu/menu.cpp)
+		siam/ui/audio/FMOD.cpp
+		siam/inc/ui/audio/FMOD.hpp
+)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
 
 if(UNIX)
-	set(SYSTEM_SPECIFIC_LIBRARIES tinfo)
+	target_link_libraries(ECE_Siam ncurses)
 endif(UNIX)
 
-target_link_libraries(ECE_Siam ${SYSTEM_SPECIFIC_LIBRARIES})
+find_package(FMOD REQUIRED)
+include_directories(${FMOD_INCLUDE_DIRS})
+target_link_libraries(ECE_Siam ${FMOD_LIBRARIES})

@@ -29,9 +29,15 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-Wextra" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
+			<Add directory="lib/fmod/inc/" />
 		</Compiler>
+		<Linker>
+			<Add library="lib/fmod/libfmod.a" />
+		</Linker>
 		<Unit filename="cli/cli.cpp" />
 		<Unit filename="cli/cli.hpp" />
 		<Unit filename="main.cpp" />
@@ -47,6 +53,7 @@
 		<Unit filename="siam/inc/objects/rhinoceros.hpp" />
 		<Unit filename="siam/inc/objects/types/type.hpp" />
 		<Unit filename="siam/inc/player.hpp" />
+		<Unit filename="siam/inc/ui/audio/FMOD.hpp" />
 		<Unit filename="siam/inc/ui/game.hpp" />
 		<Unit filename="siam/inc/ui/games/CLI.hpp" />
 		<Unit filename="siam/matrix.cpp" />
@@ -57,6 +64,7 @@
 		<Unit filename="siam/objects/mountain.cpp" />
 		<Unit filename="siam/objects/rhinoceros.cpp" />
 		<Unit filename="siam/player.cpp" />
+		<Unit filename="siam/ui/audio/FMOD.cpp" />
 		<Unit filename="siam/ui/games/CLI.cpp" />
 		<Extensions>
 			<code_completion />
