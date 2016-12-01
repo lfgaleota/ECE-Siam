@@ -93,6 +93,8 @@ void Game::moveOnBoard() { //make a move on the board
 					this->m_currentPlayer->incrementMountainsCount();
 					// And of course destroy the mountain
 					delete obj;
+					// Also the game is ended!
+					this->won = true;
 				} else {
 					// else put the piece back in the right stack
 					for( auto& loopplayer : this->m_players ) {
@@ -171,10 +173,6 @@ void Game::playerTurn() { //unfolding of a turn
 	this->m_currentPlayer = next( this->m_currentPlayer );
 }
 
-bool Game::isFinished() { //if a moutain was pushed out, then the game is finished
-	return ( this->m_board.getMountainsCount() > 0 );
-}
-
 void Game::victory() { //WIN
 	std::vector<Siam::Player>::iterator winingPlayer = this->m_players.begin();
 
@@ -193,7 +191,7 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer );
 
 	try {
-		while( isFinished() ) //while nobody won
+		while( !this->won ) //while nobody won
 			playerTurn(); //turns
 		victory(); //if you won -> victory
 	} catch( exceptions::exit_game e ) {

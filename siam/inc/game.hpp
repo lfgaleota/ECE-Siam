@@ -14,13 +14,13 @@
 				std::vector<Siam::Player> m_players; //players
 				std::vector<Siam::Player>::iterator m_currentPlayer; //an iterator of players (we need to know who's turn it is)
 				Siam::UI::Game* m_ui;
+				bool won = false;
 
 				void addOnBoard(); //add a piece to the board
 				void removeFromBoard(); //remove a piece from the board
 				void moveOnBoard(); //make a move
 				void orientOnBoard(); //reorient a piece on the board
 				void playerTurn(); //a turn
-				bool isFinished();
 				void victory(); //victory !
 
 			public:
