@@ -16,34 +16,34 @@ IF (FMOD_LIBRARIES AND FMOD_INCLUDE_DIRS)
 ENDIF (FMOD_LIBRARIES AND FMOD_INCLUDE_DIRS)
 
 SET(FMOD_INCLUDE_SEARCH_DIRS
-		${INCLUDE_SEARCH_DIRS}
-		${CMAKE_INCLUDE_PATH}
-		/usr/include
-		/usr/local/include
-		/usr/include/fmodex
-		/usr/local/include/fmodex
-		/opt/include/fmodex
-		/opt/fmodex/include
-		"C:\\Program Files (x86)\\FMOD SoundSystem\\FMOD Studio API Windows\\api\\lowlevel\\inc"
-		${CMAKE_CURRENT_LIST_DIR}/lib/fmod/inc
-		CACHE STRING ""
-		)
+	"${INCLUDE_SEARCH_DIRS}"
+	"${CMAKE_INCLUDE_PATH}"
+	"/usr/include"
+	"/usr/local/include"
+	"/usr/include/fmod"
+	"/usr/local/include/fmod"
+	"/opt/include/fmod"
+	"/opt/fmodex/include"
+	"C:\\Program Files (x86)\\FMOD SoundSystem\\FMOD Studio API Windows\\api\\lowlevel\\inc"
+	"${PROJECT_SOURCE_DIR}/lib/fmod/inc"
+	CACHE STRING ""
+)
 
 SET(FMOD_LIBRARY_SEARCH_DIRS
-		${LIBRARY_SEARCH_DIRS}
-		${CMAKE_LIBRARY_PATH}
-		/usr/lib
-		/usr/lib64
-		/usr/local/lib
-		/usr/local/lib64
-		/opt/lib
-		/opt/lib64
-		/opt/fmodex/lib
-		/opt/fmodex/lib64
-		"C:\\Program Files (x86)\\FMOD SoundSystem\\FMOD Studio API Windows\\api\\lowlevel\\lib"
-		${CMAKE_CURRENT_LIST_DIR}/lib/fmod
-		CACHE STRING ""
-		)
+	"${LIBRARY_SEARCH_DIRS}"
+	"${CMAKE_LIBRARY_PATH}"
+	"/usr/lib"
+	"/usr/lib64"
+	"/usr/local/lib"
+	"/usr/local/lib64"
+	"/opt/lib"
+	"/opt/lib64"
+	"/opt/fmodex/lib"
+	"/opt/fmodex/lib64"
+	"C:\\Program Files (x86)\\FMOD SoundSystem\\FMOD Studio API Windows\\api\\lowlevel\\lib"
+	"${PROJECT_SOURCE_DIR}/lib/fmod"
+	CACHE STRING ""
+)
 
 IF (NOT FMOD_FIND_QUIETLY)
 	MESSAGE(STATUS "Looking for FMOD")
@@ -56,7 +56,6 @@ IF(WIN32)
 		FIND_LIBRARY(FMOD_LIBRARIES fmod_vc fmodL_vc ${FMOD_LIBRARY_SEARCH_DIRS})
 	ELSE(MSVC)
 		FIND_LIBRARY(FMOD_LIBRARIES fmod fmodL ${FMOD_LIBRARY_SEARCH_DIRS})
-		MESSAGE(STATE "${FMOD_LIBRARIES}")
 	ENDIF(MSVC)
 ELSEIF(UNIX)
 	FIND_LIBRARY(FMOD_LIBRARIES fmod fmodL ${FMOD_LIBRARY_SEARCH_DIRS})
