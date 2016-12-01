@@ -29,7 +29,7 @@ void CLI::displayMatrix() {
 
 	cli.setOffsets( this->m_displayMatrix.begin()->size(), this->m_displayMatrix.size(), x, y );
 
-	for( int j = 0; j < this->m_displayMatrix.size(); j++ ) {
+	for( unsigned int j = 0; j < this->m_displayMatrix.size(); j++ ) {
 		cli.moveCursor( y + j, x );
 		cout << m_displayMatrix[ j ];
 	}

@@ -31,7 +31,7 @@ void CLIs::Menu::setOffsets( unsigned int& offset_x, unsigned int& offset_y ) {
 		- Entier >= 1 representant le choix
 		- 0 si aucun choix n'a ete fait
 ****/
-CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_color, unsigned char header_color, unsigned char selection_color ) : m_header( header ), m_choices( this->m_choices ) {
+CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_color, unsigned char header_color, unsigned char selection_color ) : m_header( header ), m_choices( choices ) {
 	// Initialisation des variables nécessaires
 	unsigned int exit = 0, offset_x = 0, offset_y = 0;
 	Keys::Key key;
