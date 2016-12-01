@@ -170,28 +170,32 @@ void CLI::displayActions() {
 	        "Orienter",
 	        "Passer"
 	};
-	cli.getSize( width, height );
+	if( this->m_showActions ) {
+		cli.getSize( width, height );
 
-	cli.moveCursor( height - 1, 0 );
-	for( unsigned int i = 0; i < 5; i++ ) {
-		cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN | BACKGROUND_INTENSITY );
-		cout << i + 1;
-		cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN );
-		cout << menu[ i ];
+		cli.moveCursor( height - 1, 0 );
+		for( unsigned int i = 0; i < 5; i++ ) {
+			cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY );
+			cout << i + 1;
+			cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED | BACKGROUND_GREEN );
+			cout << menu[ i ];
+		}
+
+		cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY );
+		cout << 0;
+		cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED | BACKGROUND_GREEN );
+		cout << "Quitter";
+
+		cli.resetColor();
 	}
-
-	cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN | BACKGROUND_INTENSITY );
-	cout << 0;
-	cli.setColor( BACKGROUND_BLUE | BACKGROUND_RED| BACKGROUND_GREEN );
-	cout << "Quitter";
-
-	cli.resetColor();
 }
 
 void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
 	Functions::Keys::Key key;
 	x = 0;
 	y = 0;
+
+	this->m_showActions = false;
 
 	display();
 	highlightSelectedPiece( x, y );
@@ -204,21 +208,32 @@ void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
 				if( y > 0 )
 					y--;
 				break;
+
 			case Functions::Keys::Key::ArrowDown:
 				if( y < this->m_board.size() - 1 )
 					y++;
 				break;
+
 			case Functions::Keys::Key::ArrowLeft:
 				if( x > 0 )
 					x--;
 				break;
+
 			case Functions::Keys::Key::ArrowRight:
 				if( x < this->m_board.begin()->size() - 1 )
 					x++;
 				break;
+
 			case Functions::Keys::Key::Enter:
 				loop = false;
 				break;
+
+			case Functions::Keys::Key::N0:
+			case Functions::Keys::Key::Escape:
+				this->m_showActions = true;
+				display();
+				throw exceptions::cancel_action();
+
 			default:
 				break;
 		}
@@ -260,12 +275,20 @@ void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
 					*dir = Direction::Down;
 					break;
 
+				case Functions::Keys::Key::N0:
+				case Functions::Keys::Key::Escape:
+					this->m_showActions = true;
+					display();
+					throw exceptions::cancel_action();
+
 				default:
 					loop = true;
 					break;
 			}
 		}
 	}
+
+	this->m_showActions = true;
 }
 
 void CLI::addPiece( const Object* ) {

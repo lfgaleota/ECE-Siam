@@ -14,6 +14,7 @@
 					const std::vector<std::vector<Siam::Object*>>& m_board;
 					const std::vector<Siam::Player>& m_players;
 					const std::vector<Siam::Player>::iterator& m_currentPlayer;
+					bool m_showActions = true;
 
 				public:
 					Game( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer ) : m_board( board ), m_players( players ), m_currentPlayer( currentPlayer ) {};

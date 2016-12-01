@@ -11,6 +11,7 @@
 			#include "stack_empty"
 			#include "stack_full"
 			#include "exit_game"
+			#include "cancel_action"
 		}
 	}
 #endif

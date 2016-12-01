@@ -158,25 +158,33 @@ void Game::playerTurn() { //unfolding of a turn
 
 	this->m_ui->playerTurnBegin( *this->m_currentPlayer );
 
-	switch( this->m_ui->getPlayerAction( *this->m_currentPlayer ) ) { //what type of turn would you like to take ?
-		case Players::Add:
-			//add
-			addOnBoard();
-			break;
-		case Players::Remove:
-			//remove
-			removeFromBoard();
-			break;
-		case Players::Move:
-			//move
-			moveOnBoard();
-			break;
-		case Players::Orient:
-			//orient
-			orientOnBoard();
-			break;
-		default:
-			break;
+	for( bool loop = true; loop; ) {
+		loop = false;
+
+		try {
+			switch( this->m_ui->getPlayerAction( *this->m_currentPlayer ) ) { //what type of turn would you like to take ?
+				case Players::Add:
+					//add
+					addOnBoard();
+					break;
+				case Players::Remove:
+					//remove
+					removeFromBoard();
+					break;
+				case Players::Move:
+					//move
+					moveOnBoard();
+					break;
+				case Players::Orient:
+					//orient
+					orientOnBoard();
+					break;
+				default:
+					break;
+			}
+		} catch( exceptions::cancel_action ) {
+			loop = true;
+		}
 	}
 
 	this->m_ui->playerTurnEnd( *this->m_currentPlayer );
