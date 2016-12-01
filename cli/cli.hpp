@@ -148,4 +148,5 @@
 		};
 	}
 
+	#include "menu/menu.hpp"
 #endif

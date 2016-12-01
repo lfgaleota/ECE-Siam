@@ -28,9 +28,9 @@ set(SOURCE_FILES
 	siam/inc/game.hpp
 	siam/game.cpp
 	siam/inc/ui/game.hpp
-	siam/ui/games/CLI.cpp
+		siam/ui/games/CLI.cpp
 	siam/inc/ui/games/CLI.hpp
-)
+		cli/menu/CLI.hpp)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
 
