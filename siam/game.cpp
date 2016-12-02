@@ -1,5 +1,5 @@
 #include "inc/game.hpp" //real game
-#include "inc/ui/games/CLI.hpp"
+#include "inc/ui/games/CLIbis.hpp"
 
 using namespace std;
 using namespace Siam;

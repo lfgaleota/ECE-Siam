@@ -1,5 +1,5 @@
-#ifndef _ECE_SIAM_UI_GAME_CLI_HPP_
-	#define _ECE_SIAM_UI_GAME_CLI_HPP_
+#ifndef CLIBIS_HPP_INCLUDED
+#define CLIBIS_HPP_INCLUDED
 
 	#include <iostream>
 	#include <fstream>
@@ -44,4 +44,9 @@ namespace Siam {
 			}
 		}
 	}
-#endif //_ECE_SIAM_UI_GAME_CLI_HPP_
+
+
+
+
+
+#endif // CLIBIS_HPP_INCLUDED
