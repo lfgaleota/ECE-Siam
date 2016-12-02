@@ -8,7 +8,7 @@
 	#include "../../object.hpp"
 	#include "../../objects/types/type.hpp"
 	#include "../../player.hpp"
-	#include "../game.hpp"
+	#include "../UIgame.hpp" //THIS ONE
 	#include "../../../../cli/cli.hpp"
 	#include "../audio/FMOD.hpp"
 

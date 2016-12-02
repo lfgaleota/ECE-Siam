@@ -1,4 +1,4 @@
-#include "inc/game.hpp"
+#include "inc/game.hpp" //real game
 #include "inc/ui/games/CLI.hpp"
 
 using namespace std;
@@ -41,7 +41,7 @@ void Game::removeFromBoard() { //remove a piece from the board
 
 	for( bool loop = true; loop; ) {
 		loop = false;
-		
+
 		this->m_ui->getPlayerCoords( x, y, nullptr );
 
 		try { //don't ask man, it works
@@ -219,6 +219,6 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 
 	for( auto& player : this->m_players )
 		player.removeRemainingObjects(); //delete everything in the stacks
-	
+
 	delete this->m_ui;
 }

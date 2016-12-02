@@ -1,5 +1,5 @@
-#ifndef _ECE_SIAM_UI_GAME_HPP_
-	#define _ECE_SIAM_UI_GAME_HPP_
+#ifndef UIGAME_HPP_INCLUDED
+#define UIGAME_HPP_INCLUDED
 
 	#include "../matrix.hpp"
 	#include "../object.hpp"
@@ -32,4 +32,7 @@
 			};
 		}
 	}
-#endif //_ECE_SIAM_UI_GAME_HPP_
+
+
+
+#endif // UIGAME_HPP_INCLUDED

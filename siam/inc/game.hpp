@@ -5,7 +5,7 @@
 	#include "matrix.hpp"
 	#include "object.hpp"
 	#include "player.hpp"
-	#include "ui/game.hpp"
+	#include "ui/UIgame.hpp" //THIS ONE
 
 	namespace Siam { //in the namespace Siam
 		class Game { //create a game class
@@ -27,5 +27,7 @@
 				Game( std::vector<Siam::Player> players ); //game method
 		};
 	}
+
+
 
 #endif //_ECE_SIAM_GAME_HPP_
