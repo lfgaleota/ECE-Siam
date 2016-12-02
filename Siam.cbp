@@ -40,6 +40,8 @@
 		</Linker>
 		<Unit filename="cli/cli.cpp" />
 		<Unit filename="cli/cli.hpp" />
+		<Unit filename="cli/menu/menu.cpp" />
+		<Unit filename="cli/menu/menu.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="siam/game.cpp" />
 		<Unit filename="siam/inc/exceptions/exceptions.hpp" />
@@ -53,9 +55,9 @@
 		<Unit filename="siam/inc/objects/rhinoceros.hpp" />
 		<Unit filename="siam/inc/objects/types/type.hpp" />
 		<Unit filename="siam/inc/player.hpp" />
+		<Unit filename="siam/inc/ui/UIgame.hpp" />
 		<Unit filename="siam/inc/ui/audio/FMOD.hpp" />
-		<Unit filename="siam/inc/ui/game.hpp" />
-		<Unit filename="siam/inc/ui/games/CLI.hpp" />
+		<Unit filename="siam/inc/ui/games/CLIbis.hpp" />
 		<Unit filename="siam/matrix.cpp" />
 		<Unit filename="siam/matrixs/direction.cpp" />
 		<Unit filename="siam/object.cpp" />
