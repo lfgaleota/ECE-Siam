@@ -1,5 +1,5 @@
 #include "popup.hpp"
-
+#include <iostream>
 using namespace std;
 using namespace Functions::Allegro;
 
@@ -101,7 +101,7 @@ void Popup::generateBackground() {
 
 Popup::Popup( std::string title, std::vector<std::string> choices, FONT* fonttext ) {
 	BITMAP *page, *save;
-	unsigned int i, choice = 0, quit = 0, start_x, start_y, end_x, selected_button;
+	int quit = 0, start_x, start_y, end_x, selected_button;
 	bool prev_mouse_l, mouse_l = 1, prev_key_down, key_down = 1, prev_key_up, key_up = 1, prev_key_enter, key_enter = 1, prev_key_esc, key_esc = 1;
 	size_t size, max_size, count = choices.size();
 	char font_loaded = 0;
@@ -189,8 +189,8 @@ Popup::Popup( std::string title, std::vector<std::string> choices, FONT* fonttex
 
 		if( mouse_x >= start_x && mouse_x <= end_x ) {
 			selected_button = ( mouse_y - start_y ) / ( MENU_FONT_SIZE_Y + MENU_LETTER_SPACING_Y );
-			if( selected_button >= 0 && selected_button < count ) {
-				this->choice = selected_button + 1;
+			if( selected_button >= 0 && (unsigned) selected_button < count ) {
+				this->choice = (unsigned) selected_button + 1;
 			}
 
 			if( !prev_mouse_l && mouse_l ) {
@@ -200,8 +200,8 @@ Popup::Popup( std::string title, std::vector<std::string> choices, FONT* fonttex
 
 		textprintf_centre_ex( page, fonttext, SCREEN_W / 2, ( SCREEN_H - height ) / 2 + MENU_PADDING_Y, makecol( 255, 255, 255 ), -1, title.c_str() );
 
-		for( i = 0; i < count; i++ ) {
-			if( i == choice - 1 )
+		for( unsigned i = 0; i < count; i++ ) {
+			if( i == this->choice - 1 )
 				textprintf_centre_ex( page, fonttext, SCREEN_W / 2, ( SCREEN_H - height ) / 2 + MENU_PADDING_Y + ( i + 2 ) * ( MENU_FONT_SIZE_Y + MENU_LETTER_SPACING_Y ), makecol( 255, 255, 255 ), -1, choices[ i ].c_str() );
 			else
 				textprintf_centre_ex( page, fonttext, SCREEN_W / 2, ( SCREEN_H - height ) / 2 + MENU_PADDING_Y + ( i + 2 ) * ( MENU_FONT_SIZE_Y + MENU_LETTER_SPACING_Y ), makecol( 255, 255, 0 ), -1, choices[ i ].c_str() );

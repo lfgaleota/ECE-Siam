@@ -6,8 +6,8 @@
 	#include <ios>
 	#include <allegro.h>
 	#include "../winhack.h"
-	#include <allegro.h>
 	#include <loadpng.h>
+	#include <jpgalleg.h>
 
 	#define MENU_BACK_OFFSET 4
 	#define MENU_TOP_BAR_OFFSET 1
