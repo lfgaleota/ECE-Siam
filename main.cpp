@@ -50,43 +50,31 @@ void manageMusics(Siam::UI::Audio::FMOD& mediaPlayer)
 
 }
 
-
-
-int main() {
-    std::vector<Siam::Player> players;
-    Siam::UI::Audio::FMOD mediaPlayer ;
-
-    newGame();
-    manageMusics(mediaPlayer);
-    int choice=0, music=0 ;
-
-
+void menuPrincipal(std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& mediaPlayer)
+{
+    char key;
+    //CLI cli = CLI();
+    int music=0 ;
 
     do
     {
         std::cout << "Entrez votre choix " << std::endl ;
         std::cout << "1. Nouvelle Partie" << std::endl ;
-        std::cout << "2. Quitter le jeu" << std::endl ;
-        std::cout << "3. Sons" << std::endl ;
-        std::cin >> choice;
+        std::cout << "2. Sons" << std::endl ;
+        std::cout << "Escape pour quitter" << std::endl ;
+        //key = cli.getKey();
+        std::cin >> key ;
 
-        switch(choice)
+        switch(key)
         {
-        case 1 :
-
+        case '1' :
             INeedPlayers(players);
             {
                 Siam::Game game = Siam::Game( players );
             }
-            break ;
-
-        case 2 :
-
-            std::cout << "Merci d'avoir joue ! A bientot !" << std::endl ;
-            return 0;
             break;
 
-        case 3 :
+        case '2' :
 
             std::cout << "1. ON" << std::endl ;
             std::cout << "2. OFF" << std::endl ;
@@ -101,7 +89,23 @@ int main() {
 
 
         }
-    } while(choice !=0);
+    } while(key != 27);
+
+}
+
+
+
+int main() {
+    std::vector<Siam::Player> players;
+    Siam::UI::Audio::FMOD mediaPlayer ;
+
+    newGame();
+    manageMusics(mediaPlayer);
+
+    menuPrincipal(players,mediaPlayer);
+
+
+
 
     return 0;
 }
