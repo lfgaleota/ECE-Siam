@@ -44,6 +44,7 @@ void CLI::showPiece( Object* elem ) {
 		if( elem->getType() == Types::Type::Mountain )
 			cout << " ";
 		else {
+            cli.setColor( FOREGROUND_BLUE | FOREGROUND_INTENSITY );
 			switch( elem->getDirection()) { //display the direction of a piece
 				case Direction::Left:
 					cout << "<";
@@ -58,6 +59,7 @@ void CLI::showPiece( Object* elem ) {
 					cout << "\\";
 					break;
 			}
+			cli.resetColor();
 		}
 	} else {
 		cout << "  ";
