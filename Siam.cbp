@@ -67,7 +67,7 @@
 		<Unit filename="siam/objects/rhinoceros.cpp" />
 		<Unit filename="siam/player.cpp" />
 		<Unit filename="siam/ui/audio/FMOD.cpp" />
-		<Unit filename="siam/ui/games/CLI.cpp" />
+		<Unit filename="siam/ui/games/CLIbis.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
