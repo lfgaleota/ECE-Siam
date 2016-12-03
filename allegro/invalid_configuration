@@ -1,0 +1,14 @@
+class invalid_configuration : public std::exception {
+	private:
+		std::string what_arg;
+
+	public:
+		explicit invalid_configuration( const std::string& what_arg ) : what_arg( what_arg ) {}
+		explicit invalid_configuration( const char* what_arg ) : what_arg( what_arg ) {}
+
+		virtual const char* what() const throw() {
+			std::string msg = "Invalid configuration: ";
+			msg += what_arg;
+			return msg.c_str();
+		}
+};
