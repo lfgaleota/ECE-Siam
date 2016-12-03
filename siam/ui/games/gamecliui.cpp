@@ -1,3 +1,5 @@
+#include <fstream>
+
 #include "../../inc/ui/games/gamecliui.hpp"
 
 using namespace std;
@@ -345,6 +347,24 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 void CLI::victory( Siam::Player& player ) {
 	cli.clearScreen();
 	std::cout << "Bravo " << player.getName() << ", tu as gagne!" << std::endl;
+	std::cout << std::endl << std::endl ;
+    std::ifstream logo("C:/Users/romai/Desktop/Siam/logowin.txt");
+
+    if(logo)
+    {
+        std::string ligne;
+
+        while(getline(logo, ligne))
+        {
+            std::cout << ligne << std::endl;
+        }
+    }
+    else
+    {
+        std::cout << "nope didn't work" << std::endl;
+    }
+
+    Sleep(2000);
 	getchar();
 }
 

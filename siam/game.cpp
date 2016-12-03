@@ -211,6 +211,7 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 		while( !this->won ) //while nobody won
 			playerTurn(); //turns
 		victory(); //if you won -> victory
+		Sleep(2000);
 	} catch( exceptions::exit_game e ) {
 		this->m_ui->showError( "Exiting" );
 	}
