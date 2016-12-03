@@ -22,7 +22,7 @@ void Game::addOnBoard() { //add a piece to the board
 			this->m_board.add( obj, x, y );
 			this->m_board.orient( x, y, dir );
 
-			this->m_ui->addPiece( obj );
+			this->m_ui->addPiece( obj, x, y );
 		} catch( Siam::exceptions::invalid_move& e ) { //shielding
 			this->m_ui->showError( e.what() );
 			loop = true;

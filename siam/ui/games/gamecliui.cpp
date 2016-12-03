@@ -291,7 +291,7 @@ void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
 	this->m_showActions = true;
 }
 
-void CLI::addPiece( const Object* ) {
+void CLI::addPiece( const Object*, unsigned int x, unsigned int y ) {
 	display();
 }
 

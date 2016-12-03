@@ -32,7 +32,7 @@
 						CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer );
 						void showError( std::string msg );
 						void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir );
-						void addPiece( const Object* );
+						void addPiece( const Object*, unsigned int x, unsigned int y );
 						void removePiece( const Object* );
 						void movePiece( std::map<const Siam::Object*, std::pair<unsigned int, unsigned int>>& movements );
 						void orientPiece( const Object*, Siam::Matrixs::Direction oldDir );

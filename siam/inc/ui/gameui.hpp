@@ -20,7 +20,7 @@
 					virtual ~Game() {};
 					virtual void showError( std::string msg ) = 0;
 					virtual void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir )= 0;
-					virtual void addPiece( const Object* ) = 0;
+					virtual void addPiece( const Object*, unsigned int x, unsigned int y ) = 0;
 					virtual void removePiece( const Object* ) = 0;
 					virtual void movePiece( std::map<const Siam::Object*, std::pair<unsigned int, unsigned int>>& movements ) = 0;
 					virtual void orientPiece( const Object*, Siam::Matrixs::Direction oldDir ) = 0;
