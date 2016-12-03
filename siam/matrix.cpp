@@ -168,7 +168,7 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 				this->set( x, y, dvec, this->at( x, y ) );
 				this->set( x, y, nullptr );
 
-				movements[ this->at( x, y, dvec ) ] =  make_pair( x, y );
+				movements[ this->at( x, y, dvec ) ] =  make_pair( x + dvec.x, y + dvec.y );
 			} else {
 				if( this->getForce( x, y, dvec ) > 0 ) {
 					// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
@@ -189,7 +189,7 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 							this->set( x, y, *nbdvec, this->at( x, y, *nbsubdvec ) );
 							this->set( x, y, *nbsubdvec, obj );
 
-							movements[ obj ] = make_pair( x + nbsubdvec->x, y + nbsubdvec->y );
+							movements[ this->at( x, y, *nbdvec ) ] = make_pair( x + nbdvec->x, y + nbdvec->y );
 
 							delete nbdvec;
 							delete nbsubdvec;
