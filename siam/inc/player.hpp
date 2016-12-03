@@ -9,6 +9,8 @@
 	#include "../inc/objects/elephant.hpp"
 	#include "../inc/objects/rhinoceros.hpp"
 
+	#define PLAYER_MAX_NUMBER_OF_PIECES 5
+
 	namespace Siam { //in the namespace Siam
 
 		class Player { //player Class
