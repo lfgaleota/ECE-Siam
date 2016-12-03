@@ -1,11 +1,10 @@
-#ifndef UIGAME_HPP_INCLUDED
-#define UIGAME_HPP_INCLUDED
+#ifndef _ECE_SIAM_UI_GAME_HPP_
+	#define _ECE_SIAM_UI_GAME_HPP_
 
 	#include "../matrix.hpp"
 	#include "../object.hpp"
 	#include "../objects/types/type.hpp"
 	#include "../player.hpp"
-	#include "../../../cli/cli.hpp"
 
 	namespace Siam {
 		namespace UI {
@@ -35,4 +34,4 @@
 
 
 
-#endif // UIGAME_HPP_INCLUDED
+#endif

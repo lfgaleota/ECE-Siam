@@ -1,5 +1,5 @@
-#include "inc/game.hpp" //real game
-#include "inc/ui/games/CLIbis.hpp"
+#include "inc/game.hpp"
+#include "inc/ui/games/gamecliui.hpp"
 
 using namespace std;
 using namespace Siam;
@@ -23,12 +23,12 @@ void Game::addOnBoard() { //add a piece to the board
 			this->m_board.orient( x, y, dir );
 
 			this->m_ui->addPiece( obj );
-		} catch( Siam::exceptions::invalid_move e ) { //shielding
+		} catch( Siam::exceptions::invalid_move& e ) { //shielding
 			this->m_ui->showError( e.what() );
 			loop = true;
 			if( obj != nullptr )
 				this->m_currentPlayer->stockPiece( obj );
-		} catch( Siam::exceptions::stack_empty e ) {
+		} catch( Siam::exceptions::stack_empty& e ) {
 			this->m_ui->showError( e.what() );
 			loop = true;
 		}
@@ -51,17 +51,17 @@ void Game::removeFromBoard() { //remove a piece from the board
 			this->m_currentPlayer->stockPiece( obj );
 
 			this->m_ui->removePiece( obj );
-		} catch( Siam::exceptions::invalid_move e ) {
+		} catch( Siam::exceptions::invalid_move& e ) {
 			this->m_ui->showError( e.what() );
 			loop = true;
 			if( obj != nullptr )
 				this->m_board.add( obj, x, y );
-		} catch( Siam::exceptions::stack_full e ) {
+		} catch( Siam::exceptions::stack_full& e ) {
 			this->m_ui->showError( e.what() );
 			loop = true;
 			if( obj != nullptr )
 				this->m_board.add( obj, x, y );
-		} catch( Siam::exceptions::invalid_object_type e ) {
+		} catch( Siam::exceptions::invalid_object_type& e ) {
 			this->m_ui->showError( "Empty space" );
 			loop = true;
 		}
@@ -114,10 +114,10 @@ void Game::moveOnBoard() { //make a move on the board
 					}
 				}
 			}
-		} catch( Siam::exceptions::invalid_move e ) { //shielding
+		} catch( Siam::exceptions::invalid_move& e ) { //shielding
 			this->m_ui->showError( e.what() );
 			loop = true;
-		} catch( Siam::exceptions::invalid_object_type e ) {
+		} catch( Siam::exceptions::invalid_object_type& e ) {
 			this->m_ui->showError( "Empty space" );
 			loop = true;
 		}
@@ -142,10 +142,10 @@ void Game::orientOnBoard() { //reorient a piece on the board
 			this->m_board.orient( x, y, dir );
 
 			this->m_ui->orientPiece( this->m_board.getObject( x, y ), oldDir );
-		} catch( Siam::exceptions::invalid_move e ) { //shielding
+		} catch( Siam::exceptions::invalid_move& e ) { //shielding
 			this->m_ui->showError( e.what() );
 			loop = true;
-		} catch( Siam::exceptions::invalid_object_type e ) {
+		} catch( Siam::exceptions::invalid_object_type& e ) {
 			this->m_ui->showError( "Empty space" );
 			loop = true;
 		}
@@ -196,7 +196,7 @@ void Game::victory() { //WIN
 	std::vector<Siam::Player>::iterator winingPlayer = this->m_players.begin();
 
 	for( auto it = this->m_players.begin(); it != this->m_players.end(); it++ ) {
-		if( it->getMountainsCount() > it->getMountainsCount() )
+		if( it->getMountainsCount() > winingPlayer->getMountainsCount() )
 			winingPlayer = it;
 	}
 

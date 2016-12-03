@@ -1,17 +1,17 @@
-#include "siam/inc/game.hpp"
-#include "siam/inc/ui/games/CLIbis.hpp"
 #include <fstream>
+#include "siam/inc/game.hpp"
+#include "siam/inc/ui/games/gamecliui.hpp"
 
 void INeedPlayers ( std::vector<Siam::Player>& players)
 {
-    std::string nameOfPlayer ;
+	std::string nameOfPlayer ;
 
-    std::cout << "Entrez le nom du joueur 1 : " << std::endl ;
-    std::cin >> nameOfPlayer ;
-    players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Rhinoceros ) );
+	std::cout << "Entrez le nom du joueur 1 : " << std::endl ;
+	std::cin >> nameOfPlayer ;
+	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Rhinoceros ) );
 
-    std::cout << "Entrez le nom du joueur 2 : " << std::endl ;
-    std::cin >> nameOfPlayer ;
+	std::cout << "Entrez le nom du joueur 2 : " << std::endl ;
+	std::cin >> nameOfPlayer ;
 	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Elephant ) );
 
 
@@ -19,20 +19,20 @@ void INeedPlayers ( std::vector<Siam::Player>& players)
 
 void newGame ()
 {
-    std::ifstream logo("C:/Users/romai/Desktop/Siam/logoSiam.txt");
+	std::ifstream logo("C:/Users/romai/Desktop/Siam/logoSiam.txt");
 
    if(logo)
    {
-     std::string ligne;
+	 std::string ligne;
 
-      while(getline(logo, ligne))
-      {
-         std::cout << ligne << std::endl;
-      }
+	  while(getline(logo, ligne))
+	  {
+		 std::cout << ligne << std::endl;
+	  }
    }
    else
    {
-      std::cout << "nope didn't work" << std::endl;
+	  std::cout << "nope didn't work" << std::endl;
    }
 
    Sleep(2000);
@@ -45,12 +45,9 @@ int main() {
 
 	newGame();
 	INeedPlayers(players);
-    Siam::Game game = Siam::Game( players );
+	Siam::Game game = Siam::Game( players );
 
 
 
 	return 0;
 }
-
-///ICI JE VAIS METTRE TOUS LES TRUCS QU'ILS FAUT CHANGER OU MODIFIER SUITE AUX TESTS
-

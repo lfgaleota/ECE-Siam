@@ -5,7 +5,7 @@
 	#include "matrix.hpp"
 	#include "object.hpp"
 	#include "player.hpp"
-	#include "ui/UIgame.hpp" //THIS ONE
+	#include "ui/gameui.hpp"
 
 	namespace Siam { //in the namespace Siam
 		class Game { //create a game class

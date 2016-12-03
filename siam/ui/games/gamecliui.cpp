@@ -1,4 +1,4 @@
-#include "../../inc/ui/games/CLIbis.hpp"
+#include "../../inc/ui/games/gamecliui.hpp"
 
 using namespace std;
 using namespace Siam;

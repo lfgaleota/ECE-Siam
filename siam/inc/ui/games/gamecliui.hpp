@@ -1,5 +1,5 @@
-#ifndef CLIBIS_HPP_INCLUDED
-#define CLIBIS_HPP_INCLUDED
+#ifndef _ECE_SIAM_UI_GAMES_CLI_HPP_
+	#define _ECE_SIAM_UI_GAMES_CLI_HPP_
 
 	#include <iostream>
 	#include <fstream>
@@ -8,11 +8,11 @@
 	#include "../../object.hpp"
 	#include "../../objects/types/type.hpp"
 	#include "../../player.hpp"
-	#include "../UIgame.hpp" //THIS ONE
+	#include "../gameui.hpp"
 	#include "../../../../cli/cli.hpp"
 	#include "../audio/FMOD.hpp"
 
-namespace Siam {
+	namespace Siam {
 		namespace UI {
 			namespace Games {
 				class CLI : public Siam::UI::Game {
@@ -44,9 +44,4 @@ namespace Siam {
 			}
 		}
 	}
-
-
-
-
-
-#endif // CLIBIS_HPP_INCLUDED
+#endif
