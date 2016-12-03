@@ -35,7 +35,7 @@
 						void addPiece( const Object*, unsigned int x, unsigned int y );
 						void removePiece( const Object* );
 						void movePiece( std::map<const Siam::Object*, std::pair<unsigned int, unsigned int>>& movements );
-						void orientPiece( const Object*, Siam::Matrixs::Direction oldDir );
+						void orientPiece( const Object* );
 						void playerTurnBegin( Siam::Player& player );
 						void playerTurnEnd( Siam::Player& player );
 						Players::Action getPlayerAction( Siam::Player& player );

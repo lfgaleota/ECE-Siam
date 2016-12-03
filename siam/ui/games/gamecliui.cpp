@@ -303,7 +303,7 @@ void CLI::movePiece( map<const Object*, pair<unsigned int, unsigned int>>& movem
 	display();
 }
 
-void CLI::orientPiece( const Object*, Direction oldDir ) {
+void CLI::orientPiece( const Object* ) {
 	display();
 }
 

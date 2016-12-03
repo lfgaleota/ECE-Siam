@@ -126,7 +126,7 @@ void Game::moveOnBoard() { //make a move on the board
 
 void Game::orientOnBoard() { //reorient a piece on the board
 	unsigned int x, y;
-	Direction dir, oldDir;
+	Direction dir;
 
 	for( bool loop = true; loop; ) {
 		loop = false;
@@ -137,11 +137,9 @@ void Game::orientOnBoard() { //reorient a piece on the board
 			if( this->m_board.getType( x, y ) != this->m_currentPlayer->getAnimalChosen() ) //just orients a piece according to the player wishes
 				throw Siam::exceptions::invalid_move( "Piece not to the player" ); //checks if u are allowed to do it first
 
-			oldDir = this->m_board.getDirection( x, y );
-
 			this->m_board.orient( x, y, dir );
 
-			this->m_ui->orientPiece( this->m_board.getObject( x, y ), oldDir );
+			this->m_ui->orientPiece( this->m_board.getObject( x, y ) );
 		} catch( Siam::exceptions::invalid_move& e ) { //shielding
 			this->m_ui->showError( e.what() );
 			loop = true;
