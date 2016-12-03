@@ -42,17 +42,20 @@ void newGame ()
     Sleep(2000);
 }
 
-void manageMusics(Siam::UI::Audio::FMOD& mediaPlayer)
+void manageMusics(Siam::UI::Audio::FMOD& mediaPlayer, bool onOff)
 {
 
     mediaPlayer.loadMusic("unity","C:/Users/romai/Desktop/Siam/Unity.wav");
-    mediaPlayer.playMusic("unity");
+    if(onOff)
+        mediaPlayer.playMusic("unity");
+    else
+        mediaPlayer.pauseMusic();
 
 }
 
 void menuPrincipal(std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& mediaPlayer)
 {
-    char key;
+    int key;
     //CLI cli = CLI();
     int music=0 ;
 
@@ -61,28 +64,28 @@ void menuPrincipal(std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& me
         std::cout << "Entrez votre choix " << std::endl ;
         std::cout << "1. Nouvelle Partie" << std::endl ;
         std::cout << "2. Sons" << std::endl ;
-        std::cout << "Escape pour quitter" << std::endl ;
+        std::cout << "Echap pour quitter" << std::endl ;
         //key = cli.getKey();
-        std::cin >> key ;
+        key = getch() ;
 
         switch(key)
         {
-        case '1' :
+        case 49 :
             INeedPlayers(players);
             {
                 Siam::Game game = Siam::Game( players );
             }
             break;
 
-        case '2' :
+        case 50 :
 
             std::cout << "1. ON" << std::endl ;
             std::cout << "2. OFF" << std::endl ;
-            std::cin >> music ;
-            if(music==1)
-                manageMusics(mediaPlayer);
+            music = getch();
+            if(music==49)
+                manageMusics(mediaPlayer, true);
             else
-                mediaPlayer.stopMusic();
+                manageMusics(mediaPlayer, false);
 
 
             break ;
@@ -100,7 +103,7 @@ int main() {
     Siam::UI::Audio::FMOD mediaPlayer ;
 
     newGame();
-    manageMusics(mediaPlayer);
+    manageMusics(mediaPlayer,true);
 
     menuPrincipal(players,mediaPlayer);
 
