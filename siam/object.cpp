@@ -20,7 +20,7 @@ Object::~Object()
 
 }
 
-float Object::getForce() { //read access to force
+float Object::getForce() const { //read access to force
 	return m_force;
 }
 
@@ -32,6 +32,6 @@ void Object::setDirection( Direction direction ) { //write access to direction
 	this->m_direction = direction;
 }
 
-Types::Type Object::getType() { //read access to type
+Types::Type Object::getType() const { //read access to type
 	return Types::Type::Object;
 }

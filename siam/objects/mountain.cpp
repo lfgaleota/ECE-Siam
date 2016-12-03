@@ -15,6 +15,6 @@ Mountain::Mountain( string nom, float force ) //overload constructor
 
 }
 
-Types::Type Mountain::getType() { //read access to type
+Types::Type Mountain::getType() const { //read access to type
 	return Types::Type::Mountain;
 }

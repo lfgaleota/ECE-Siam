@@ -8,6 +8,6 @@ using namespace Siam::Objects;
 Rhinoceros::Rhinoceros() : Entity() {} //default constructor
 Rhinoceros::Rhinoceros( string nom, float force, Direction direction ) : Entity( nom, force, direction ) {} //overload constructor
 
-Types::Type Rhinoceros::getType() { //read access to type
+Types::Type Rhinoceros::getType() const { //read access to type
 	return Types::Type::Rhinoceros;
 }
