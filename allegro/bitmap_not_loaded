@@ -1,0 +1,14 @@
+class bitmap_not_loaded : public std::exception {
+	private:
+		std::string what_arg;
+
+	public:
+		explicit bitmap_not_loaded( const std::string& what_arg ) : what_arg( what_arg ) {}
+		explicit bitmap_not_loaded( const char* what_arg ) : what_arg( what_arg ) {}
+
+		virtual const char* what() const throw() {
+			std::string msg = "Bitmap not loaded: ";
+			msg += what_arg;
+			return msg.c_str();
+		}
+};

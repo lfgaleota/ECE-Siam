@@ -41,6 +41,8 @@ set(SOURCE_FILES
     siam/ui/games/gameallegroui.cpp
     siam/inc/ui/games/gameallegroui.hpp
     winhack.h
+    allegro/popup.cpp
+    allegro/popup.hpp
 )
 
 add_executable(ECE_Siam ${SOURCE_FILES})
