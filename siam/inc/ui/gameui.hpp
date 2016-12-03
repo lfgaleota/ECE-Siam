@@ -24,6 +24,7 @@
 					virtual void removePiece( const Object* ) = 0;
 					virtual void movePiece( std::map<const Siam::Object*, std::pair<unsigned int, unsigned int>>& movements ) = 0;
 					virtual void orientPiece( const Object* ) = 0;
+					virtual void ejectPiece( const Object* ) = 0;
 					virtual void playerTurnBegin( Siam::Player& player ) = 0;
 					virtual void playerTurnEnd( Siam::Player& player ) = 0;
 					virtual Players::Action getPlayerAction( Siam::Player& player ) = 0;

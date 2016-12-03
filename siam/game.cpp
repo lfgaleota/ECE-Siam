@@ -88,6 +88,7 @@ void Game::moveOnBoard() { //make a move on the board
 
 			if( ejectedobj != nullptr ) {
 				// we ejected a spot
+				this->m_ui->ejectPiece( ejectedobj );
 				if( ejectedobj->getType() == Siam::Objects::Types::Type::Mountain ) {
 					// we try to detect which player gets the point
 					winingobj = this->m_board.getWiningObject( x, y, dir );
@@ -100,9 +101,6 @@ void Game::moveOnBoard() { //make a move on the board
 								this->won = true;
 							}
 						}
-					} else {
-						cout << "No wining obj";
-						getchar();
 					}
 					// And of course destroy the mountain
 					delete ejectedobj;
@@ -211,10 +209,7 @@ Game::Game( vector<Player> players ) { //that's how it goes down
 		while( !this->won ) //while nobody won
 			playerTurn(); //turns
 		victory(); //if you won -> victory
-		Sleep(2000);
-	} catch( exceptions::exit_game e ) {
-		this->m_ui->showError( "Exiting" );
-	}
+	} catch( exceptions::exit_game e ) {}
 
 	for( auto& player : this->m_players )
 		player.removeRemainingObjects(); //delete everything in the stacks

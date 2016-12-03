@@ -33,9 +33,10 @@
 						void showError( std::string msg );
 						void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir );
 						void addPiece( const Object*, unsigned int x, unsigned int y );
-						void removePiece( const Object* );
+						void removePiece( const Object* obj );
 						void movePiece( std::map<const Siam::Object*, std::pair<unsigned int, unsigned int>>& movements );
-						void orientPiece( const Object* );
+						void orientPiece( const Object* obj );
+						void ejectPiece( const Object* obj );
 						void playerTurnBegin( Siam::Player& player );
 						void playerTurnEnd( Siam::Player& player );
 						Players::Action getPlayerAction( Siam::Player& player );

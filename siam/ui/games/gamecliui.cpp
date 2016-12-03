@@ -311,6 +311,10 @@ void CLI::orientPiece( const Object* ) {
 	display();
 }
 
+void CLI::ejectPiece( const Object* ) {
+
+}
+
 void CLI::playerTurnBegin( Siam::Player& player ) {
 	display();
 }
