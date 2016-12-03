@@ -12,7 +12,7 @@
 
 		#define WIN
 
-		#include <windows.h>
+		#include "../winhack.h"
 		#include <conio.h>
 
 	#elif __APPLE__ || __linux || __linux__ || __unix || __unix__ || __posix

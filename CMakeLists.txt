@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.6)
 project(ECE_Siam)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+list(APPEND CMAKE_LIBRARY_PATH "C:\\msys64\\mingw32\\lib\\")
+list(APPEND CMAKE_LIBRARY_PATH "X:\\msys64\\mingw32\\lib\\")
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
@@ -38,6 +40,7 @@ set(SOURCE_FILES
     siam/inc/ui/audio/FMOD.hpp
     siam/ui/games/gameallegroui.cpp
     siam/inc/ui/games/gameallegroui.hpp
+    winhack.h
 )
 
 add_executable(ECE_Siam ${SOURCE_FILES})
@@ -46,6 +49,12 @@ if(UNIX)
 	target_link_libraries(ECE_Siam ncurses)
 endif(UNIX)
 
+target_link_libraries(ECE_Siam m)
+
 find_package(FMOD REQUIRED)
 include_directories(${FMOD_INCLUDE_DIRS})
 target_link_libraries(ECE_Siam ${FMOD_LIBRARIES})
+
+find_package(ALLEGRO4 REQUIRED)
+include_directories(${ALLEGRO4_INCLUDE_DIRS})
+target_link_libraries(ECE_Siam ${ALLEGRO4_LIBRARIES})

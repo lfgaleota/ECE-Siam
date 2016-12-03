@@ -1,4 +1,7 @@
 #include <fstream>
+#include <allegro.h>
+#include "winhack.h"
+
 #include "siam/inc/game.hpp"
 #include "siam/inc/ui/games/gamecliui.hpp"
 
@@ -51,3 +54,5 @@ int main() {
 
 	return 0;
 }
+
+END_OF_MAIN();
