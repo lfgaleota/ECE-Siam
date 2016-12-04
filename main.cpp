@@ -29,7 +29,6 @@ void INeedPlayers( std::vector<Siam::Player>& players ) {
 }
 
 void logo() {
-
 	std::ifstream logo( "texts/siam.txt" );
 
 	if( logo ) {
@@ -82,18 +81,16 @@ int main() {
 	std::vector<Siam::Player> players;
 	Siam::UI::Audio::FMOD fmod;
 
+	fmod.loadMusic( "menu", "musics/menu.it" );
+	fmod.loadMusic( "main1", "musics/main1.it" );
+	fmod.loadMusic( "victory", "musics/victorybg.it" );
+	fmod.loadSound( "victory", "musics/victory.it" );
 
-	fmod.loadMusic( "menu", "musics/menu.ogg" );
-	fmod.loadMusic( "main1", "musics/main1.ogg" );
-	fmod.loadMusic( "victory", "musics/victorybg.ogg" );
-	fmod.loadSound( "victory", "musics/victory.ogg" );
-    fmod.playMusic( "menu" );
+	fmod.playMusic( "menu" );
 
 	menuPrincipal(players,fmod);
-
-
 
 	return 0;
 }
 
-END_OF_MAIN();
+END_OF_MAIN()
