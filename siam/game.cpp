@@ -1,5 +1,6 @@
 #include "inc/game.hpp"
 #include "inc/ui/games/gamecliui.hpp"
+#include "inc/ui/games/gameallegroui.hpp"
 
 using namespace std;
 using namespace Siam;
@@ -199,11 +200,11 @@ void Game::victory() { //WIN
 	this->m_ui->victory( *winingPlayer );
 }
 
-Game::Game( vector<Player> players ) { //that's how it goes down
+Game::Game( vector<Player> players, Siam::UI::Audio::FMOD& fmod ) { //that's how it goes down
 	this->m_players = players; //and the players
 	this->m_currentPlayer = this->m_players.begin(); //first player "selected"
 
-	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer );
+	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer, fmod );
 
 	try {
 		while( !this->won ) //while nobody won

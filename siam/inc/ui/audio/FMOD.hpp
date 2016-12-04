@@ -25,6 +25,7 @@
 						bool loadMusic( std::string name, std::string filepath );
 
 						void playSound( std::string name );
+						void playSoundWait( std::string name );
 						void playMusic( std::string name );
 
 						void pauseMusic();

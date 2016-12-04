@@ -25,6 +25,9 @@ bool actionsMenuCallback( int index, int x, int y, void* customParameter ) {
 		case 4:
 			((Allegro*)customParameter)->setSelectedAction( Players::Action::Nothing );
 			return true;
+		case 5:
+			((Allegro*)customParameter)->showPause();
+			return false;
 		default:
 			return false;
 	}
@@ -63,7 +66,7 @@ Types::Type AllegroObject::getType() const {
 }
 
 
-Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vector<Player>& players, std::vector<Player>::iterator& currentPlayer ) : Game( board, players, currentPlayer ) {
+Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vector<Player>& players, std::vector<Player>::iterator& currentPlayer, Siam::UI::Audio::FMOD& fmod ) : Game( board, players, currentPlayer, fmod ) {
 	allegro_init();
 	install_mouse();
 	install_keyboard();
@@ -86,6 +89,8 @@ Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vec
 	select_mouse_cursor( 2 );
 	show_mouse( screen );
 
+	this->m_fmod.playMusic( "main1" );
+
 	loadSprites();
 	loadFonts();
 	loadMenus();
@@ -101,6 +106,8 @@ Allegro::~Allegro() {
 	}
 
 	delete this->m_actionsMenu;
+
+	this->m_fmod.stopMusic();
 }
 
 void Allegro::loadSprites() {
@@ -116,7 +123,8 @@ void Allegro::loadSprites() {
 	        "actionRemove",
 	        "actionMove",
 	        "actionOrient",
-	        "actionNothing"
+	        "actionNothing",
+	        "actionPause"
 	};
 
 	for( const auto& bmpName : bmpNames ) {
@@ -152,7 +160,7 @@ void Allegro::loadMenus() {
 		std::make_pair( "actionMove", "Déplacer" ),
 		std::make_pair( "actionOrient", "Orienter" ),
 		std::make_pair( "actionNothing", "Passer son tour" ),
-		std::make_pair( "actionNothing", "Passer son tour" )
+		std::make_pair( "actionPause", "Pause" )
 	};
 
 	for( unsigned int i = 0; i < itemsToGenerate.size(); i++ ) {
@@ -275,8 +283,8 @@ void Allegro::displayCurrentAction() {
 		}
 
 		rectfill( this->m_page, 0, y, SCREEN_W, SCREEN_H, ACTION_PANE_COLOR );
-		textprintf_centre_ex( this->m_page, this->m_textFont, SCREEN_W / 2, SCREEN_H - ACTION_PANE_PADDING, makecol( 0, 0, 0 ), -1, "%s", action.c_str() );
-		draw_trans_sprite( this->m_page, icon, SCREEN_W - text_length( this->m_textFont, action.c_str() ) - icon->w, y + ( this->m_textFont->height - icon->h ) / 2 );
+		textprintf_centre_ex( this->m_page, this->m_textFont, SCREEN_W / 2, y + ACTION_PANE_PADDING, makecol( 0, 0, 0 ), -1, "%s", action.c_str() );
+		draw_trans_sprite( this->m_page, icon, ( SCREEN_W - text_length( this->m_textFont, action.c_str() ) ) / 2 - icon->w - ACTION_PANE_PADDING, y + ACTION_PANE_PADDING + ( this->m_textFont->height - icon->h ) / 2 );
 	}
 }
 

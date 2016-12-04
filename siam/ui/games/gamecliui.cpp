@@ -8,11 +8,15 @@ using namespace Siam::Objects;
 using namespace Siam::Matrixs;
 using namespace Siam::UI::Games;
 
-CLI::CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players,
-          std::vector<Siam::Player>::iterator& currentPlayer ) : Game( board, players, currentPlayer ) {
+CLI::CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer, Siam::UI::Audio::FMOD& fmod ) : Game( board, players, currentPlayer, fmod ) {
 	cli = Functions::CLI();
+	this->m_fmod.playMusic( "main1" );
 	loadDisplayMatrix();
 	display();
+}
+
+CLI::~CLI() {
+	this->m_fmod.stopMusic();
 }
 
 void CLI::showError( string msg ) {
@@ -354,7 +358,9 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 
 void CLI::victory( Siam::Player& player ) {
 	cli.clearScreen();
-	std::ifstream logo( "texts/logowin.txt" );
+
+	this->m_fmod.stopMusic();
+	std::ifstream logo( "texts/victory.txt" );
 
 	if( logo ) {
 		std::string ligne;
@@ -363,12 +369,18 @@ void CLI::victory( Siam::Player& player ) {
 			std::cout << ligne << std::endl;
 		}
 	} else {
-		throw std::ios_base::failure( "File not found: texts/logowin.txt" );
+		throw std::ios_base::failure( "File not found: texts/victory.txt" );
 	}
+
+	this->m_fmod.playSoundWait( "victory" );
+	this->m_fmod.playMusic( "victory" );
+
 	std::cout << std::endl << std::endl << "Bravo " << player.getName() << ", tu as gagne!" << std::endl;
 
-	SLEEP( 2000 );
-	getchar();
+	while( kbhit() )
+		getch();
+
+	getch();
 }
 
 void CLI::loadDisplayMatrix() {

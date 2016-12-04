@@ -5,6 +5,7 @@
 	#include "../object.hpp"
 	#include "../objects/types/type.hpp"
 	#include "../player.hpp"
+	#include "audio/FMOD.hpp"
 
 	namespace Siam {
 		namespace UI {
@@ -13,10 +14,11 @@
 					const std::vector<std::vector<Siam::Object*>>& m_board;
 					const std::vector<Siam::Player>& m_players;
 					const std::vector<Siam::Player>::iterator& m_currentPlayer;
+					Siam::UI::Audio::FMOD& m_fmod;
 					bool m_showActions = true;
 
 				public:
-					Game( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer ) : m_board( board ), m_players( players ), m_currentPlayer( currentPlayer ) {};
+					Game( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer, Siam::UI::Audio::FMOD& fmod ) : m_board( board ), m_players( players ), m_currentPlayer( currentPlayer ), m_fmod( fmod ) {};
 					virtual ~Game() {};
 					virtual void showError( std::string msg ) = 0;
 					virtual void getPlayerCoords( unsigned int& x, unsigned int& y, Siam::Matrixs::Direction* dir )= 0;

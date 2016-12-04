@@ -17,8 +17,8 @@
 	#define ACTION_MENU_SIZE 42
 	#define PLAYER_NAME_PADDING_W 10
 	#define PLAYER_NAME_PADDING_H 2
-	#define ACTION_PANE_COLOR makecol( 127, 127, 127 )
-	#define ACTION_PANE_PADDING 5
+	#define ACTION_PANE_COLOR makecol( 200, 200, 200 )
+	#define ACTION_PANE_PADDING 10
 	#define COLOR_ACTIVE_PLAYER makecol( 27, 144, 170 )
 	#define COLOR_INACTIVE_PLAYER makecol( 3, 21, 25 )
 	#define COLOR_PLAYER_RHINOCEROS makecol( 3, 21, 25 )
@@ -80,12 +80,10 @@
 
 						void updateInputs();
 
-						void showPause();
-
 						BITMAP* getAnimalSprite( Siam::Objects::Types::Type animal ) const;
 
 					public:
-						Allegro( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer );
+						Allegro( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer, Siam::UI::Audio::FMOD& fmod );
 						~Allegro();
 
 						void showError( std::string msg );
@@ -99,7 +97,9 @@
 						void playerTurnEnd( Siam::Player& player );
 						Players::Action getPlayerAction( Siam::Player& player );
 						void victory( Siam::Player& player );
+
 						void setSelectedAction( Siam::Players::Action action );
+						void showPause();
 				};
 			}
 		}

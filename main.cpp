@@ -6,111 +6,83 @@
 #include "siam/inc/ui/games/gamecliui.hpp"
 #include "siam/inc/ui/audio/FMOD.hpp"
 
-void INeedPlayers ( std::vector<Siam::Player>& players)
-{
-    std::string nameOfPlayer ;
+void INeedPlayers( std::vector<Siam::Player>& players ) {
+	std::string nameOfPlayer;
 
-    std::cout << "Entrez le nom du joueur 1 : " << std::endl ;
-    std::cin >> nameOfPlayer ;
-    players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Rhinoceros ) );
+	std::cout << "Entrez le nom du joueur 1 : " << std::endl;
+	std::cin >> nameOfPlayer;
+	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Rhinoceros ) );
 
-    std::cout << "Entrez le nom du joueur 2 : " << std::endl ;
-    std::cin >> nameOfPlayer ;
-    players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Elephant ) );
+	std::cout << "Entrez le nom du joueur 2 : " << std::endl;
+	std::cin >> nameOfPlayer;
+	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Elephant ) );
 
 
 }
 
-void newGame ()
-{
-    std::ifstream logo("C:/Users/romai/Desktop/Siam/logoSiam.txt");
+void logo() {
+	std::ifstream logo( "texts/siam.txt" );
 
-    if(logo)
-    {
-        std::string ligne;
+	if( logo ) {
+		std::string ligne;
 
-        while(getline(logo, ligne))
-        {
-            std::cout << ligne << std::endl;
-        }
-    }
-    else
-    {
-        std::cout << "nope didn't work" << std::endl;
-    }
-
-    Sleep(2000);
+		while( getline( logo, ligne ) ) {
+			std::cout << ligne << std::endl;
+		}
+	} else {
+		throw std::ios_base::failure( "File not found: texts/siam.txt" );
+	}
 }
 
-void manageMusics(Siam::UI::Audio::FMOD& mediaPlayer, bool onOff)
-{
+void menuPrincipal( std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& fmod ) {
+	int key;
+	//CLI cli = CLI();
 
-    mediaPlayer.loadMusic("unity","C:/Users/romai/Desktop/Siam/Unity.wav");
-    if(onOff)
-        mediaPlayer.playMusic("unity");
-    else
-        mediaPlayer.pauseMusic();
+	do {
+		logo();
 
+		std::cout << "Entrez votre choix " << std::endl;
+		std::cout << "1. Nouvelle Partie" << std::endl;
+		std::cout << "2. Sons" << std::endl;
+		std::cout << "Echap pour quitter" << std::endl;
+		//key = cli.getKey();
+		key = getch();
+
+		switch( key ) {
+			case 49:
+				INeedPlayers( players );
+				fmod.stopMusic();
+				Siam::Game( players, fmod );
+				fmod.playMusic( "menu" );
+				break;
+
+			case 50:
+				fmod.pauseMusic();
+				break;
+
+		}
+	} while( key != 27 );
 }
-
-void menuPrincipal(std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& mediaPlayer)
-{
-    int key;
-    //CLI cli = CLI();
-    int music=0 ;
-
-    do
-    {
-        std::cout << "Entrez votre choix " << std::endl ;
-        std::cout << "1. Nouvelle Partie" << std::endl ;
-        std::cout << "2. Sons" << std::endl ;
-        std::cout << "Echap pour quitter" << std::endl ;
-        //key = cli.getKey();
-        key = getch() ;
-
-        switch(key)
-        {
-        case 49 :
-            INeedPlayers(players);
-            {
-                Siam::Game game = Siam::Game( players );
-            }
-            break;
-
-        case 50 :
-
-            std::cout << "1. ON" << std::endl ;
-            std::cout << "2. OFF" << std::endl ;
-            music = getch();
-            if(music==49)
-                manageMusics(mediaPlayer, true);
-            else
-                manageMusics(mediaPlayer, false);
-
-
-            break ;
-
-
-        }
-    } while(key != 27);
-
-}
-
 
 
 int main() {
-    std::vector<Siam::Player> players;
-    Siam::UI::Audio::FMOD mediaPlayer ;
+	std::vector<Siam::Player> players;
+	Siam::UI::Audio::FMOD fmod;
 
-    newGame();
-    manageMusics(mediaPlayer,true);
+	fmod.loadMusic( "menu", "musics/menu.ogg" );
+	fmod.loadMusic( "main1", "musics/main1.ogg" );
+	fmod.loadMusic( "victory", "musics/victorybg.ogg" );
+	fmod.loadSound( "victory", "musics/victory.ogg" );
 
-    menuPrincipal(players,mediaPlayer);
+	fmod.playMusic( "menu" );
+
+	logo();
+	SLEEP( 2000 );
+
+	menuPrincipal( players, fmod );
 
 
-
-
-    return 0;
+	return 0;
 }
 
 END_OF_MAIN();

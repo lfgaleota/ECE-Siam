@@ -9,8 +9,7 @@ FMOD::FMOD() {
 	
 	FMOD_System_Init( this->m_system, 10, FMOD_INIT_NORMAL, 0 );
 	FMOD_System_GetMasterChannelGroup( this->m_system, &this->m_masterChannel );
-	FMOD_System_GetChannel( this->m_system, 1, &this->m_musicChannel );
-	FMOD_System_GetChannel( this->m_system, 2, &this->m_soundChannel );
+	FMOD_ChannelGroup_SetVolume( this->m_masterChannel, 100 );
 }
 
 FMOD::~FMOD() {
@@ -32,7 +31,7 @@ bool FMOD::loadSound( string name, string filepath ) {
 	FMOD_RESULT ret;
 	FMOD_SOUND* sound;
 
-	ret = FMOD_System_CreateSound( this->m_system, filepath.c_str(), FMOD_CREATESAMPLE, 0, &sound );
+	ret = FMOD_System_CreateSound( this->m_system, filepath.c_str(), FMOD_CREATESAMPLE | FMOD_LOOP_OFF, NULL, &sound );
 	if( ret != FMOD_OK )
 		return false;
 	this->m_sounds[ name ] = sound;
@@ -45,7 +44,7 @@ bool FMOD::loadMusic( string name, string filepath ) {
 	FMOD_RESULT ret;
 	FMOD_SOUND* sound;
 
-	ret = FMOD_System_CreateSound( this->m_system, filepath.c_str(), FMOD_2D | FMOD_CREATESTREAM, 0, &sound );
+	ret = FMOD_System_CreateSound( this->m_system, filepath.c_str(), FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, NULL, &sound );
 	if( ret != FMOD_OK )
 		return false;
 	this->m_musics[ name ] = sound;
@@ -57,9 +56,15 @@ void FMOD::playSound( string name ) {
 	FMOD_System_PlaySound( this->m_system, this->m_sounds[ name ], this->m_masterChannel, 0, &this->m_soundChannel );
 }
 
+void FMOD::playSoundWait( string name ) {
+	unsigned int length, pos = 0;
+	FMOD_System_PlaySound( this->m_system, this->m_sounds[ name ], this->m_masterChannel, 0, &this->m_soundChannel );
+	for( FMOD_Sound_GetLength( this->m_sounds[ name ], &length, FMOD_TIMEUNIT_MS ); pos < length; FMOD_Channel_GetPosition( this->m_soundChannel, &pos, FMOD_TIMEUNIT_MS )) {}
+}
+
 void FMOD::playMusic( string name ) {
 	FMOD_Sound_SetLoopCount( this->m_musics[ name ], -1 );
-	FMOD_System_PlaySound( this->m_system, this->m_musics[ name ], this->m_masterChannel, 0, &this->m_soundChannel );
+	FMOD_System_PlaySound( this->m_system, this->m_musics[ name ], this->m_masterChannel, 0, &this->m_musicChannel );
 }
 
 void FMOD::pauseMusic() {

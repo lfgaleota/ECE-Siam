@@ -24,7 +24,7 @@
 				void victory(); //victory !
 
 			public:
-				Game( std::vector<Siam::Player> players ); //game method
+				Game( std::vector<Siam::Player> players, Siam::UI::Audio::FMOD& fmod ); //game method
 		};
 	}
 
