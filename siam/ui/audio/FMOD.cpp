@@ -76,3 +76,13 @@ void FMOD::pauseMusic() { //pauses music
 void FMOD::stopMusic() { //stops music
 	FMOD_Channel_Stop( this->m_musicChannel );
 }
+
+void FMOD::setMasterVolume( float volume ) {
+	FMOD_ChannelGroup_SetVolume( this->m_masterChannel, volume );
+}
+
+float FMOD::getMasterVolume() const {
+	float volume;
+	FMOD_ChannelGroup_GetVolume( this->m_masterChannel, &volume );
+	return volume;
+}

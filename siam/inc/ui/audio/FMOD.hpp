@@ -31,6 +31,9 @@
 						void pauseMusic();
 
 						void stopMusic();
+
+						void setMasterVolume( float volume );
+						float getMasterVolume() const;
 				};
 			}
 		}
