@@ -5,7 +5,7 @@ using namespace Siam;
 using namespace Siam::Matrixs;
 using namespace Siam::Objects;
 
-Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) {
+Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) { //default constructor
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 2 && j == 1 ) || ( i == 2 && j == 2 ) || ( i == 2 && j == 3 ) ) {
@@ -67,7 +67,7 @@ Siam::Object* Matrix::remove( unsigned int x, unsigned int y ) { //remove a piec
 DirectionVector Matrix::getDirectionVector( Direction dir ) { //used to get the direction of an Object
 	switch( dir ) {
 		case Left:
-			return DirectionVector( -1, 0 );
+			return DirectionVector( -1, 0 ); //get the four different directions
 		case Right:
 			return DirectionVector( 1, 0 );
 		case Up:
@@ -134,14 +134,14 @@ Object* Matrix::getWiningObject( unsigned int x, unsigned int y, Direction dir )
 	Object* obj = nullptr;
 	int nb = 0;
 
-	// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
+	//browse the matrix until empty spot or limit
 	try {
 		obj = this->at( x, y, dvec );
 		for( nb = 1; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {}
 	} catch( out_of_range e ) {}
 
-	// Maintenant nb contient le nombre de fois qu'on se déplace pour atteindre la prochaine case vide ou sortir du tableau
-	// On parcourt alors le tableau en sens inverse
+	// nb contains the numbers of moves "until the end"
+	// then browse the matrix but the other way
 	for( ; nb > 0; nb-- ) {
 		try {
 			obj = this->at( x, y, nb * dvec );
@@ -171,17 +171,17 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 				movements[ this->at( x, y, dvec ) ] =  make_pair( x + dvec.x, y + dvec.y );
 			} else {
 				if( this->getForce( x, y, dvec ) > 0 ) {
-					// On parcourt le tableau dans la direction de déplacement jusqu'à tomber sur du vide OU sortir du tableau
+					// browse the board until empty spot or limit
 					try {
 						obj = this->at( x, y );
 						for( nb = 0; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {}
 					} catch( out_of_range e ) {}
 
-					// Maintenant nb contient le nombre de fois qu'on se déplace pour atteindre la prochaine case vide ou sortir du tableau
-					// On parcourt alors le tableau en sens inverse
+						// nb contains the numbers of moves "until the end"
+                        // then browse the matrix but the other way
 					for( ; nb > 0; nb-- ) {
 						try {
-							// On intervertie l'objet en cours et celui à côté dans le sens opposé au déplacement
+							//Interverts actual used object with the next one opposed to moving direction
 							nbdvec = new DirectionVector( nb * dvec );
 							nbsubdvec = new DirectionVector( ( nb - 1 ) * dvec );
 
@@ -194,15 +194,15 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 							delete nbdvec;
 							delete nbsubdvec;
 						} catch( out_of_range e ) {
-							// On est en dehors! On va donc retourner l'object
+							// Out of bound, just return the object
 
-							// Si on a déjà un objet à éjecter en attente
+							// shields, you can only eject one object at the same time
 							if( ejectedobj != nullptr )
-								throw exceptions::invalid_move( "Ejecting more than one piece at a time." ); // Ce n'est pas sensé arriver! On arrête tout.
+								throw exceptions::invalid_move( "Ejecting more than one piece at a time." ); //not supposed to happen
 
-							// Sinon on stocke l'objet à éjecter
+							//else stock the eject piece
 							ejectedobj = this->at( x, y, ( nb - 1 ) * dvec );
-							// On vide son ancienne case
+							//empty his former spot
 							this->set( x, y, ( nb - 1 ) * dvec, nullptr );
 						}
 					}
@@ -214,8 +214,8 @@ Object* Matrix::move( unsigned int x, unsigned int y, Direction direction, map<c
 	}
 
 	if( ejectedobj != nullptr && ejectedobj->getType() == Types::Type::Mountain )
-		// L'objet à ejecter est une montagne? On décréménte le compteur de montagne!
-		this->m_mountainCount--;
+		// If the ejected object is a mountain
+		this->m_mountainCount--; //decrement the mountain count
 	return ejectedobj;
 }
 
@@ -231,7 +231,7 @@ const std::vector<std::vector<Siam::Object*>>& Matrix::getBoard() { //read acces
 	return this->m_board;
 }
 
-Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
+Types::Type Matrix::getType( unsigned int x, unsigned int y ) { //read access to the type of a spot
 	Object* obj;
 	try {
 		obj = this->at( x, y );
@@ -239,16 +239,16 @@ Types::Type Matrix::getType( unsigned int x, unsigned int y ) {
 			return obj->getType();
 		else
 			throw Siam::exceptions::invalid_object_type();
-	} catch( out_of_range e ) {
+	} catch( out_of_range e ) { //shielding
 		throw Siam::exceptions::invalid_move( "Get type: out of range" );
 	}
 }
 
-unsigned int Matrix::getMountainsCount() {
+unsigned int Matrix::getMountainsCount() { //read access to the mountain count
 	return this->m_mountainCount;
 }
 
-Siam::Matrixs::Direction Matrix::getDirection( unsigned int x, unsigned int y ) {
+Siam::Matrixs::Direction Matrix::getDirection( unsigned int x, unsigned int y ) { //read access to the direction
 	Object* obj;
 	try {
 		obj = this->at( x, y );
@@ -261,6 +261,6 @@ Siam::Matrixs::Direction Matrix::getDirection( unsigned int x, unsigned int y ) 
 	}
 }
 
-const Siam::Object* Matrix::getObject( unsigned int x, unsigned int y ) {
+const Siam::Object* Matrix::getObject( unsigned int x, unsigned int y ) { //read access to the object
 	return this->at( x, y );
 }

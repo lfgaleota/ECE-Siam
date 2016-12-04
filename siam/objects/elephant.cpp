@@ -1,5 +1,6 @@
 #include "../inc/objects/elephant.hpp"
 
+//access via the namespaces
 using namespace std;
 using namespace Siam;
 using namespace Siam::Matrixs;

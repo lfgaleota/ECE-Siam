@@ -60,6 +60,6 @@ void Player::removeRemainingObjects() {
 	}
 }
 
-unsigned long Player::getRemainingObjects() const {
+unsigned long Player::getRemainingObjects() const { //read access to the number of remaining objects in the player's stack
 	return this->m_pieces.size();
 }

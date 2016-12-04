@@ -4,21 +4,21 @@ using namespace std;
 using namespace Functions;
 
 void CLIs::Menu::setOffsets( unsigned int& offset_x, unsigned int& offset_y ) {
-	// Déclaration des variables utiles
+	//Useful variables
 	unsigned int len, width = this->m_header.size();
 
-	// On parcours les valeurs, et on récupère la largeur maximale
+	//Browse ton get back, max width
 	for( const auto& choice : this->m_choices ) {
 		len = choice.size();
 
-		// Si on dépasse la largeur maximale trouvée
+		// If we go across that width
 		if( width < len ) {
-			// Alors on la stocke en tant que tel
+			//save it
 			width = len;
 		}
 	}
 
-	// On récupère les offsets à appliquer pour centrer le niveau
+	// Then get the offsets in order to center the game
 	CLI::setOffsets( width, this->m_choices.size() + 1, offset_x, offset_y );
 }
 
@@ -32,64 +32,65 @@ void CLIs::Menu::setOffsets( unsigned int& offset_x, unsigned int& offset_y ) {
 		- 0 si aucun choix n'a ete fait
 ****/
 CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_color, unsigned char header_color, unsigned char selection_color ) : m_header( header ), m_choices( choices ) {
-	// Initialisation des variables nécessaires
+	//Useful variables
 	unsigned int exit = 0, offset_x = 0, offset_y = 0;
 	Keys::Key key;
 	CLI cli = CLI();
 
-	// On récupère les offsets pour centrer le menu
+	//get the offsets to center menu
 	setOffsets( offset_x, offset_y );
 
 	while( exit == 0 ) {
-		// On met la couleur de fond souhaitée
+		//Get the background color
 		cli.setColor( back_color );
 
-		// On efface la sortie de la console
+		//Erase previous displays
 		cli.clearScreen();
 
-		// On met la couleur d'en-tête souhaitée
+		//Set foreground color
 		cli.setColor( header_color );
-		// On se place en haut, en tenant compte des offsets
+		//Positioning (taking the offsets into account)
 		cli.moveCursor( offset_y, offset_x );
-		// On affiche l'en-tête
+		// Display
 		cout << "=== %s ===" << endl;
 
 		for( unsigned int i = 0; i < this->m_choices.size() ; i++ ) {
-			// Afficher les choix
+			// Display the choices
 			if( this->m_choice == i + 1) {
-				// Si le choix sélectionné correspond au texte à afficher, on met la couleur d'en-tête souhaitée
+				// If it matches the text put the appropriate color
 				cli.setColor( selection_color );
 			} else {
-				// Sinon on affiche la couleur de fond
+				//else display background
 				cli.setColor( back_color );
 			}
 
-			// On se place là où doit être cette ligne
+			// move the the supposed location
 			cli.moveCursor( offset_y + i + 1, offset_x );
 
-			// On affiche le texte
+			//display text
 			cout << this->m_choices[ i ] << endl;
 		}
 
-		// On récupère la touche appuyée
+		//get the pressed key --> something like kbhit
 		key = cli.getKey();
 
 		switch( key ) {
 			case Keys::Key::ArrowUp:
-				// Si la flèche du haut est appuyée, passer au choix précédent
+				// Last choice
 				if( this->m_choice > 1 )
 					this->m_choice--;
 				break;
 			case Keys::Key::ArrowDown:
-				// Si la flèche du bas est appuyée, passer au choix suivant
+				//Next choice
 				if( this->m_choice < this->m_choices.size() )
 					this->m_choice++;
 				break;
 			case Keys::Key::Escape:
-				// Si la touche Esc est appuyée, passer le choix à 0
+				// choice equals zero if you press escape
+				// means we'll get out of the loop
 				this->m_choice = 0;
 			case Keys::Key::Enter:
-				// Si la touche Entrée ou Esc est appuyée, quitter la boucle du menu
+				//If you press enter or escape you leave the menu ! --> recursivity condition
 				exit = 1;
 				break;
 			default:
@@ -98,13 +99,13 @@ CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_colo
 
 	}
 
-	// On rétablie les couleurs d'origines
+	//Reset colors to normal
 	cli.resetColor();
 
-	// On efface l'écran pour nettoyer les artefacts
+	//erase previous displays
 	cli.clearScreen();
 }
 
-unsigned int CLIs::Menu::getChoice() const {
+unsigned int CLIs::Menu::getChoice() const { //read access to the choice made by user for the menu
 	return this->m_choice;
 }

@@ -184,9 +184,9 @@ void Game::playerTurn() { //unfolding of a turn
 		}
 	}
 
-	this->m_ui->playerTurnEnd( *this->m_currentPlayer );
+	this->m_ui->playerTurnEnd( *this->m_currentPlayer ); //ends the turn
 
-	this->m_currentPlayer = next( this->m_currentPlayer );
+	this->m_currentPlayer = next( this->m_currentPlayer ); //changes the players
 }
 
 void Game::victory() { //WIN

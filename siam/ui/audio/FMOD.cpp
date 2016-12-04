@@ -4,30 +4,30 @@ using namespace std;
 using namespace Siam::UI::Audio;
 
 FMOD::FMOD() {
-	// Initialisation du système avec 10 cannaux
+	//Initilization of system with 10 channels
 	FMOD_System_Create( &this->m_system );
-	
+
 	FMOD_System_Init( this->m_system, 10, FMOD_INIT_NORMAL, 0 );
 	FMOD_System_GetMasterChannelGroup( this->m_system, &this->m_masterChannel );
 	FMOD_ChannelGroup_SetVolume( this->m_masterChannel, 100 );
 }
 
 FMOD::~FMOD() {
-	// Libération des sons
+	// release the sounds
 	for( auto& sound : m_sounds ) {
 		FMOD_Sound_Release( sound.second );
 	}
 	for( auto& music : m_musics ) {
 		FMOD_Sound_Release( music.second );
 	}
-	
-	// Libération du système
+
+	// release the system
 	FMOD_System_Close( this->m_system );
 	FMOD_System_Release( this->m_system );
 }
 
-bool FMOD::loadSound( string name, string filepath ) {
-	// Chargement de tous les sons, si on n'y arrive pas on quitte le sous-programme.
+bool FMOD::loadSound( string name, string filepath ) { //takes name and filepath in order to get the right one
+	//Load sounds, if you cannot, then leave function
 	FMOD_RESULT ret;
 	FMOD_SOUND* sound;
 
@@ -39,8 +39,8 @@ bool FMOD::loadSound( string name, string filepath ) {
 	return true;
 }
 
-bool FMOD::loadMusic( string name, string filepath ) {
-	// Chargement de tous les sons, si on n'y arrive pas on quitte le sous-programme.
+bool FMOD::loadMusic( string name, string filepath ) { //takes name and filepath in order to get the right one
+	//Load musics, if you cannot then leaves the function
 	FMOD_RESULT ret;
 	FMOD_SOUND* sound;
 
@@ -52,27 +52,27 @@ bool FMOD::loadMusic( string name, string filepath ) {
 	return true;
 }
 
-void FMOD::playSound( string name ) {
+void FMOD::playSound( string name ) { //plays a sound
 	FMOD_System_PlaySound( this->m_system, this->m_sounds[ name ], this->m_masterChannel, 0, &this->m_soundChannel );
 }
 
-void FMOD::playSoundWait( string name ) {
+void FMOD::playSoundWait( string name ) { //pauses for a certain amount of time
 	unsigned int length, pos = 0;
 	FMOD_System_PlaySound( this->m_system, this->m_sounds[ name ], this->m_masterChannel, 0, &this->m_soundChannel );
 	for( FMOD_Sound_GetLength( this->m_sounds[ name ], &length, FMOD_TIMEUNIT_MS ); pos < length; FMOD_Channel_GetPosition( this->m_soundChannel, &pos, FMOD_TIMEUNIT_MS )) {}
 }
 
-void FMOD::playMusic( string name ) {
+void FMOD::playMusic( string name ) { //plays music
 	FMOD_Sound_SetLoopCount( this->m_musics[ name ], -1 );
 	FMOD_System_PlaySound( this->m_system, this->m_musics[ name ], this->m_masterChannel, 0, &this->m_musicChannel );
 }
 
-void FMOD::pauseMusic() {
+void FMOD::pauseMusic() { //pauses music
 	FMOD_BOOL state;
 	FMOD_Channel_GetPaused( this->m_musicChannel, &state );
 	FMOD_Channel_SetPaused( this->m_musicChannel, !state );
 }
 
-void FMOD::stopMusic() {
+void FMOD::stopMusic() { //stops music
 	FMOD_Channel_Stop( this->m_musicChannel );
 }

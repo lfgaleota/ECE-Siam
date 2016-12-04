@@ -15,7 +15,7 @@ Object::Object( string nom, float force, Siam::Matrixs::Direction direction ) //
 
 }
 
-Object::~Object()
+Object::~Object() //destructor
 {
 
 }
