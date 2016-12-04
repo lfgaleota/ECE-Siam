@@ -75,16 +75,16 @@ Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vec
 	display();
 }
 
-Allegro::~Allegro() {
+void Allegro::freeBitmaps() {
 	for( auto bmp = this->m_bitmaps.begin(); bmp != this->m_bitmaps.end(); bmp++ ) {
 		if( bmp->second != nullptr ) {
 			destroy_bitmap( bmp->second );
 			bmp->second = nullptr;
 		}
 	}
+}
 
-	delete this->m_actionsMenu;
-
+Allegro::~Allegro() {
 	this->m_fmod.stopMusic();
 }
 
@@ -525,6 +525,8 @@ void Allegro::victory( Player& player ) {
 		if( !this->prevMouseL && this->mouseL )
 			loop = false;
 	}
+
+	freeBitmaps();
 }
 
 void Allegro::showError( std::string msg ) {

@@ -81,6 +81,8 @@
 
 						void updateInputs();
 
+						void freeBitmaps();
+
 						BITMAP* getAnimalSprite( Siam::Objects::Types::Type animal ) const;
 
 					public:

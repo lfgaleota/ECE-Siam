@@ -47,9 +47,10 @@
 						void menu();
 						void newGame();
 						void options();
+
+						void freeBitmaps();
 					public:
 						Allegro( Siam::UI::Audio::FMOD& fmod );
-						~Allegro();
 
 						friend int allegroGetPlayers( Dialog::CallbackData cd );
 				};

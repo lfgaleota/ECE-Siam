@@ -38,17 +38,10 @@ Allegro::Allegro( Siam::UI::Audio::FMOD& fmod ) : m_fmod( fmod ) {
 	display();
 
 	menu();
-}
 
-Allegro::~Allegro() {
-	for( auto bmp = this->m_bitmaps.begin(); bmp != this->m_bitmaps.end(); bmp++ ) {
-		if( bmp->second != nullptr ) {
-			destroy_bitmap( bmp->second );
-			bmp->second = nullptr;
-		}
-	}
-
+	freeBitmaps();
 	allegro_exit();
+	exit( 0 );
 }
 
 void Allegro::loadSprites() {
@@ -113,6 +106,15 @@ void Allegro::loadFonts() {
 		throw std::ios_base::failure( "File not found: fonts/droidsans_14_mono.pcx" );
 	}
 	font = this->m_textFont;
+}
+
+void Allegro::freeBitmaps() {
+	for( auto bmp = this->m_bitmaps.begin(); bmp != this->m_bitmaps.end(); bmp++ ) {
+		if( bmp->second != nullptr ) {
+			destroy_bitmap( bmp->second );
+			bmp->second = nullptr;
+		}
+	}
 }
 
 void Allegro::display() {

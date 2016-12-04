@@ -19,11 +19,6 @@ CircularMenu::CircularMenu( int x, int y, int radius, int size, vector<MenuItem>
 
 CircularMenu::~CircularMenu() {
 	destroy_bitmap( this->bmp );
-
-	for(const auto& item : items ) {
-		if( item.icon )
-			destroy_bitmap( item.icon );
-	}
 }
 
 void CircularMenu::compute() {
