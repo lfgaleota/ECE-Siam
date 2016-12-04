@@ -6,6 +6,7 @@
 #include "siam/inc/ui/games/gamecliui.hpp"
 #include "cli/cli.hpp"
 #include "siam/inc/ui/audio/FMOD.hpp"
+#include "siam/inc/ui/main/mainallegroui.hpp"
 
 void INeedPlayers( std::vector<Siam::Player>& players ) { //gets the players info
 
@@ -28,8 +29,12 @@ void INeedPlayers( std::vector<Siam::Player>& players ) { //gets the players inf
 
 }
 
+<<<<<<< HEAD
 void logo() { //game logo !
 
+=======
+void logo() {
+>>>>>>> 0fb88af97797401f95b77ae5e224887e4bf9eb8d
 	std::ifstream logo( "texts/siam.txt" );
 
 	if( logo ) {
@@ -82,6 +87,7 @@ int main() {
 	std::vector<Siam::Player> players; //initialize players
 	Siam::UI::Audio::FMOD fmod; //initialize music
 
+<<<<<<< HEAD
 	fmod.loadMusic( "menu", "musics/menu.ogg" ); //load musics
 	fmod.loadMusic( "main1", "musics/main1.ogg" );
 	fmod.loadMusic( "victory", "musics/victorybg.ogg" );
@@ -90,7 +96,17 @@ int main() {
 
 	menuPrincipal(players,fmod); //start the menu, then it will do the rest !
 
+=======
+	fmod.loadMusic( "menu", "musics/menu.it" );
+	fmod.loadMusic( "main1", "musics/main1.it" );
+	fmod.loadMusic( "victory", "musics/victorybg.it" );
+	fmod.loadSound( "victory", "musics/victory.it" );
 
+	//fmod.playMusic( "menu" );
+>>>>>>> 0fb88af97797401f95b77ae5e224887e4bf9eb8d
+
+	//menuPrincipal(players,fmod);
+	Siam::UI::Main::Allegro ui( fmod );
 
 	return 0;
 }

@@ -43,7 +43,7 @@ set(SOURCE_FILES
     winhack.h
     allegro/popup.cpp
     allegro/popup.hpp
-    allegro/circularmenu.cpp)
+    allegro/circularmenu.cpp siam/ui/main/mainallegroui.cpp siam/inc/ui/main/mainallegroui.hpp)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
 
@@ -57,9 +57,9 @@ find_package(FMOD REQUIRED)
 include_directories(${FMOD_INCLUDE_DIRS})
 target_link_libraries(ECE_Siam ${FMOD_LIBRARIES})
 
-find_package(FBLEND REQUIRED)
-include_directories(${FBLEND_INCLUDE_DIRS})
-target_link_libraries(ECE_Siam ${FBLEND_LIBRARIES})
+find_package(DUI REQUIRED)
+include_directories(${DUI_INCLUDE_DIRS})
+target_link_libraries(ECE_Siam ${DUI_LIBRARIES})
 
 find_package(ALLEGRO4 REQUIRED)
 include_directories(${ALLEGRO4_INCLUDE_DIRS})

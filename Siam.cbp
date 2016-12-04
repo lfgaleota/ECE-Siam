@@ -22,7 +22,6 @@
 					<Add library="png.dll" />
 					<Add library="libjpgalleg.a" />
 					<Add library="alleg44.dll" />
-					<Add library="libfblend.a" />
 				</Linker>
 			</Target>
 			<Target title="Release">

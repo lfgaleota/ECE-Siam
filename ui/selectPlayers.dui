@@ -1,0 +1,10 @@
+<radio id="player1local" d1="1" d2="0" dp="Local" flags="" h="30" w="150" x="50" y="0"/>
+<radio id="player2local" d1="2" d2="0" dp="Local" flags="" h="30" w="150" x="350" y="0"/>
+<radio id="player1ai" d1="1" d2="0" dp="IA" flags="" h="40" w="150" x="50" y="50"/>
+<radio id="player2ai" d1="2" d2="0" dp="IA" flags="" h="40" w="150" x="350" y="50"/>
+<ctext dp="Nom:" h="30" w="160" x="50" y="100"/>
+<edit d1="16" d2="" dp="" h="40" id="player1name" onchange="useCur();setCurAttr(dp);attrToReg(0)" w="150" x="50" y="140"/>
+<ctext dp="Nom:" h="30" w="160" x="350" y="100"/>
+<edit d1="16" d2="" dp="" h="40" id="player2name" onchange="useCur();setCurAttr(dp);attrToReg(1)" w="150" x="350" y="140"/>
+<button dp="Continuer >" h="40" key="" onchange="getPlayers(allegptr);" w="200" x="350" y="200"/>
+<button dp="< Menu" flags="EXIT" h="40" key="" w="200" x="0" y="200"/>
