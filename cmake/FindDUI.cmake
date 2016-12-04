@@ -21,8 +21,7 @@ SET(DUI_INCLUDE_SEARCH_DIRS
     "${CMAKE_INCLUDE_PATH}"
     "/usr/include"
     "/usr/local/include"
-    "/usr/include/allegro"
-    "/usr/local/include/allegro"
+	"${PROJECT_SOURCE_DIR}/lib/dui/inc"
     CACHE STRING ""
     )
 
@@ -35,6 +34,7 @@ SET(DUI_LIBRARY_SEARCH_DIRS
     "/usr/local/lib64"
     "/opt/lib"
     "/opt/lib64"
+	"${PROJECT_SOURCE_DIR}/lib/dui"
     CACHE STRING ""
     )
 
