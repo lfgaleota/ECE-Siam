@@ -4,16 +4,24 @@
 
 #include "siam/inc/game.hpp"
 #include "siam/inc/ui/games/gamecliui.hpp"
+#include "cli/cli.hpp"
 #include "siam/inc/ui/audio/FMOD.hpp"
 
 void INeedPlayers( std::vector<Siam::Player>& players ) {
+
+	Functions::CLI cli;
+    cli.clearScreen();
 	std::string nameOfPlayer;
 
-	std::cout << "Entrez le nom du joueur 1 : " << std::endl;
+    cli.moveCursor(10,70);
+	std::cout << "Entrez le nom du joueur 1 : " ;
+	cli.moveCursor(12,70);
 	std::cin >> nameOfPlayer;
 	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Rhinoceros ) );
 
-	std::cout << "Entrez le nom du joueur 2 : " << std::endl;
+    cli.moveCursor(15,70);
+	std::cout << "Entrez le nom du joueur 2 : " ;
+	cli.moveCursor(17,70);
 	std::cin >> nameOfPlayer;
 	players.push_back( Siam::Player( nameOfPlayer, Siam::Objects::Types::Type::Elephant ) );
 
@@ -21,6 +29,7 @@ void INeedPlayers( std::vector<Siam::Player>& players ) {
 }
 
 void logo() {
+
 	std::ifstream logo( "texts/siam.txt" );
 
 	if( logo ) {
@@ -36,32 +45,36 @@ void logo() {
 
 void menuPrincipal( std::vector<Siam::Player>& players, Siam::UI::Audio::FMOD& fmod ) {
 	int key;
-	//CLI cli = CLI();
 
+    Functions::CLI cli;
+    cli.clearScreen();
+    cli.setColor(FOREGROUND_GREEN | FOREGROUND_INTENSITY);
 	do {
 		logo();
-
-		std::cout << "Entrez votre choix " << std::endl;
-		std::cout << "1. Nouvelle Partie" << std::endl;
-		std::cout << "2. Sons" << std::endl;
-		std::cout << "Echap pour quitter" << std::endl;
-		//key = cli.getKey();
-		key = getch();
+		cli.moveCursor(30,70);
+        std::cout << "Entrez votre choix : " ;
+        cli.moveCursor(32,70);
+		std::cout << "1. Nouvelle Partie" ;
+		cli.moveCursor(34,70);
+		std::cout << "2. Sons" ;
+		cli.moveCursor(36,70);
+		key = cli.getKey();
 
 		switch( key ) {
-			case 49:
+			case 7:
 				INeedPlayers( players );
 				fmod.stopMusic();
 				Siam::Game( players, fmod );
 				fmod.playMusic( "menu" );
 				break;
 
-			case 50:
+			case 8:
 				fmod.pauseMusic();
 				break;
 
 		}
 	} while( key != 27 );
+	cli.resetColor();
 }
 
 
@@ -69,17 +82,15 @@ int main() {
 	std::vector<Siam::Player> players;
 	Siam::UI::Audio::FMOD fmod;
 
+
 	fmod.loadMusic( "menu", "musics/menu.ogg" );
 	fmod.loadMusic( "main1", "musics/main1.ogg" );
 	fmod.loadMusic( "victory", "musics/victorybg.ogg" );
 	fmod.loadSound( "victory", "musics/victory.ogg" );
+    fmod.playMusic( "menu" );
 
-	fmod.playMusic( "menu" );
+	menuPrincipal(players,fmod);
 
-	logo();
-	SLEEP( 2000 );
-
-	menuPrincipal( players, fmod );
 
 
 	return 0;

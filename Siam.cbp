@@ -12,8 +12,18 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-std=c++11" />
 					<Add option="-g" />
 				</Compiler>
+				<Linker>
+					<Add library="libm.a" />
+					<Add library="libloadpng.a" />
+					<Add library="png.dll" />
+					<Add library="libjpgalleg.a" />
+					<Add library="alleg44.dll" />
+					<Add library="libfblend.a" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Siam" prefix_auto="1" extension_auto="1" />
@@ -38,6 +48,10 @@
 		<Linker>
 			<Add library="lib/fmod/libfmod.a" />
 		</Linker>
+		<Unit filename="allegro/circularmenu.cpp" />
+		<Unit filename="allegro/circularmenu.hpp" />
+		<Unit filename="allegro/popup.cpp" />
+		<Unit filename="allegro/popup.hpp" />
 		<Unit filename="cli/cli.cpp" />
 		<Unit filename="cli/cli.hpp" />
 		<Unit filename="cli/menu/menu.cpp" />
@@ -55,9 +69,10 @@
 		<Unit filename="siam/inc/objects/rhinoceros.hpp" />
 		<Unit filename="siam/inc/objects/types/type.hpp" />
 		<Unit filename="siam/inc/player.hpp" />
-		<Unit filename="siam/inc/ui/UIgame.hpp" />
 		<Unit filename="siam/inc/ui/audio/FMOD.hpp" />
-		<Unit filename="siam/inc/ui/games/CLIbis.hpp" />
+		<Unit filename="siam/inc/ui/games/gameallegroui.hpp" />
+		<Unit filename="siam/inc/ui/games/gamecliui.hpp" />
+		<Unit filename="siam/inc/ui/gameui.hpp" />
 		<Unit filename="siam/matrix.cpp" />
 		<Unit filename="siam/matrixs/direction.cpp" />
 		<Unit filename="siam/object.cpp" />
@@ -67,7 +82,8 @@
 		<Unit filename="siam/objects/rhinoceros.cpp" />
 		<Unit filename="siam/player.cpp" />
 		<Unit filename="siam/ui/audio/FMOD.cpp" />
-		<Unit filename="siam/ui/games/CLIbis.cpp" />
+		<Unit filename="siam/ui/games/gameallegroui.cpp" />
+		<Unit filename="siam/ui/games/gamecliui.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

@@ -17,7 +17,7 @@
 			namespace Games {
 				class CLI : public Siam::UI::Game {
 					private:
-						Functions::CLI cli;
+
 						void display();
 						void displayMatrix();
 						void displayPlayers();
@@ -41,6 +41,7 @@
 						void playerTurnEnd( Siam::Player& player );
 						Players::Action getPlayerAction( Siam::Player& player );
 						void victory( Siam::Player& player );
+						Functions::CLI cli;
 				};
 			}
 		}
