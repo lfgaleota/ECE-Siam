@@ -5,7 +5,7 @@
 	#include "../../../../winhack.h"
 	#include <jpgalleg.h>
 	#include <loadpng.h>
-	//#include <fblend.h>
+	#include <fblend.h>
 	#include <vector>
 	#include <ios>
 	#include "../../../../allegro/popup.hpp"
@@ -25,7 +25,8 @@
 	#define COLOR_PLAYER_ELEPHANT makecol( 27, 144, 170 )
 	#define COLOR_SELECTION makecol( 255, 0, 0 )
 	#define COLOR_DIRECTION_SELECTION makecol( 255, 255, 0 )
-	#define COLOR_SELECTION_BLENDFACTOR 30
+	#define COLOR_SELECTION_BLENDFACTOR 80
+	#define VICTORY_PADDING 50
 
 	namespace Siam {
 		namespace UI {
@@ -58,7 +59,6 @@
 					private:
 						std::unordered_map<const Siam::Object*, AllegroObject> m_objects;
 						std::unordered_map<std::string, BITMAP*> m_bitmaps;
-						Siam::UI::Audio::FMOD fmod;
 						BITMAP* m_page;
 						FONT* m_textFont;
 						Functions::Allegro::CircularMenu* m_actionsMenu;
@@ -71,6 +71,7 @@
 						void loadSprites();
 						void loadFonts();
 						void loadMenus();
+						void loadBackgrounds();
 
 						void display( bool update = true );
 						void displayMatrix();

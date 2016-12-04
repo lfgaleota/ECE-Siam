@@ -16,14 +16,6 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add library="libm.a" />
-					<Add library="libloadpng.a" />
-					<Add library="png.dll" />
-					<Add library="libjpgalleg.a" />
-					<Add library="alleg44.dll" />
-					<Add library="libfblend.a" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Siam" prefix_auto="1" extension_auto="1" />
@@ -44,9 +36,16 @@
 			<Add option="-std=c++11" />
 			<Add option="-fexceptions" />
 			<Add directory="lib/fmod/inc/" />
+			<Add directory="lib/dui/inc/" />
 		</Compiler>
 		<Linker>
-			<Add library="lib/fmod/libfmod.a" />
+			<Add library="libm" />
+			<Add library="libloadpng" />
+			<Add library="libpng" />
+			<Add library="libjpgalleg" />
+			<Add library="lib/fmod/libdui.a" />
+			<Add library="liballeg44" />
+			<Add library="lib/fmod/fmod.a" />
 		</Linker>
 		<Unit filename="allegro/circularmenu.cpp" />
 		<Unit filename="allegro/circularmenu.hpp" />
@@ -84,6 +83,10 @@
 		<Unit filename="siam/ui/audio/FMOD.cpp" />
 		<Unit filename="siam/ui/games/gameallegroui.cpp" />
 		<Unit filename="siam/ui/games/gamecliui.cpp" />
+		<Unit filename="siam/inc/ui/main/mainallegroui.hpp" />
+		<Unit filename="siam/ui/main/mainallegroui.cpp" />
+		<Unit filename="ui/selectPlayers.dui" />
+		<Unit filename="winhack.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

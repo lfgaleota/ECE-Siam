@@ -200,11 +200,21 @@ void Game::victory() { //WIN
 	this->m_ui->victory( *winingPlayer );
 }
 
-Game::Game( vector<Player> players, Siam::UI::Audio::FMOD& fmod ) { //that's how it goes down
+Game::Game( vector<Player> players, Siam::UI::Audio::FMOD& fmod, bool allegro ) { //that's how it goes down
 	this->m_players = players; //and the players
 	this->m_currentPlayer = this->m_players.begin(); //first player "selected"
 
-	this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer, fmod );
+	if( allegro )
+		this->m_ui = new Siam::UI::Games::Allegro( this->m_board.getBoard(), this->m_players, this->m_currentPlayer, fmod );
+	else
+		this->m_ui = new Siam::UI::Games::CLI( this->m_board.getBoard(), this->m_players, this->m_currentPlayer, fmod );
+
+	for( unsigned int j = 0; j < this->m_board.getBoard().size(); j++ ) {
+		for( unsigned int i = 0; i < this->m_board.getBoard()[ j ].size(); i++ ) {
+			if( this->m_board.getBoard()[ i ][ j ] != nullptr )
+				this->m_ui->addPiece( this->m_board.getBoard()[ i ][ j ], i, j );
+		}
+	}
 
 	try {
 		while( !this->won ) //while nobody won

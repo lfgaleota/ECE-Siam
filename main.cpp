@@ -6,6 +6,7 @@
 #include "siam/inc/ui/games/gamecliui.hpp"
 #include "cli/cli.hpp"
 #include "siam/inc/ui/audio/FMOD.hpp"
+#include "siam/inc/ui/main/mainallegroui.hpp"
 
 void INeedPlayers( std::vector<Siam::Player>& players ) {
 
@@ -86,9 +87,10 @@ int main() {
 	fmod.loadMusic( "victory", "musics/victorybg.it" );
 	fmod.loadSound( "victory", "musics/victory.it" );
 
-	fmod.playMusic( "menu" );
+	//fmod.playMusic( "menu" );
 
-	menuPrincipal(players,fmod);
+	//menuPrincipal(players,fmod);
+	Siam::UI::Main::Allegro ui( fmod );
 
 	return 0;
 }

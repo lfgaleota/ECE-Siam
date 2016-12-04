@@ -1,12 +1,9 @@
 #include "../../inc/ui/games/gameallegroui.hpp"
-#include <iostream>
+
 using namespace Siam;
 using namespace Siam::Objects;
 using namespace Siam::Matrixs;
 using namespace Siam::UI::Games;
-
-#include <sstream>
-#include <allegro/internal/aintern.h>
 
 bool actionsMenuCallback( int index, int x, int y, void* customParameter ) {
 	switch( index ) {
@@ -67,31 +64,10 @@ Types::Type AllegroObject::getType() const {
 
 
 Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vector<Player>& players, std::vector<Player>::iterator& currentPlayer, Siam::UI::Audio::FMOD& fmod ) : Game( board, players, currentPlayer, fmod ) {
-	allegro_init();
-	install_mouse();
-	install_keyboard();
-
-	jpgalleg_init();
-	register_png_file_type();
-	install_keyboard();
-	install_mouse();
-
-	set_color_depth( desktop_color_depth() );
-	if( set_gfx_mode( GFX_AUTODETECT_WINDOWED, 1280, 720, 0, 0 ) != 0 ) {
-		allegro_message( "probleme mode graphique" );
-		allegro_exit();
-		throw std::runtime_error( "Allegro initialization failed" );
-	}
-
-	set_window_title( "ECE-Siam" );
-
-	enable_hardware_cursor();
-	select_mouse_cursor( 2 );
-	show_mouse( screen );
-
 	this->m_fmod.playMusic( "main1" );
 
 	loadSprites();
+	loadBackgrounds();
 	loadFonts();
 	loadMenus();
 
@@ -100,9 +76,11 @@ Allegro::Allegro( const std::vector<std::vector<Object*>>& board, const std::vec
 }
 
 Allegro::~Allegro() {
-	for( auto& bmp : this->m_bitmaps ) {
-		destroy_bitmap( bmp.second );
-		bmp.second = nullptr;
+	for( auto bmp = this->m_bitmaps.begin(); bmp != this->m_bitmaps.end(); bmp++ ) {
+		if( bmp->second != nullptr ) {
+			destroy_bitmap( bmp->second );
+			bmp->second = nullptr;
+		}
 	}
 
 	delete this->m_actionsMenu;
@@ -124,7 +102,8 @@ void Allegro::loadSprites() {
 	        "actionMove",
 	        "actionOrient",
 	        "actionNothing",
-	        "actionPause"
+	        "actionPause",
+	        "youWin"
 	};
 
 	for( const auto& bmpName : bmpNames ) {
@@ -145,6 +124,32 @@ void Allegro::loadSprites() {
 	}
 }
 
+void Allegro::loadBackgrounds() {
+	std::string path;
+	BITMAP* bmp;
+	std::vector<std::string> bmpNames = {
+			"mainBg",
+			"gameBg"
+	};
+
+	for( const auto& bmpName : bmpNames ) {
+		path = "images/";
+		path += bmpName;
+		path += ".jpg";
+
+		bmp = load_bitmap( path.c_str(), NULL );
+		if( bmp ) {
+			this->m_bitmaps.insert( std::make_pair( bmpName, bmp ) );
+		} else {
+			path = "File not found: ";
+			path = "images/";
+			path += bmpName;
+			path += ".jpg";
+			throw std::ios_base::failure( path );
+		}
+	}
+}
+
 void Allegro::loadFonts() {
 	this->m_textFont = load_font( "fonts/droidsans_14_mono.pcx", NULL, NULL );
 	if( !this->m_textFont ) {
@@ -157,7 +162,7 @@ void Allegro::loadMenus() {
 	std::vector<std::pair<std::string, std::string>> itemsToGenerate = {
 		std::make_pair( "actionAdd", "Ajouter" ),
 		std::make_pair( "actionRemove", "Enlever" ),
-		std::make_pair( "actionMove", "Déplacer" ),
+		std::make_pair( "actionMove", "Deplacer" ),
 		std::make_pair( "actionOrient", "Orienter" ),
 		std::make_pair( "actionNothing", "Passer son tour" ),
 		std::make_pair( "actionPause", "Pause" )
@@ -167,7 +172,7 @@ void Allegro::loadMenus() {
 		items.push_back( Functions::Allegro::MenuItem( this->m_bitmaps.find( itemsToGenerate[ i ].first )->second, itemsToGenerate[ i ].second, makecol( 254 - i * 6, 254 - i * 6, 254 - i * 6 ), makecol( 200, 200, 200 ), makecol( 0, 0, 0 ), actionsMenuCallback ) );
 	}
 
-	this->m_actionsMenu = new Functions::Allegro::CircularMenu( SCREEN_W / 2 , SCREEN_H / 2, this->m_board.begin()->size() * this->m_bitmaps.find( "case" )->second->w + ACTION_MENU_RADIUS_PADDING, ACTION_MENU_SIZE, items, this->m_textFont );
+	this->m_actionsMenu = new Functions::Allegro::CircularMenu( SCREEN_W / 2 , SCREEN_H / 2, ( this->m_board.size() - 1 ) * this->m_bitmaps.find( "case" )->second->w + ACTION_MENU_RADIUS_PADDING, ACTION_MENU_SIZE, items, this->m_textFont );
 	this->m_actionsMenu->compute();
 }
 
@@ -177,6 +182,8 @@ BITMAP* Allegro::getAnimalSprite( Types::Type animal ) const {
 			return this->m_bitmaps.find( "elephant" )->second;
 		case Types::Type::Rhinoceros:
 			return this->m_bitmaps.find( "rhinoceros" )->second;
+		case Types::Type::Mountain:
+			return this->m_bitmaps.find( "mountain" )->second;
 		default:
 			throw exceptions::invalid_object_type();
 	}
@@ -210,16 +217,16 @@ void Allegro::displayMatrix() {
 
 		switch( objpair.second.getDirection() ) {
 			case Direction::Right:
-				draw_sprite( this->m_page, sprite, x, y );
+				draw_trans_sprite( this->m_page, sprite, x, y );
 				break;
 			case Direction::Left:
-				rotate_sprite_v_flip( this->m_page, sprite, x, y, itofix( 128 ) );
+				rotate_sprite_v_flip_trans( this->m_page, sprite, x, y, itofix( 128 ) );
 				break;
 			case Direction::Up:
-				rotate_sprite( this->m_page, sprite, x, y, itofix( 192 ) );
+				rotate_sprite_trans( this->m_page, sprite, x, y, itofix( 192 ) );
 				break;
 			case Direction::Down:
-				rotate_sprite( this->m_page, sprite, x, y, itofix( 64 ) );
+				rotate_sprite_trans( this->m_page, sprite, x, y, itofix( 64 ) );
 				break;
 		}
 	}
@@ -248,7 +255,7 @@ void Allegro::displayPlayers() {
 
 		for( unsigned int j = 0; j < PLAYER_MAX_NUMBER_OF_PIECES; j++ ) {
 			if( j < this->m_players[ i ].getRemainingObjects() ) {
-				draw_sprite( this->m_page, getAnimalSprite( this->m_players[ i ].getAnimalChosen() ), pos_x, pos_y + j * this->m_bitmaps.find( "case" )->second->h );
+				draw_trans_sprite( this->m_page, getAnimalSprite( this->m_players[ i ].getAnimalChosen() ), pos_x, pos_y + j * this->m_bitmaps.find( "case" )->second->h );
 			}
 		}
 	}
@@ -269,7 +276,7 @@ void Allegro::displayCurrentAction() {
 				icon = this->m_bitmaps.find( "actionRemove" )->second;
 				break;
 			case Players::Action::Move:
-				action = "Déplacer";
+				action = "Deplacer";
 				icon = this->m_bitmaps.find( "actionMove" )->second;
 				break;
 			case Players::Action::Orient:
@@ -289,7 +296,7 @@ void Allegro::displayCurrentAction() {
 }
 
 void Allegro::display( bool update ) {
-	clear_bitmap( m_page );
+	stretch_blit( this->m_bitmaps.find( "gameBg" )->second, this->m_page, 0, 0, this->m_bitmaps.find( "gameBg" )->second->w, this->m_bitmaps.find( "gameBg" )->second->h, 0, 0, SCREEN_W, SCREEN_H);
 
 	set_alpha_blender();
 
@@ -340,8 +347,13 @@ void Allegro::highlightSelectedPiece( unsigned int x, unsigned int y, int color 
 		rh = this->m_bitmaps.find( "case" )->second->h;
 		posx = ( SCREEN_W - this->m_board.begin()->size() * rw ) / 2;
 		posy = ( SCREEN_H - this->m_board.size() * rh ) / 2;
+
+		set_trans_blender( 0, 0, 0, COLOR_SELECTION_BLENDFACTOR );
+		drawing_mode( DRAW_MODE_TRANS, NULL, 0, 0 );
 		rectfill( this->m_page, posx + x * rw, posy + y * rh, posx + x * rw + rw, posy + y * rh + rh, color );
-		//fblend_rect_trans( this->m_page, posx + x * rw, posy + y * rh, rw, rh, color, COLOR_SELECTION_BLENDFACTOR );
+		drawing_mode( DRAW_MODE_SOLID, NULL, 0, 0 );
+
+		set_alpha_blender();
 	}
 }
 
@@ -462,6 +474,7 @@ void Allegro::ejectPiece( const Object* object ) {
 
 void Allegro::playerTurnBegin( Player& player ) {
 	this->m_selectedAction = Players::Action::Nothing;
+
 	display();
 }
 
@@ -490,11 +503,32 @@ Players::Action Allegro::getPlayerAction( Player& player ) {
 }
 
 void Allegro::victory( Player& player ) {
+	stretch_blit( this->m_bitmaps.find( "mainBg" )->second, this->m_page, 0, 0, this->m_bitmaps.find( "mainBg" )->second->w, this->m_bitmaps.find( "mainBg" )->second->h, 0, 0, SCREEN_W, SCREEN_H);
 
+	set_alpha_blender();
+	draw_trans_sprite( this->m_page, this->m_bitmaps.find( "youWin" )->second, ( SCREEN_W - this->m_bitmaps.find( "youWin" )->second->w ) / 2, VICTORY_PADDING );
+
+	textprintf_centre_ex( this->m_page, this->m_textFont, SCREEN_W / 2, SCREEN_H / 2, makecol( 255, 255, 255 ), -1, "Bravo %s! Tu as gagne!", player.getName().c_str() );
+
+	blit( this->m_page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H );
+
+	this->m_fmod.stopMusic();
+	this->m_fmod.playSoundWait( "victory" );
+	this->m_fmod.playMusic( "victory" );
+
+	textprintf_centre_ex( screen, this->m_textFont, SCREEN_W / 2, SCREEN_H - this->m_textFont->height - VICTORY_PADDING, makecol( 255, 255, 255 ), -1, "Continuer >" );
+
+	this->prevMouseL = true;
+
+	for( bool loop = true; loop; ) {
+		updateInputs();
+		if( !this->prevMouseL && this->mouseL )
+			loop = false;
+	}
 }
 
 void Allegro::showError( std::string msg ) {
-	Functions::Allegro::Popup popup = Functions::Allegro::Popup( msg );
+	Functions::Allegro::Popup popup( msg );
 }
 
 void Allegro::setSelectedAction( Siam::Players::Action action ) {
