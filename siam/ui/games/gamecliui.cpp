@@ -8,9 +8,9 @@ using namespace Siam::Objects;
 using namespace Siam::Matrixs;
 using namespace Siam::UI::Games;
 
-CLI::CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players, std::vector<Siam::Player>::iterator& currentPlayer ) : Game( board, players, currentPlayer ) {
+CLI::CLI( const std::vector<std::vector<Siam::Object*>>& board, const std::vector<Siam::Player>& players,
+          std::vector<Siam::Player>::iterator& currentPlayer ) : Game( board, players, currentPlayer ) {
 	cli = Functions::CLI();
-	fmod = Siam::UI::Audio::FMOD();
 	loadDisplayMatrix();
 	display();
 }
@@ -28,7 +28,7 @@ void CLI::display() {
 
 void CLI::showPiece( Object* elem ) {
 	if( elem != nullptr ) { //different types of display function of the spot content
-		switch( elem->getType()) {
+		switch( elem->getType() ) {
 			case Types::Type::Mountain:
 				cout << "M";
 				break;
@@ -46,8 +46,8 @@ void CLI::showPiece( Object* elem ) {
 		if( elem->getType() == Types::Type::Mountain )
 			cout << " ";
 		else {
-            cli.setColor( FOREGROUND_BLUE | FOREGROUND_INTENSITY );
-			switch( elem->getDirection()) { //display the direction of a piece
+			cli.setColor( FOREGROUND_BLUE | FOREGROUND_INTENSITY );
+			switch( elem->getDirection() ) { //display the direction of a piece
 				case Direction::Left:
 					cout << "<";
 					break;
@@ -169,10 +169,10 @@ void CLI::displayActions() {
 	unsigned int width, height;
 	string menu[] = {
 			"Ajouter",
-	        "Retirer",
-	        "Deplacer",
-	        "Orienter",
-	        "Passer"
+			"Retirer",
+			"Deplacer",
+			"Orienter",
+			"Passer"
 	};
 	if( this->m_showActions ) {
 		cli.getSize( width, height );
@@ -252,13 +252,17 @@ void CLI::getPlayerCoords( unsigned int& x, unsigned int& y, Direction* dir ) {
 			display();
 
 			if( x < this->m_board.begin()->size() - 1 )
-				highlightSelectedPiece( x + 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+				highlightSelectedPiece( x + 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE |
+				                                  FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 			if( x > 0 )
-				highlightSelectedPiece( x - 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+				highlightSelectedPiece( x - 1, y, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE |
+				                                  FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 			if( y < this->m_board.size() - 1 )
-				highlightSelectedPiece( x, y + 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+				highlightSelectedPiece( x, y + 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE |
+				                                  FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 			if( y > 0 )
-				highlightSelectedPiece( x, y - 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN | FOREGROUND_INTENSITY );
+				highlightSelectedPiece( x, y - 1, BACKGROUND_GREEN | BACKGROUND_RED | FOREGROUND_RED | FOREGROUND_BLUE |
+				                                  FOREGROUND_GREEN | FOREGROUND_INTENSITY );
 
 			key = cli.getKey();
 
@@ -350,25 +354,20 @@ Players::Action CLI::getPlayerAction( Siam::Player& player ) {
 
 void CLI::victory( Siam::Player& player ) {
 	cli.clearScreen();
-	std::cout << "Bravo " << player.getName() << ", tu as gagne!" << std::endl;
-	std::cout << std::endl << std::endl ;
-    std::ifstream logo("C:/Users/romai/Desktop/Siam/logowin.txt");
+	std::ifstream logo( "texts/logowin.txt" );
 
-    if(logo)
-    {
-        std::string ligne;
+	if( logo ) {
+		std::string ligne;
 
-        while(getline(logo, ligne))
-        {
-            std::cout << ligne << std::endl;
-        }
-    }
-    else
-    {
-        std::cout << "nope didn't work" << std::endl;
-    }
+		while( getline( logo, ligne ) ) {
+			std::cout << ligne << std::endl;
+		}
+	} else {
+		throw std::ios_base::failure( "File not found: texts/logowin.txt" );
+	}
+	std::cout << std::endl << std::endl << "Bravo " << player.getName() << ", tu as gagne!" << std::endl;
 
-    Sleep(2000);
+	SLEEP( 2000 );
 	getchar();
 }
 
@@ -410,19 +409,19 @@ void CLI::loadDisplayMatrix() {
 		for( unsigned int i = 0; i < this->m_board[ j / 2 ].size(); i++ ) {
 			tmp2 << "|";
 
-			if( !( j % 2 )) {
+			if( !( j % 2 ) ) {
 				tmp2 << "    ";
 			} else {
 				tmp2 << "____";
 			}
 		}
 		tmp2 << "| |";
-		if( !( j % 2 )) {
+		if( !( j % 2 ) ) {
 			tmp2 << " " << j / 2 + 1 << "  |";
 		} else {
 			tmp2 << "____|";
 		}
-		this->m_displayMatrix.push_back( tmp2.str());
+		this->m_displayMatrix.push_back( tmp2.str() );
 	}
 
 }

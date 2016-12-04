@@ -15,6 +15,8 @@
 		#include "../winhack.h"
 		#include <conio.h>
 
+		#define SLEEP(ms) Sleep(ms)
+
 	#elif __APPLE__ || __linux || __linux__ || __unix || __unix__ || __posix
 
 		#define UNIX
@@ -22,6 +24,8 @@
 		#include <sys/ioctl.h>
 		#include <unistd.h>
 		#include <term.h>
+
+		#define SLEEP(ms) usleep(ms*1000)
 
 	#endif
 

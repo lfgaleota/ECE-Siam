@@ -18,7 +18,6 @@
 				class CLI : public Siam::UI::Game {
 					private:
 						Functions::CLI cli;
-						Siam::UI::Audio::FMOD fmod;
 						void display();
 						void displayMatrix();
 						void displayPlayers();
