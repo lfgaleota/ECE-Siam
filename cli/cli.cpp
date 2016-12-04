@@ -172,6 +172,122 @@ void CLI::setOffsets( unsigned int width, unsigned int height, unsigned int& u_o
 	u_offset_y = ( offset_y >= 0 ? (unsigned) offset_y : 0 );
 }
 
+int getch() {
+	return 0;
+}
+
+char kbhit() {
+	return 0;
+}
+
+Keys::Key CLI::getKey() {
+	// Initialisation de la variable et récupération de la touche appuyée
+	unsigned int key = getch();
+
+	/**
+		getch() retourne 2 valeurs dans le buffer pour les touches fléchées:
+			- 0xffffffe0 (code touche Esc)
+			- 0x48, 0x50, 0x4D ou 0x4B (respectivement fléche haut, bas, droit et gauche)
+		getch() retourne simplement 0x1B pour la touche Esc
+		getch() retourne simplement 0x0D pour la touche Entrée
+
+		On cherche alors à vérifier dans quel cas on est:
+		- si on a le code pour la touche ESC, alors on a soit appuyé sur ESC, soit sur une touche fléchée
+			-> si on a le code pour '[', alors on a appuyé sur une touche fléchée
+			-> sinon, on a appuyé sur la touche ESC
+		- si on a le code '\r', alors on a appuyé sur la touche Entrée
+	**/
+	switch( key ) {
+		case 0x0D:
+			// Si le code correpond à la touche Entrée
+			return Keys::Key::Enter;
+
+		case 0x1B:
+			// Si le code correspond à la touche Esc, on retourne Esc
+			return Keys::Key::Escape;
+
+		case '1':
+		case 38:
+			// Si le code correspond à la touche 1
+			return Keys::Key::N1;
+
+		case '2':
+		case 130:
+			// Si le code correspond à la touche 2
+			return Keys::Key::N2;
+
+		case '3':
+		case 34:
+			// Si le code correspond à la touche 3
+			return Keys::Key::N3;
+
+		case '4':
+		case 39:
+			// Si le code correspond à la touche 4
+			return Keys::Key::N4;
+
+		case '5':
+		case 40:
+			// Si le code correspond à la touche 5
+			return Keys::Key::N5;
+
+		case '6':
+		case 45:
+			// Si le code correspond à la touche 6
+			return Keys::Key::N6;
+
+		case '7':
+		case 138:
+			// Si le code correspond à la touche 7
+			return Keys::Key::N7;
+
+		case '8':
+		case 95:
+			// Si le code correspond à la touche 8
+			return Keys::Key::N8;
+
+		case '9':
+		case 135:
+			// Si le code correspond à la touche 9
+			return Keys::Key::N9;
+
+		case '0':
+		case 133:
+			// Si le code correspond à la touche 0
+			return Keys::Key::N0;
+
+		case 0xE0:
+			// Si le code correspond à la 1ère valeur des touches fléchées
+			switch( getch() ) {
+				// Récupérer la 2nde valeure
+
+				case 0x48:
+					// Flèche haut
+					return Keys::Key::ArrowUp;
+
+				case 0x50:
+					// Flèche bas
+					return Keys::Key::ArrowDown;
+
+				case 0x4B:
+					// Flèche gauche
+					return Keys::Key::ArrowLeft;
+
+				case 0x4D:
+					// Flèche droite
+					return Keys::Key::ArrowRight;
+
+				default:
+					// Aucune des flèches, donc on est en présence d'une "valeur invalide" (non traitée ici)
+					return Keys::Key::Invalid;
+			}
+
+		default:
+			// Aucune condition n'a été vérifiée, donc on est en présence d'une "valeur invalide" (non traitée ici)
+			return Keys::Key::Invalid;
+	}
+}
+
 #endif
 
 #if defined( UNIX ) || defined( ANSI_TERM )

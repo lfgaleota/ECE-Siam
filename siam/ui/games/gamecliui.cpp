@@ -378,7 +378,7 @@ void CLI::victory( Siam::Player& player ) { //victory
 	this->m_fmod.playMusic( "victory" ); //plays victory music
 
 	std::cout << std::endl << std::endl << "Bravo " << player.getName() << ", tu as gagne!" << std::endl; //displays the winning player
-    Sleep(4000);
+    SLEEP( 4000 );
     std::cout << "Press any key to continue..." << std::endl ;
 	while( kbhit() ) //waits for the use to hit keyboard
 		getch();

@@ -27,6 +27,9 @@
 
 		#define SLEEP(ms) usleep(ms*1000)
 
+		int getch();
+		char kbhit();
+
 	#endif
 
 	#if defined( ANSI_TERM ) || defined( UNIX )

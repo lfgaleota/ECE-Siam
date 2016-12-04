@@ -43,7 +43,12 @@ set(SOURCE_FILES
     winhack.h
     allegro/popup.cpp
     allegro/popup.hpp
-    allegro/circularmenu.cpp siam/ui/main/mainallegroui.cpp siam/inc/ui/main/mainallegroui.hpp siam/ui/main/maincliui.cpp siam/inc/ui/main/maincliui.hpp)
+    allegro/circularmenu.cpp
+	siam/ui/main/mainallegroui.cpp
+	siam/inc/ui/main/mainallegroui.hpp
+	siam/ui/main/maincliui.cpp
+	siam/inc/ui/main/maincliui.hpp
+)
 
 add_executable(ECE_Siam ${SOURCE_FILES})
 

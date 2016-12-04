@@ -180,7 +180,7 @@ void Allegro::options() {
 
 void Allegro::loadPlayersDialog() {
 	std::ostringstream thisptr;
-	thisptr << (int) this;
+	thisptr << (size_t) this;
 	std::ifstream playersDialogFile( "ui/selectPlayers.dui" );
 	if( !playersDialogFile.is_open() ) {
 		throw std::ios_base::failure( "File not found: ui/selectPlayers.dui" );
@@ -219,18 +219,18 @@ void Allegro::newGame() {
 
 int Siam::UI::Main::allegroGetPlayers( Dialog::CallbackData cd ) {
 	std::istringstream allegptr;
-	int allegint;
+	size_t allegint;
 	Allegro* alleg = nullptr;
 	std::string player1name, player2name;
 
 	player1name = Dialog::registry( 0 );
 	player2name = Dialog::registry( 1 );
 
-	Dialog *d = Dialog::getActiveDialog();
+	/*Dialog *d = Dialog::getActiveDialog();
 	bool player1local = Xml::find( d->xmlCache, "id", "player1local" )[ 0 ]->attr[ "flags" ].str != "0";
 	bool player1ai = Xml::find( d->xmlCache, "id", "player1ai" )[ 0 ]->attr[ "flags" ].str != "0";
 	bool player2local = Xml::find( d->xmlCache, "id", "player2local" )[ 0 ]->attr[ "flags" ].str != "0";
-	bool player2ai = Xml::find( d->xmlCache, "id", "player2ai" )[ 0 ]->attr[ "flags" ].str != "0";
+	bool player2ai = Xml::find( d->xmlCache, "id", "player2ai" )[ 0 ]->attr[ "flags" ].str != "0";*/
 
 	allegptr.str( cd.parameters[ 0 ] );
 	allegptr >> allegint;
