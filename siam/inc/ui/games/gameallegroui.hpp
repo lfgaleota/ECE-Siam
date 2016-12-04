@@ -5,7 +5,7 @@
 	#include "../../../../winhack.h"
 	#include <jpgalleg.h>
 	#include <loadpng.h>
-	#include <fblend.h>
+	//#include <fblend.h>
 	#include <vector>
 	#include <ios>
 	#include "../../../../allegro/popup.hpp"
