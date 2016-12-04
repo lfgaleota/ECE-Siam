@@ -31,7 +31,7 @@ void CLIs::Menu::setOffsets( unsigned int& offset_x, unsigned int& offset_y ) {
 		- Entier >= 1 representant le choix
 		- 0 si aucun choix n'a ete fait
 ****/
-CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_color, unsigned char header_color, unsigned char selection_color ) : m_header( header ), m_choices( choices ) {
+CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_color, unsigned char header_color, unsigned char selection_color, unsigned int minimal_height, void ( *intermediateDisplay )() ) : m_header( header ), m_choices( choices ) {
 	//Useful variables
 	unsigned int exit = 0, offset_x = 0, offset_y = 0;
 	Keys::Key key;
@@ -39,6 +39,8 @@ CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_colo
 
 	//get the offsets to center menu
 	setOffsets( offset_x, offset_y );
+	if( minimal_height > offset_y )
+		offset_y = minimal_height;
 
 	while( exit == 0 ) {
 		//Get the background color
@@ -47,12 +49,18 @@ CLIs::Menu::Menu( string header, vector<string> choices, unsigned char back_colo
 		//Erase previous displays
 		cli.clearScreen();
 
+		// On appelle la fonction d'affichage intermédiaire
+		if( intermediateDisplay != nullptr )
+			intermediateDisplay();
+
 		//Set foreground color
 		cli.setColor( header_color );
 		//Positioning (taking the offsets into account)
 		cli.moveCursor( offset_y, offset_x );
+
 		// Display
-		cout << "=== %s ===" << endl;
+		if( header.size() > 0 )
+			cout << "=== " << header << " ===" << endl;
 
 		for( unsigned int i = 0; i < this->m_choices.size() ; i++ ) {
 			// Display the choices

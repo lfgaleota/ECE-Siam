@@ -3,11 +3,10 @@
 #include "winhack.h"
 
 #include "siam/inc/game.hpp"
-#include "siam/inc/ui/games/gamecliui.hpp"
-#include "cli/cli.hpp"
-#include "siam/inc/ui/audio/FMOD.hpp"
+#include "siam/inc/ui/main/maincliui.hpp"
 #include "siam/inc/ui/main/mainallegroui.hpp"
 
+<<<<<<< HEAD
 void INeedPlayers( std::vector<Siam::Player>& players ) { //gets the players info
 
 	Functions::CLI cli;
@@ -84,19 +83,27 @@ int main() {
 	std::vector<Siam::Player> players; //initialize players
 	Siam::UI::Audio::FMOD fmod; //initialize music
 
+=======
+int main() {
+	Siam::UI::Audio::FMOD fmod;
+>>>>>>> d064672314cb83d1601f6b722d160e810cdcd54d
 
 	fmod.loadMusic( "menu", "musics/menu.it" );
 	fmod.loadMusic( "main1", "musics/main1.it" );
 	fmod.loadMusic( "victory", "musics/victorybg.it" );
 	fmod.loadSound( "victory", "musics/victory.it" );
 
+<<<<<<< HEAD
 	//fmod.playMusic( "menu" );
 
 
 	//menuPrincipal(players,fmod);
 	Siam::UI::Main::Allegro ui( fmod );
+=======
+	Siam::UI::Main::CLI ui( fmod );
+>>>>>>> d064672314cb83d1601f6b722d160e810cdcd54d
 
 	return 0;
 }
 
-END_OF_MAIN();
+END_OF_MAIN()
