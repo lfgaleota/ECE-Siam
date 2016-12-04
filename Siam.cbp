@@ -21,8 +21,8 @@
 					<Add library="libloadpng.a" />
 					<Add library="png.dll" />
 					<Add library="libjpgalleg.a" />
-					<Add library="alleg44.dll" />
 					<Add library="lib/dui/libdui.a" />
+					<Add library="alleg44.dll" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -58,7 +58,13 @@
 		<Unit filename="cli/menu/menu.hpp" />
 		<Unit filename="main.cpp" />
 		<Unit filename="siam/game.cpp" />
+		<Unit filename="siam/inc/exceptions/cancel_action" />
 		<Unit filename="siam/inc/exceptions/exceptions.hpp" />
+		<Unit filename="siam/inc/exceptions/exit_game" />
+		<Unit filename="siam/inc/exceptions/invalid_move" />
+		<Unit filename="siam/inc/exceptions/invalid_object_type" />
+		<Unit filename="siam/inc/exceptions/stack_empty" />
+		<Unit filename="siam/inc/exceptions/stack_full" />
 		<Unit filename="siam/inc/game.hpp" />
 		<Unit filename="siam/inc/matrix.hpp" />
 		<Unit filename="siam/inc/matrixs/direction.hpp" />
@@ -74,6 +80,7 @@
 		<Unit filename="siam/inc/ui/games/gamecliui.hpp" />
 		<Unit filename="siam/inc/ui/gameui.hpp" />
 		<Unit filename="siam/inc/ui/main/mainallegroui.hpp" />
+		<Unit filename="siam/inc/ui/main/maincliui.hpp" />
 		<Unit filename="siam/matrix.cpp" />
 		<Unit filename="siam/matrixs/direction.cpp" />
 		<Unit filename="siam/object.cpp" />
@@ -86,6 +93,7 @@
 		<Unit filename="siam/ui/games/gameallegroui.cpp" />
 		<Unit filename="siam/ui/games/gamecliui.cpp" />
 		<Unit filename="siam/ui/main/mainallegroui.cpp" />
+		<Unit filename="siam/ui/main/maincliui.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
