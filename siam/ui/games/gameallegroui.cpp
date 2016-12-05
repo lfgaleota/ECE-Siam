@@ -316,6 +316,13 @@ void Allegro::showPause() {
 	std::vector<std::string> choices = { "Continuer", "Couper/Remettre les sons", "Quitter" };
 	Functions::Allegro::Popup pause = Functions::Allegro::Popup( "Pause", choices, this->m_textFont );
 	switch( pause.getChoice() ) {
+		case 2:
+			if( this->m_fmod.getMasterVolume() > 0 ) {
+				this->m_fmod.setMasterVolume( 0 );
+			} else {
+				this->m_fmod.setMasterVolume( 1.0f );
+			}
+			break;
 		case 3:
 			throw exceptions::exit_game();
 		default:

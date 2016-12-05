@@ -9,6 +9,7 @@
 	#include <ios>
 	#include <fstream>
 	#include <sstream>
+	#include <stdlib.h>
 	#include "../../../../lib/dui/inc/dui.h"
 	#include "../../../../allegro/popup.hpp"
 	#include "../audio/FMOD.hpp"
@@ -46,6 +47,7 @@
 						void display();
 						void menu();
 						void newGame();
+						void joinGame();
 						void options();
 
 						void freeBitmaps();

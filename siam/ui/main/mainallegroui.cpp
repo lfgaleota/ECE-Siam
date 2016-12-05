@@ -159,6 +159,9 @@ void Allegro::menu() {
 					// Nouvelle partie
 					newGame();
 					break;
+				case 2:
+					joinGame();
+					break;
 				case 3:
 					// Options
 					options();
@@ -176,8 +179,23 @@ void Allegro::menu() {
 	}
 }
 
-void Allegro::options() {
+void Allegro::joinGame() {
+	Functions::Allegro::Popup popup( "Indisponible pour le moment ! ;)" );
+}
 
+void Allegro::options() {
+	std::vector<std::string> choices = { "Couper/Remettre les sons", "Retour" };
+	Functions::Allegro::Popup pause = Functions::Allegro::Popup( "Options", choices, this->m_textFont );
+	switch( pause.getChoice() ) {
+		case 1:
+			if( this->m_fmod.getMasterVolume() > 0 ) {
+				this->m_fmod.setMasterVolume( 0 );
+			} else {
+				this->m_fmod.setMasterVolume( 1.0f );
+			}
+		default:
+			break;
+	}
 }
 
 void Allegro::loadPlayersDialog() {

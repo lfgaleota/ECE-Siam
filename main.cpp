@@ -13,6 +13,7 @@ int main( int argc, char* argv[] ) {
 	fmod.loadMusic( "main1", "musics/main1.it" );
 	fmod.loadMusic( "victory", "musics/victorybg.it" );
 	fmod.loadSound( "victory", "musics/victory.it" );
+	fmod.setMasterVolume( 1.0f );
 
 	if( argc > 0 ) {
 		std::string arg0 = argv[ 0 ];
