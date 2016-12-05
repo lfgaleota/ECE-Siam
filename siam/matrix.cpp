@@ -9,7 +9,7 @@ Matrix::Matrix() : m_board( 5, vector<Siam::Object*>( 5 ) ) { //default construc
 	for( unsigned int i = 0; i < 5; i++ ) {
 		for( unsigned int j = 0; j < 5; j++ ) {
 			if( ( i == 2 && j == 1 ) || ( i == 2 && j == 2 ) || ( i == 2 && j == 3 ) ) {
-				this->set( i, j, new Mountain( "M", 0 ) );
+				this->set( i, j, new Mountain( "M", 0.9 ) );
 				m_mountainCount++;
 			} else {
 				this->set( i, j, nullptr );
@@ -112,8 +112,10 @@ int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
 		if( initobj != nullptr ) {
 			try {
 				obj = this->at( x, y );
-				for( int nb = 1; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {
-					if( initobj->getType() == obj->getType() && this->getDirectionVector( obj->getDirection() ) == dvec )
+				for( int nb = 0; obj != nullptr; nb++, obj = this->at( x, y, nb * dvec ) ) {
+					if( obj->getType() == Types::Type::Mountain )
+                        forceSum -= obj->getForce();
+					else if( initobj->getType() == obj->getType() && this->getDirectionVector( obj->getDirection() ) == dvec )
 						forceSum += obj->getForce();
 					else if( initobj->getType() != obj->getType() && this->getDirectionVector( obj->getDirection() ) == invdvec )
 						forceSum -= obj->getForce();

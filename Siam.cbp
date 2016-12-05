@@ -16,14 +16,6 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 				</Compiler>
-				<Linker>
-					<Add library="libm.a" />
-					<Add library="libloadpng.a" />
-					<Add library="png.dll" />
-					<Add library="libjpgalleg.a" />
-					<Add library="lib/dui/libdui.a" />
-					<Add library="alleg44.dll" />
-				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/Siam" prefix_auto="1" extension_auto="1" />
@@ -42,11 +34,19 @@
 			<Add option="-Wextra" />
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
+			<Add option="-m32" />
 			<Add option="-fexceptions" />
 			<Add directory="lib/fmod/inc/" />
 		</Compiler>
 		<Linker>
+			<Add option="-m32" />
 			<Add library="lib/fmod/libfmod.a" />
+			<Add library="libm.a" />
+			<Add library="png" />
+			<Add library="libjpgalleg.a" />
+			<Add library="libloadpng.a" />
+			<Add library="lib/dui/libdui.a" />
+			<Add library="alleg44" />
 		</Linker>
 		<Unit filename="allegro/circularmenu.cpp" />
 		<Unit filename="allegro/circularmenu.hpp" />
