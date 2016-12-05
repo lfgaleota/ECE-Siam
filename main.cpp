@@ -15,10 +15,10 @@ int main( int argc, char* argv[] ) {
 	fmod.loadSound( "victory", "musics/victory.it" );
 	fmod.setMasterVolume( 1.0f );
 
-	if( argc > 0 ) {
-		std::string arg0 = argv[ 0 ];
+	if( argc > 1 ) {
+		std::string arg1 = argv[ 1 ];
 
-		if( arg0 == "--cli" ) {
+		if( arg1 == "--cli" ) {
 			Siam::UI::Main::CLI ui( fmod );
 			return 0;
 		}
