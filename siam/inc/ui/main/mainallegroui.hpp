@@ -10,11 +10,14 @@
 	#include <fstream>
 	#include <sstream>
 	#include <stdlib.h>
-	#include "../../../../lib/dui/inc/dui.h"
 	#include "../../../../allegro/popup.hpp"
 	#include "../audio/FMOD.hpp"
 	#include "../../game.hpp"
 	#include "../../player.hpp"
+
+	#ifdef USE_DUI
+        #include "../../../../lib/dui/inc/dui.h"
+    #endif
 
 	#define DIALOG_PLAYERS_WIDTH 700
 	#define DIALOG_PLAYERS_HEIGHT 240
@@ -23,12 +26,16 @@
 	namespace Siam {
 		namespace UI {
 			namespace Main {
-				int allegroGetPlayers( Dialog::CallbackData cd );
+				#ifdef USE_DUI
+                    int allegroGetPlayers( Dialog::CallbackData cd );
+                #endif
 
 				class Allegro {
 					private:
 						Siam::UI::Audio::FMOD& m_fmod;
-						Dialog m_playersDialog;
+						#ifdef USE_DUI
+                            Dialog m_playersDialog;
+                        #endif
 						BITMAP* m_page;
 						FONT* m_textFont;
 						std::unordered_map<std::string, BITMAP*> m_bitmaps;
@@ -42,7 +49,11 @@
 						void loadSprites();
 						void loadFonts();
 						void loadBackgrounds();
-						void loadPlayersDialog();
+						#ifdef USE_DUI
+                            void loadPlayersDialog();
+                        #else
+                            std::string askPlayerName();
+						#endif
 
 						void display();
 						void menu();
@@ -54,7 +65,9 @@
 					public:
 						Allegro( Siam::UI::Audio::FMOD& fmod );
 
-						friend int allegroGetPlayers( Dialog::CallbackData cd );
+						#ifdef USE_DUI
+                            friend int allegroGetPlayers( Dialog::CallbackData cd );
+                        #endif
 				};
 			}
 		}

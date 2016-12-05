@@ -32,7 +32,9 @@ Allegro::Allegro( Siam::UI::Audio::FMOD& fmod ) : m_fmod( fmod ) {
 	loadSprites();
 	loadBackgrounds();
 	loadFonts();
-	loadPlayersDialog();
+	#ifdef USE_DUI
+    loadPlayersDialog();
+    #endif
 
 	m_page = create_bitmap( SCREEN_W, SCREEN_H );
 	display();
@@ -41,7 +43,9 @@ Allegro::Allegro( Siam::UI::Audio::FMOD& fmod ) : m_fmod( fmod ) {
 
 	freeBitmaps();
 	allegro_exit();
-	exit( 0 );
+	#ifdef USE_DUI
+    exit( 0 );
+    #endif
 }
 
 void Allegro::loadSprites() {
@@ -198,6 +202,7 @@ void Allegro::options() {
 	}
 }
 
+#ifdef USE_DUI
 void Allegro::loadPlayersDialog() {
 	std::ostringstream thisptr;
 	thisptr << (size_t) this;
@@ -217,16 +222,55 @@ void Allegro::loadPlayersDialog() {
 	this->m_playersDialog = Dialog( playerDialogStreamModified );
 	this->m_playersDialog.setCallback( "getPlayers", allegroGetPlayers );
 }
+#else
+std::string Allegro::askPlayerName() {
+    std::string name;
+    int key;
+
+    for( ; ; ) {
+        stretch_blit( this->m_bitmaps.find( "mainBg" )->second, this->m_page, 0, 0, this->m_bitmaps.find( "mainBg" )->second->w, this->m_bitmaps.find( "mainBg" )->second->h, 0, 0, SCREEN_W, SCREEN_H );
+        rectfill( this->m_page, ( SCREEN_W - DIALOG_PLAYERS_WIDTH ) / 2, ( SCREEN_H - DIALOG_PLAYERS_HEIGHT ) / 2 - DIALOG_PLAYERS_PADDING_H, ( SCREEN_W + DIALOG_PLAYERS_WIDTH ) / 2, ( SCREEN_H + DIALOG_PLAYERS_HEIGHT ) / 2 + DIALOG_PLAYERS_PADDING_H, makecol( 200, 200, 200 ) );
+
+        textprintf_centre_ex( this->m_page, this->m_textFont, SCREEN_W / 2, SCREEN_H / 2 - this->m_textFont->height, makecol( 0, 0, 0 ), -1, "Nom du joueur:" );
+        textprintf_centre_ex( this->m_page, this->m_textFont, SCREEN_W / 2, SCREEN_H / 2 + this->m_textFont->height, makecol( 0, 0, 0 ), -1, "%s", name.c_str() );
+
+        blit( this->m_page, screen, 0, 0, 0, 0, SCREEN_W, SCREEN_H );
+
+        key = readkey();
+        if( ( ( key & 0xff ) >= 'a' && ( key & 0xff ) <= 'z') || ( ( key & 0xff ) >= 'A' && ( key & 0xff ) <= 'Z' ) ) {
+            if( name.size() < 16 )
+                name += (char) ( key & 0xff );
+        } else if( ( key >> 8 ) == KEY_BACKSPACE ) {
+            name.pop_back();
+        } else if( ( key >> 8 ) == KEY_ENTER ) {
+            return name;
+        }  else if( ( key >> 8 ) == KEY_ESC ) {
+            return "";
+        }
+    };
+}
+#endif
 
 void Allegro::newGame() {
 	this->m_players.clear();
 
+	#ifdef USE_DUI
 	stretch_blit( this->m_bitmaps.find( "mainBg" )->second, screen, 0, 0, this->m_bitmaps.find( "mainBg" )->second->w, this->m_bitmaps.find( "mainBg" )->second->h, 0, 0, SCREEN_W, SCREEN_H );
 	rectfill( screen, ( SCREEN_W - DIALOG_PLAYERS_WIDTH ) / 2, ( SCREEN_H - DIALOG_PLAYERS_HEIGHT ) / 2 - DIALOG_PLAYERS_PADDING_H, ( SCREEN_W + DIALOG_PLAYERS_WIDTH ) / 2, ( SCREEN_H + DIALOG_PLAYERS_HEIGHT ) / 2 + DIALOG_PLAYERS_PADDING_H, makecol( 200, 200, 200 ) );
 
 	centre_dialog( &this->m_playersDialog.dialog[ 0 ] );
 
 	this->m_playersDialog.doDialog();
+	#else
+    std::string player1name = askPlayerName();
+    if( player1name == "" )
+        return;
+    std::string player2name = askPlayerName();
+    if( player2name == "" )
+        return;
+    this->m_players.push_back( Player( player1name, Objects::Types::Type::Rhinoceros ) );
+	this->m_players.push_back( Player( player2name, Objects::Types::Type::Elephant ) );
+	#endif
 
 	if( this->m_players.size() > 0 ) {
 		this->m_fmod.stopMusic();
@@ -237,6 +281,7 @@ void Allegro::newGame() {
 	}
 }
 
+#ifdef USE_DUI
 int Siam::UI::Main::allegroGetPlayers( Dialog::CallbackData cd ) {
 	std::istringstream allegptr;
 	size_t allegint;
@@ -263,3 +308,4 @@ int Siam::UI::Main::allegroGetPlayers( Dialog::CallbackData cd ) {
 
 	return D_EXIT;
 }
+#endif

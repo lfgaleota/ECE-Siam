@@ -41,11 +41,10 @@
 		<Linker>
 			<Add option="-m32" />
 			<Add library="lib/fmod/libfmod.a" />
-			<Add library="libm.a" />
+			<Add library="libm" />
+			<Add library="libjpgalleg" />
+			<Add library="libloadpng" />
 			<Add library="png" />
-			<Add library="libjpgalleg.a" />
-			<Add library="libloadpng.a" />
-			<Add library="lib/dui/libdui.a" />
 			<Add library="alleg44" />
 		</Linker>
 		<Unit filename="allegro/circularmenu.cpp" />
