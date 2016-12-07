@@ -101,8 +101,8 @@ inline void Matrix::set( unsigned int x, unsigned int y, DirectionVector dvec, S
 		throw out_of_range( "Accessing outside the defined matrix" );
 }
 
-int Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
-	int forceSum = 0;
+float Matrix::getForce( unsigned int x, unsigned int y, DirectionVector dvec ) {
+	float forceSum = 0;
 
 	try {
 		Object* initobj = this->at( x, y );
