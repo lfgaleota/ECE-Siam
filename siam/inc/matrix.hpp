@@ -36,7 +36,7 @@
 
 				Siam::Matrixs::DirectionVector getDirectionVector( Siam::Matrixs::Direction dir ); //gets direction of the object (read access)
 
-				int getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
+				float getForce( unsigned int x, unsigned int y, Siam::Matrixs::DirectionVector dvec ); //returns sum of frontforce and backforce
 				Siam::Objects::Types::Type getType( unsigned int x, unsigned int y);
 				Siam::Matrixs::Direction getDirection( unsigned int x, unsigned int y );
 
