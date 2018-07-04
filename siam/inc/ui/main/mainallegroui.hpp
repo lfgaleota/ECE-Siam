@@ -16,7 +16,7 @@
 	#include "../../player.hpp"
 
 	#ifdef USE_DUI
-        #include "../../../../lib/dui/inc/dui.h"
+        #include <dui.h>
     #endif
 
 	#define DIALOG_PLAYERS_WIDTH 700
