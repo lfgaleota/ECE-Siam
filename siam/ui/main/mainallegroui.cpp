@@ -23,11 +23,11 @@ Allegro::Allegro( Siam::UI::Audio::FMOD& fmod ) : m_fmod( fmod ) {
 
 	set_window_title( "ECE-Siam" );
 
+	splashscreen();
+
 	enable_hardware_cursor();
 	select_mouse_cursor( 2 );
 	show_mouse( screen );
-
-	this->m_fmod.playMusic( "menu" );
 
 	loadSprites();
 	loadBackgrounds();
@@ -36,8 +36,12 @@ Allegro::Allegro( Siam::UI::Audio::FMOD& fmod ) : m_fmod( fmod ) {
     loadPlayersDialog();
     #endif
 
+    splashscreenEnd();
+
 	m_page = create_bitmap( SCREEN_W, SCREEN_H );
 	display();
+
+	this->m_fmod.playMusic( "menu" );
 
 	menu();
 
@@ -119,6 +123,17 @@ void Allegro::freeBitmaps() {
 			bmp->second = nullptr;
 		}
 	}
+}
+
+void Allegro::splashscreen() {
+	BITMAP* bg = load_jpg( "images/splashscreen.jpg", NULL );
+	clear_bitmap( screen );
+	blit( bg, screen, 0, 0, ( SCREEN_W - bg->w ) / 2, ( SCREEN_H - bg->h ) / 2, bg->w, bg->h );
+	destroy_bitmap( bg );
+}
+
+void Allegro::splashscreenEnd() {
+	std::this_thread::sleep_for( std::chrono::seconds( SPLASHCREEN_DURATION_AFTERLOADING ) );
 }
 
 void Allegro::display() {

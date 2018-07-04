@@ -9,6 +9,8 @@
 	#include <ios>
 	#include <fstream>
 	#include <sstream>
+	#include <thread>
+	#include <chrono>
 	#include <stdlib.h>
 	#include "../../../../allegro/popup.hpp"
 	#include "../audio/FMOD.hpp"
@@ -22,6 +24,8 @@
 	#define DIALOG_PLAYERS_WIDTH 700
 	#define DIALOG_PLAYERS_HEIGHT 240
 	#define DIALOG_PLAYERS_PADDING_H 50
+
+	#define SPLASHCREEN_DURATION_AFTERLOADING 2
 
 	namespace Siam {
 		namespace UI {
@@ -60,6 +64,9 @@
 						void newGame();
 						void joinGame();
 						void options();
+
+						void splashscreen();
+						void splashscreenEnd();
 
 						void freeBitmaps();
 					public:
