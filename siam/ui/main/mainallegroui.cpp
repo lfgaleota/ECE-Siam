@@ -149,8 +149,10 @@ void Allegro::display() {
 		draw_trans_sprite( this->m_page, this->m_bitmaps.find( "menu1" )->second, 0, 0 );
 		this->choice = item;
 	} else if( item == 2 ) {
-		draw_trans_sprite( this->m_page, this->m_bitmaps.find( "menu2" )->second, 0, 0 );
-		this->choice = item;
+		/*draw_trans_sprite( this->m_page, this->m_bitmaps.find( "menu2" )->second, 0, 0 );
+		this->choice = item;*/
+		draw_trans_sprite( this->m_page, this->m_bitmaps.find( "menu0" )->second, 0, 0 );
+		this->choice = 0;
 	} else if( item == 3 ) {
 		draw_trans_sprite( this->m_page, this->m_bitmaps.find( "menu3" )->second, 0, 0 );
 		this->choice = item;
@@ -178,9 +180,9 @@ void Allegro::menu() {
 					// Nouvelle partie
 					newGame();
 					break;
-				case 2:
+				/*case 2:
 					joinGame();
-					break;
+					break;*/
 				case 3:
 					// Options
 					options();
@@ -199,7 +201,7 @@ void Allegro::menu() {
 }
 
 void Allegro::joinGame() {
-	Functions::Allegro::Popup popup( "Indisponible pour le moment ! ;)" );
+	Functions::Allegro::Popup popup( "Non-implémenté" );
 }
 
 void Allegro::options() {
